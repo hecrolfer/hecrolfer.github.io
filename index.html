@@ -3,32 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pistas Musicales</title>
+    <title>El Bosque de los Susurros</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Pantalla de Inicio -->
     <div id="pantalla-inicio" class="pantalla visible">
-        <h1>Tu viaje musical empieza aquí</h1>
-        <button onclick="avanzarPantalla()">Comenzar</button>
+        <h1>El Bosque de los Susurros</h1>
+        <p>En un bosque olvidado por el tiempo, los susurros guardan secretos que solo quienes buscan lo desconocido pueden oír. En este lugar mágico, hay un secreto esperando a ser descubierto…</p>
+        <button onclick="avanzarPantalla()">Escuchar los susurros</button>
     </div>
 
+    <!-- Primera Pista -->
     <div id="pantalla-frase1" class="pantalla">
-        <p>Nunca es tarde para aprender</p>
-        <button onclick="avanzarPantalla()">Siguiente</button>
+        <p><em>Mientras avanzaba por el bosque, el/la viajero/a encuentra una roca antigua cubierta de musgo. Grabada en su superficie, una frase le habla con voz tenue:</em></p>
+        <h2>“Nunca es tarde para aprender”</h2>
+        <p><em>La frase vibra con una energía suave, invitándole a seguir adelante.</em></p>
+        <button onclick="avanzarPantalla()">Continuar explorando</button>
     </div>
 
+    <!-- Segunda Pista -->
     <div id="pantalla-frase2" class="pantalla">
-        <p>A veces pienso que en lugar del deporte tendría que haber elegido la música</p>
-        <button onclick="avanzarPantalla()">Continuar el viaje</button>
+        <p><em>Más adelante, en un claro donde la luz apenas atraviesa las hojas, otro mensaje espera. Grabado en la corteza de un árbol se lee:</em></p>
+        <h2>“A veces pienso que en lugar del deporte tendría que haber elegido…”</h2>
+        <p><em>El/la viajero/a siente que esta confesión es una señal para seguir buscando.</em></p>
+        <button onclick="avanzarPantalla()">Buscar lo que nunca se ha encontrado</button>
     </div>
 
+    <!-- Tercera Pista -->
     <div id="pantalla-frase3" class="pantalla">
-        <p>¿Y qué instrumento cojo? ¿El piano? A mí me gusta</p>
-        <button onclick="avanzarPantalla()">Descubre tu regalo</button>
+        <p><em>Al cruzar un puente cubierto de flores, un último susurro emerge entre el viento:</em></p>
+        <h2>“¿Y qué instrumento cojo? ¿El piano? A mí me gusta”</h2>
+        <p><em>Las palabras parecen resonar en el aire, como si guiaran el/la viajero/a hacia un destino oculto.</em></p>
+        <button onclick="avanzarPantalla()">Descubrir el secreto oculto</button>
     </div>
 
+    <!-- Pantalla Final -->
     <div id="pantalla-final" class="pantalla">
-        <h2>Para ti, que siempre has tenido la música dentro...</h2>
+        <h2>Un Regalo Oculto</h2>
+        <p><em>Las pistas han guiado al/la viajero/a hasta el corazón del bosque. Allí, encuentra algo inesperado, un regalo para crear sus propias melodías.</em></p>
+        <h3>Este piano es solo para ti… para que descubras las melodías que has llevado dentro todo este tiempo.</h3>
+        <button onclick="iniciarMelodia()">Iniciar tu melodía</button>
     </div>
 
     <script src="script.js"></script>
