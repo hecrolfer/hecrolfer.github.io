@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pistas Musicales</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="pantalla-inicio" class="pantalla visible">
+        <h1>Tu viaje musical empieza aquí</h1>
+        <button onclick="avanzarPantalla()">Comenzar</button>
+    </div>
+
+    <div id="pantalla-frase1" class="pantalla">
+        <p>Nunca es tarde para aprender</p>
+        <button onclick="avanzarPantalla()">Siguiente</button>
+    </div>
+
+    <div id="pantalla-frase2" class="pantalla">
+        <p>A veces pienso que en lugar del deporte tendría que haber elegido la música</p>
+        <button onclick="avanzarPantalla()">Continuar el viaje</button>
+    </div>
+
+    <div id="pantalla-frase3" class="pantalla">
+        <p>¿Y qué instrumento cojo? ¿El piano? A mí me gusta</p>
+        <button onclick="avanzarPantalla()">Descubre tu regalo</button>
+    </div>
+
+    <div id="pantalla-final" class="pantalla">
+        <h2>Para ti, que siempre has tenido la música dentro...</h2>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
