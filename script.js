@@ -10,13 +10,11 @@ const mensajesDescifrados = {
 
 // Función para avanzar a la siguiente pantalla
 function avanzarPantalla() {
-    // Si es la última pantalla antes de la revelación final, verifica que todos los mensajes estén descifrados
     if (pantallaActual === pantallas.length - 3 && !todosMensajesDescifrados()) {
         alert("Debes descifrar todos los mensajes antes de continuar.");
         return;
     }
 
-    // Avanza a la siguiente pantalla si se cumplen las condiciones
     pantallas[pantallaActual].classList.remove('visible');
     pantallaActual++;
     if (pantallaActual < pantallas.length) {
@@ -33,13 +31,24 @@ function retrocederPantalla() {
     }
 }
 
-// Función para descifrar el texto de un holograma
+// Función para simular el efecto de tipeo al descifrar el mensaje
 function descifrarTexto(cartaId, fraseDescifrada) {
     let carta = document.getElementById(cartaId);
-    carta.innerText = fraseDescifrada;
+    let i = 0;
 
-    // Marca el mensaje como descifrado en el objeto de control
-    mensajesDescifrados[cartaId] = true;
+    // Reseteamos el texto para el efecto de tipeo
+    carta.innerText = '';
+    mensajesDescifrados[cartaId] = true; // Marca como descifrado
+
+    // Función para mostrar las letras una por una
+    function tipo() {
+        if (i < fraseDescifrada.length) {
+            carta.innerText += fraseDescifrada.charAt(i);
+            i++;
+            setTimeout(tipo, 50); // Ajusta el tiempo para cambiar la velocidad del efecto
+        }
+    }
+    tipo(); // Inicia el efecto de tipeo
 }
 
 // Función para verificar si todos los mensajes han sido descifrados
