@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartas en un Planeta Extraño</title>
+    <title>Cartas de un Planeta Extraño</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Pantalla de Introducción -->
     <div id="pantalla-inicio" class="pantalla visible">
         <h1>Bienvenida a un Planeta Extraño</h1>
-        <p>Sari, has llegado a un planeta desconocido, lleno de secretos y susurros antiguos. En este lugar, encuentras cartas dispersas, como si estuvieran esperando a alguien que pudiera entenderlas. Cada carta contiene un mensaje cifrado, ¿te atreves a descubrirlos?</p>
-        <button onclick="avanzarPantalla()">Comenzar a explorar</button>
+        <p>Sari, al aterrizar en este planeta, sientes una energía desconocida. En el suelo, encuentras la primera de muchas cartas, como si el planeta te estuviera guiando. ¿Te atreves a descifrarlas?</p>
+        <button onclick="avanzarPantalla()">Comenzar la Aventura</button>
     </div>
 
     <!-- Primera Carta - Desierto Luminoso -->
     <div id="pantalla-frase1" class="pantalla">
         <h2>Desierto Luminoso</h2>
-        <p class="texto-cifrado" id="carta1">¿*?л@vи- т3мпр⍜ @пгл@ ⧂п⍜#яедн3р</p>
+        <div class="carta">
+            <p class="texto-cifrado" id="carta1">¿*?л@vи- т3мпр⍜ @пгл@ ⧂п⍜#яедн3р</p>
+        </div>
+        <p><em>"En el silencio del desierto, este planeta ha estado esperando a alguien con un corazón dispuesto a escuchar. Descifra las palabras y hallarás el primer secreto."</em></p>
         <button onclick="descifrarTexto('carta1', 'Nunca es tarde para aprender')">Descifrar Carta</button>
         <button onclick="avanzarPantalla()">Explorar más allá</button>
     </div>
@@ -25,7 +28,10 @@
     <!-- Segunda Carta - Campo de Cristales -->
     <div id="pantalla-frase2" class="pantalla">
         <h2>Campo de Cristales</h2>
-        <p class="texto-cifrado" id="carta2">&@ в3cz3ы тk⍜@ аилуl м5$@нг3y eл ⍜rdэ⧂ $l м6z1c@.</p>
+        <div class="carta">
+            <p class="texto-cifrado" id="carta2">&@ в3cz3ы тk⍜@ аилуl м5$@нг3y eл ⍜rdэ⧂ $l м6z1c@.</p>
+        </div>
+        <p><em>"En este campo de cristales, cada piedra refleja decisiones y sueños. Aquellos que han pasado por aquí dejaron sus deseos grabados. Sigue descifrando, porque estás más cerca de conocer el mensaje que este planeta guarda para ti."</em></p>
         <button onclick="descifrarTexto('carta2', 'A veces pienso que en lugar del deporte tendría que haber elegido la música')">Descifrar Carta</button>
         <button onclick="avanzarPantalla()">Seguir explorando el planeta</button>
     </div>
@@ -33,7 +39,10 @@
     <!-- Tercera Carta - Bosque de Luces Flotantes -->
     <div id="pantalla-frase3" class="pantalla">
         <h2>Bosque de Luces Flotantes</h2>
-        <p class="texto-cifrado" id="carta3">¿& к@ℰ ⧋@%тром3иТ⧂ C⍜рр3 ? ⍜l pl&@? A  m@ m3 ƃшst@.</p>
+        <div class="carta">
+            <p class="texto-cifrado" id="carta3">¿& к@ℰ ⧋@%тром3иТ⧂ C⍜рр3 ? ⍜l pl&@? A  m@ m3 ƃшst@.</p>
+        </div>
+        <p><em>"Aquí, bajo las luces flotantes, el planeta revela su propósito. Estás cerca del final, y lo que has estado buscando también ha estado buscándote. La última carta te dará la clave para entender todo."</em></p>
         <button onclick="descifrarTexto('carta3', '¿Y qué instrumento cojo? ¿El piano? A mí me gusta')">Descifrar Carta</button>
         <button onclick="avanzarPantalla()">Descubrir el secreto oculto</button>
     </div>
@@ -41,7 +50,7 @@
     <!-- Pantalla Final - Revelación del Regalo -->
     <div id="pantalla-final" class="pantalla">
         <h2>El Último Susurro</h2>
-        <p>Has llegado al final de tu viaje y descubierto los mensajes ocultos. Al abrir tu regalo, entenderás el mensaje completo.</p>
+        <p>Has llegado al final de tu viaje y descubierto los mensajes ocultos. Abre el regalo que tienes frente a ti, y este planeta te revelará su secreto final.</p>
         <button onclick="mostrarUltimaFrase()">Ya he abierto el regalo</button>
     </div>
 

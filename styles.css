@@ -33,10 +33,23 @@ h1, h2 {
     color: #ffd700;
 }
 
-p, .texto-cifrado {
+p, .texto-cifrado, em {
     font-size: 1.2em;
     color: #e0e0e0;
     margin-bottom: 20px;
+}
+
+.carta {
+    background-color: #fef5d4;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    max-width: 500px;
+    margin: auto;
 }
 
 button {
