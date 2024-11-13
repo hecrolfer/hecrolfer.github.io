@@ -24,6 +24,15 @@ function avanzarPantalla() {
     }
 }
 
+// Función para retroceder a la pantalla anterior
+function retrocederPantalla() {
+    if (pantallaActual > 0) {
+        pantallas[pantallaActual].classList.remove('visible');
+        pantallaActual--;
+        pantallas[pantallaActual].classList.add('visible');
+    }
+}
+
 // Función para descifrar el texto de un holograma
 function descifrarTexto(cartaId, fraseDescifrada) {
     let carta = document.getElementById(cartaId);
