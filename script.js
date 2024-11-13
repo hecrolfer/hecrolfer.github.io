@@ -9,18 +9,40 @@ const mensajesDescifrados = {
 };
 
 // Minijuego 1: Emparejar Estrellas
-let patronEstrellas = [1, 2, 3, 4];
+// Patrón de Estrellas para Memorizar y Reproducir
+const patronEstrellas = [1, 4, 6, 8, 9]; // Posiciones en orden del patrón de constelación
 let seleccionEstrellas = [];
+let patronMostrado = false;
+
+function mostrarPatron() {
+    const patron = document.getElementById('patron-estrellas');
+    patron.style.display = 'block';
+    setTimeout(() => {
+        patron.style.display = 'none';
+        patronMostrado = true;
+        document.getElementById('instruccion').innerText = "Reproduce el patrón seleccionando las estrellas correctas.";
+    }, 3000); // Muestra el patrón por 3 segundos
+}
+
 function seleccionarEstrella(num) {
+    if (!patronMostrado) return; // Evita que seleccione antes de ver el patrón
+
     seleccionEstrellas.push(num);
     if (seleccionEstrellas.length === patronEstrellas.length) {
         if (JSON.stringify(seleccionEstrellas) === JSON.stringify(patronEstrellas)) {
             document.getElementById('mensaje1').innerText = "El tiempo es solo un número, nunca es tarde para aprender.";
             mensajesDescifrados.carta1 = true;
+        } else {
+            alert("La secuencia es incorrecta. Inténtalo de nuevo.");
         }
         seleccionEstrellas = [];
     }
 }
+
+// Llama a mostrar el patrón al cargar esta pantalla
+document.addEventListener("DOMContentLoaded", () => {
+    if (pantallaActual === 1) mostrarPatron();
+});
 
 // Minijuego 2: Secuencia Musical
 let secuenciaCristales = [1, 2, 3];

@@ -16,20 +16,33 @@
 
     <!-- Pantalla 1: Desierto Luminoso -->
     <div id="pantalla-frase1" class="pantalla">
-        <h2>Desierto Luminoso</h2>
-        <p>El Desierto Luminoso está cubierto de arena negra que brilla como estrellas. En el centro, encuentras un enigma visual en forma de constelación.</p>
-        <!-- Minijuego: Emparejar Estrellas -->
-        <p>Haz clic en las estrellas para reproducir el patrón correcto y desbloquear el mensaje.</p>
-        <div class="minijuego" id="estrellas">
-            <!-- Estrellas: Clic en el orden correcto para resolver -->
-            <button onclick="seleccionarEstrella(1)">★</button>
-            <button onclick="seleccionarEstrella(2)">★</button>
-            <button onclick="seleccionarEstrella(3)">★</button>
-            <button onclick="seleccionarEstrella(4)">★</button>
-        </div>
-        <p class="mensaje-descifrado" id="mensaje1"></p>
-        <button onclick="avanzarPantalla()">Explorar más allá</button>
+    <h2>Desierto Luminoso</h2>
+    <p>El Desierto Luminoso está cubierto de arena negra que brilla como estrellas. En el centro, encuentras un patrón de estrellas que debes memorizar y reproducir.</p>
+    <!-- Patrón a Memorizar (se muestra por unos segundos) -->
+    <div id="patron-estrellas" class="patron">
+        <span>★</span> <span>★</span> <span></span> <span>★</span>
+        <br>
+        <span></span> <span>★</span> <span></span> <span>★</span>
+        <br>
+        <span></span> <span></span> <span>★</span> <span></span>
     </div>
+    <p id="instruccion">Memoriza el patrón y luego reproduce la secuencia seleccionando las estrellas correctas.</p>
+    <!-- Minijuego: Selección de Estrellas -->
+    <div class="minijuego" id="estrellas">
+        <button onclick="seleccionarEstrella(1)">★</button>
+        <button onclick="seleccionarEstrella(2)">★</button>
+        <button onclick="seleccionarEstrella(3)">★</button>
+        <button onclick="seleccionarEstrella(4)">★</button>
+        <button onclick="seleccionarEstrella(5)">★</button>
+        <button onclick="seleccionarEstrella(6)">★</button>
+        <button onclick="seleccionarEstrella(7)">★</button>
+        <button onclick="seleccionarEstrella(8)">★</button>
+        <button onclick="seleccionarEstrella(9)">★</button>
+    </div>
+    <p class="mensaje-descifrado" id="mensaje1"></p>
+    <button onclick="avanzarPantalla()">Explorar más allá</button>
+    </div>
+
 
     <!-- Pantalla 2: Campo de Cristales -->
     <div id="pantalla-frase2" class="pantalla">

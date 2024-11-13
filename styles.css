@@ -83,7 +83,13 @@ button:active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos para los botones de los minijuegos */
+.patron {
+    font-size: 2em;
+    color: #ffd700;
+    margin-bottom: 15px;
+    display: none; /* Solo se muestra al inicio */
+}
+
 .minijuego button {
     font-size: 1.5em;
     background-color: #333;
