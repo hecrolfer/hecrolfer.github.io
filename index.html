@@ -14,38 +14,29 @@
         <button onclick="avanzarPantalla()">Comenzar la Aventura</button>
     </div>
 
-    <!-- Pantalla 1: Desierto Luminoso -->
+    <!-- Pantalla 1: Desierto Luminoso con el alienígena y el juego de tres en raya -->
 <div id="pantalla-frase1" class="pantalla">
     <h2>Desierto Luminoso</h2>
-    <p>El Desierto Luminoso está cubierto de arena negra que brilla como estrellas. En el centro, encuentras un patrón de estrellas que debes memorizar y reproducir.</p>
+    <p>Explorando el Desierto Luminoso, te encuentras con una pequeña criatura alienígena que parece amistosa y curiosa. La criatura se comunica de forma extraña, pero entiendes que quiere desafiarte a una partida de tres en raya.</p>
+    <p>Gana el juego para continuar tu aventura.</p>
     
-    <!-- Patrón a Memorizar (mostrado por unos segundos) -->
-    <div id="patron-estrellas" class="patron">
-        <span>★</span> <span>★</span> <span></span> <span>★</span>
-        <br>
-        <span></span> <span>★</span> <span></span> <span>★</span>
-        <br>
-        <span></span> <span></span> <span>★</span> <span></span>
+    <!-- Minijuego: Tres en Raya -->
+    <div id="tres-en-raya">
+        <div class="celda" onclick="jugadaHumana(0)"></div>
+        <div class="celda" onclick="jugadaHumana(1)"></div>
+        <div class="celda" onclick="jugadaHumana(2)"></div>
+        <div class="celda" onclick="jugadaHumana(3)"></div>
+        <div class="celda" onclick="jugadaHumana(4)"></div>
+        <div class="celda" onclick="jugadaHumana(5)"></div>
+        <div class="celda" onclick="jugadaHumana(6)"></div>
+        <div class="celda" onclick="jugadaHumana(7)"></div>
+        <div class="celda" onclick="jugadaHumana(8)"></div>
     </div>
-    
-    <p id="instruccion">Memoriza el patrón de estrellas y luego reproduce la secuencia seleccionando las estrellas correctas en la cuadrícula de abajo.</p>
-    
-    <!-- Minijuego: Cuadrícula de Estrellas para Reproducir el Patrón -->
-    <div class="minijuego" id="cuadricula-estrellas">
-        <button onclick="seleccionarEstrella(1)">★</button>
-        <button onclick="seleccionarEstrella(2)">★</button>
-        <button onclick="seleccionarEstrella(3)">★</button>
-        <button onclick="seleccionarEstrella(4)">★</button>
-        <button onclick="seleccionarEstrella(5)">★</button>
-        <button onclick="seleccionarEstrella(6)">★</button>
-        <button onclick="seleccionarEstrella(7)">★</button>
-        <button onclick="seleccionarEstrella(8)">★</button>
-        <button onclick="seleccionarEstrella(9)">★</button>
-    </div>
-    
+
     <p class="mensaje-descifrado" id="mensaje1"></p>
     <button onclick="avanzarPantalla()">Explorar más allá</button>
 </div>
+
 
 
     <!-- Pantalla 2: Campo de Cristales -->
