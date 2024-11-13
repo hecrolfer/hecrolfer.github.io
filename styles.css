@@ -39,100 +39,6 @@ p, .texto-cifrado, em {
     margin-bottom: 20px;
 }
 
-/* Estilos para los mensajes holográficos */
-.holograma {
-    background: rgba(0, 255, 255, 0.1);
-    border: 1px solid rgba(0, 255, 255, 0.4);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
-    text-align: center;
-    color: #00ffff;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.1em;
-    width: 90%;
-    max-width: 300px;
-    margin: auto;
-    margin-bottom: 20px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    line-height: 1.4;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #444;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    margin: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-button:hover {
-    background-color: #666;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
-}
-
-button:active {
-    background-color: #333;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilos para el patrón de constelación */
-.patron {
-    font-size: 2em;
-    color: #ffd700;
-    margin-bottom: 15px;
-    display: none; /* Solo se muestra al inicio */
-    text-align: center;
-}
-
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Georgia', serif;
-    background-color: #1c1c1c;
-    color: #f5f5f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.pantalla {
-    display: none;
-    text-align: center;
-    max-width: 600px;
-    padding: 20px;
-}
-
-.visible {
-    display: block;
-}
-
-h1, h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #ffd700;
-}
-
-p, .texto-cifrado, em {
-    font-size: 1.2em;
-    color: #e0e0e0;
-    margin-bottom: 20px;
-}
-
 /* Estilos para el minijuego de tres en raya */
 #tres-en-raya {
     display: grid;
@@ -160,4 +66,59 @@ p, .texto-cifrado, em {
 .celda:hover {
     background-color: #555;
     transform: scale(1.05);
+}
+
+/* Botones generales */
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background-color: #666;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+button:active {
+    background-color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para el botón deshabilitado */
+button:disabled {
+    background-color: #555;
+    color: #aaa;
+    cursor: not-allowed;
+    position: relative;
+}
+
+/* Tooltip para el botón deshabilitado */
+button[disabled]:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilos para el mensaje descifrado */
+.mensaje-descifrado {
+    color: #ffd700;
+    font-size: 1.3em;
+    margin-top: 15px;
 }
