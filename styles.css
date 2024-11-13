@@ -49,12 +49,19 @@ p, .texto-cifrado, em {
     text-align: center;
     color: #00ffff;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.2em; /* Ajuste del tamaño de fuente */
-    width: 90%; /* Ocupa el 90% del ancho para ajustar mejor el texto */
+    font-size: 1.1em; /* Reduce ligeramente el tamaño de la fuente */
+    width: 90%; /* Ajusta al 90% del ancho para que no se salga */
     max-width: 300px;
     margin: auto;
-    white-space: pre-wrap; /* Permite que el texto haga saltos de línea */
-    word-wrap: break-word; /* Ajusta las palabras largas */
+    white-space: pre-wrap; /* Permite saltos de línea */
+    word-wrap: break-word;
     overflow-wrap: break-word;
-    line-height: 1.5; /* Espaciado entre líneas */
+    line-height: 1.4;
+}
+
+/* Ajuste adicional: Reducir el tamaño de fuente si el texto es demasiado largo */
+.holograma p {
+    display: inline-block;
+    width: 100%;
+    font-size: 1em; /* Ajuste adicional si el texto es largo */
 }
