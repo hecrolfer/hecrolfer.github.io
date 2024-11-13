@@ -65,3 +65,31 @@ p, .texto-cifrado, em {
     width: 100%;
     font-size: 1em; /* Ajuste adicional si el texto es largo */
 }
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    /*Bordesredondeados*/cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    /*Transiciónparaelefectodehover*/margin: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+     /* Sombra para dar profundidad */:;
+    -webkit-transition: background-color 0.3s, box-shadow 0.3s;
+    -moz-transition: background-color 0.3s, box-shadow 0.3s;
+    -ms-transition: background-color 0.3s, box-shadow 0.3s;
+    -o-transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+    background-color: #666; /* Cambio de color al pasar el cursor */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4); /* Aumenta la sombra al pasar el cursor */
+}
+
+button:active {
+    background-color: #333; /* Color más oscuro al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Reduce la sombra al hacer clic */
+}
