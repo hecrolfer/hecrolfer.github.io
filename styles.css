@@ -1,82 +1,14 @@
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Añadir brillo al texto descifrado */
+.texto-cifrado {
+    animation: shine 1s ease-in-out infinite alternate;
 }
 
-body {
-    font-family: 'Georgia', serif;
-    background-color: #1c1c1c;
-    color: #f5f5f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.pantalla {
-    display: none;
-    text-align: center;
-    max-width: 600px;
-    padding: 20px;
-}
-
-.visible {
-    display: block;
-}
-
-h1, h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #ffd700;
-}
-
-p, .texto-cifrado, em {
-    font-size: 1.2em;
-    color: #e0e0e0;
-    margin-bottom: 20px;
-}
-
-/* Estilos para los mensajes holográficos */
-.holograma {
-    background: rgba(0, 255, 255, 0.1);
-    border: 1px solid rgba(0, 255, 255, 0.4);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
-    text-align: center;
-    color: #00ffff;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.4em;
-    width: 300px;
-    margin: auto;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #444;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #555;
-}
-
-.pantalla.visible {
-    animation: fadeIn 1.2s ease-in-out;
-}
-
-@keyframes fadeIn {
+@keyframes shine {
     from {
-        opacity: 0;
+        opacity: 0.8;
     }
     to {
         opacity: 1;
+        text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
     }
 }
