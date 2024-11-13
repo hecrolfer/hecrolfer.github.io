@@ -33,13 +33,7 @@ h1, h2 {
     color: #ffd700;
 }
 
-h3 {
-    font-size: 1.5em;
-    color: #ffd700;
-    margin-top: 20px;
-}
-
-p, em {
+p, .texto-cifrado {
     font-size: 1.2em;
     color: #e0e0e0;
     margin-bottom: 20px;

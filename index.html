@@ -3,54 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Sendero de los Ecos</title>
+    <title>Cartas en un Planeta Extraño</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Pantalla de Inicio -->
+    <!-- Pantalla de Introducción -->
     <div id="pantalla-inicio" class="pantalla visible">
-        <h1>El Sendero de los Ecos</h1>
-        <p>Sari, bienvenid@ a un sendero escondido en los susurros del bosque. Se dice que quienes escuchan atentamente pueden descubrir secretos guardados en los ecos de las hojas y las piedras. ¿Te atreves a adentrarte y escuchar lo que el bosque tiene para decirte?</p>
-        <button onclick="avanzarPantalla()">Comenzar el viaje</button>
+        <h1>Bienvenida a un Planeta Extraño</h1>
+        <p>Sari, has llegado a un planeta desconocido, lleno de secretos y susurros antiguos. En este lugar, encuentras cartas dispersas, como si estuvieran esperando a alguien que pudiera entenderlas. Cada carta contiene un mensaje cifrado, ¿te atreves a descubrirlos?</p>
+        <button onclick="avanzarPantalla()">Comenzar a explorar</button>
     </div>
 
-    <!-- Primera Pista -->
+    <!-- Primera Carta - Desierto Luminoso -->
     <div id="pantalla-frase1" class="pantalla">
-        <p><em>Mientras avanzas por el sendero, un suave susurro parece provenir de una antigua piedra cubierta de musgo. Te acercas y, casi como si te hablara directamente, oyes:</em></p>
-        <h2>“Nunca es tarde para aprender”</h2>
-        <p><em>Sientes que es un recordatorio suave, una invitación a dejar atrás lo conocido y abrirte a una nueva aventura.</em></p>
-        <button onclick="avanzarPantalla()">Continuar explorando</button>
+        <h2>Desierto Luminoso</h2>
+        <p class="texto-cifrado" id="carta1">¿*?л@vи- т3мпр⍜ @пгл@ ⧂п⍜#яедн3р</p>
+        <button onclick="descifrarTexto('carta1', 'Nunca es tarde para aprender')">Descifrar Carta</button>
+        <button onclick="avanzarPantalla()">Explorar más allá</button>
     </div>
 
-    <!-- Segunda Pista -->
+    <!-- Segunda Carta - Campo de Cristales -->
     <div id="pantalla-frase2" class="pantalla">
-        <p><em>El bosque parece conocer tus pensamientos, casi como si hubiera escuchado tus inquietudes y deseos. En un claro, otro susurro te llega con un aire de complicidad, diciendo:</em></p>
-        <h2>“¿Y si el camino que no elegiste es, en realidad, el que siempre quisiste?”</h2>
-        <p><em>Recuerdas aquellos momentos en los que, en lugar de perseguir lo familiar, pensaste en algo distinto, en algo que podría haber sido.</em></p>
-        <button onclick="avanzarPantalla()">Seguir adelante</button>
+        <h2>Campo de Cristales</h2>
+        <p class="texto-cifrado" id="carta2">&@ в3cz3ы тk⍜@ аилуl м5$@нг3y eл ⍜rdэ⧂ $l м6z1c@.</p>
+        <button onclick="descifrarTexto('carta2', 'A veces pienso que en lugar del deporte tendría que haber elegido la música')">Descifrar Carta</button>
+        <button onclick="avanzarPantalla()">Seguir explorando el planeta</button>
     </div>
 
-    <!-- Tercera Pista -->
+    <!-- Tercera Carta - Bosque de Luces Flotantes -->
     <div id="pantalla-frase3" class="pantalla">
-        <p><em>Al cruzar un antiguo puente cubierto de enredaderas, un último susurro emerge entre el viento:</em></p>
-        <h2>“A veces, lo que más queremos descubrir es lo que ha estado en nuestro corazón desde el principio.”</h2>
-        <p><em>Con esa frase en el aire, sabes que el sendero está a punto de desvelar su último misterio.</em></p>
+        <h2>Bosque de Luces Flotantes</h2>
+        <p class="texto-cifrado" id="carta3">¿& к@ℰ ⧋@%тром3иТ⧂ C⍜рр3 ? ⍜l pl&@? A  m@ m3 ƃшst@.</p>
+        <button onclick="descifrarTexto('carta3', '¿Y qué instrumento cojo? ¿El piano? A mí me gusta')">Descifrar Carta</button>
         <button onclick="avanzarPantalla()">Descubrir el secreto oculto</button>
     </div>
 
-    <!-- Pantalla Final - Revelación -->
+    <!-- Pantalla Final - Revelación del Regalo -->
     <div id="pantalla-final" class="pantalla">
-        <h2>Un Regalo Oculto</h2>
-        <p><em>Sari, has llegado al final del sendero. Al fin, los susurros del bosque han compartido su secreto contigo. Frente a ti, un regalo te espera… Pero para comprender todo lo que significa, primero debes abrirlo y desvelar lo que contiene. Solo entonces sabrás el mensaje completo.</em></p>
+        <h2>El Último Susurro</h2>
+        <p>Has llegado al final de tu viaje y descubierto los mensajes ocultos. Al abrir tu regalo, entenderás el mensaje completo.</p>
         <button onclick="mostrarUltimaFrase()">Ya he abierto el regalo</button>
     </div>
 
-    <!-- Pantalla Final con la Última Frase -->
+    <!-- Pantalla de Revelación Final -->
     <div id="pantalla-final-revelacion" class="pantalla">
-        <h2>El Último Susurro</h2>
-        <p><em>Ahora que has descubierto el regalo, el último susurro del bosque te habla, casi como si estuviera respondiendo a tus pensamientos:</em></p>
-        <h3>“¿Y qué instrumento cojo? ¿El piano? A mí me gusta.”</h3>
-        <p><em>Sientes que esta frase estaba destinada a este momento, a esta elección.</em></p>
+        <h2>Este es tu regalo</h2>
+        <p>Ahora que has descubierto el regalo, el último susurro del planeta te habla directamente: “¿Y qué instrumento cojo? ¿El piano? A mí me gusta.”</p>
         <p>Sari, este piano es solo para ti… para que descubras las melodías que has llevado dentro todo este tiempo.</p>
     </div>
 
