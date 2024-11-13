@@ -49,35 +49,12 @@ p, .texto-cifrado, em {
     text-align: center;
     color: #00ffff;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.4em;
-    width: 300px;
+    font-size: 1.2em; /* Ajuste del tamaño de fuente */
+    width: 90%; /* Ocupa el 90% del ancho para ajustar mejor el texto */
+    max-width: 300px;
     margin: auto;
-    white-space: pre; /* Esto asegura que los espacios se respeten */
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #444;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #555;
-}
-
-.pantalla.visible {
-    animation: fadeIn 1.2s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    white-space: pre-wrap; /* Permite que el texto haga saltos de línea */
+    word-wrap: break-word; /* Ajusta las palabras largas */
+    overflow-wrap: break-word;
+    line-height: 1.5; /* Espaciado entre líneas */
 }
