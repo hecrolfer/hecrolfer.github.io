@@ -49,11 +49,12 @@ p, .texto-cifrado, em {
     text-align: center;
     color: #00ffff;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.1em; /* Reduce ligeramente el tamaño de la fuente */
-    width: 90%; /* Ajusta al 90% del ancho para que no se salga */
+    font-size: 1.1em;
+    width: 90%;
     max-width: 300px;
     margin: auto;
-    white-space: pre-wrap; /* Permite saltos de línea */
+    margin-bottom: 20px; /* Añade espacio debajo de la card */
+    white-space: pre-wrap;
     word-wrap: break-word;
     overflow-wrap: break-word;
     line-height: 1.4;
