@@ -83,11 +83,22 @@ button:active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Estilos para el patrón de constelación */
 .patron {
     font-size: 2em;
     color: #ffd700;
     margin-bottom: 15px;
     display: none; /* Solo se muestra al inicio */
+    text-align: center;
+}
+
+/* Estilo para la cuadrícula de estrellas */
+#cuadricula-estrellas {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 150px;
+    margin: 0 auto;
+    gap: 10px;
 }
 
 .minijuego button {

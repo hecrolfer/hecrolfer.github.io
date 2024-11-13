@@ -8,7 +8,6 @@ const mensajesDescifrados = {
     carta3: false
 };
 
-// Minijuego 1: Emparejar Estrellas
 // Patrón de Estrellas para Memorizar y Reproducir
 const patronEstrellas = [1, 4, 6, 8, 9]; // Posiciones en orden del patrón de constelación
 let seleccionEstrellas = [];
@@ -17,8 +16,10 @@ let patronMostrado = false;
 function mostrarPatron() {
     const patron = document.getElementById('patron-estrellas');
     patron.style.display = 'block';
+    document.getElementById('cuadricula-estrellas').style.display = 'none'; // Oculta la cuadrícula al inicio
     setTimeout(() => {
         patron.style.display = 'none';
+        document.getElementById('cuadricula-estrellas').style.display = 'block'; // Muestra la cuadrícula después de mostrar el patrón
         patronMostrado = true;
         document.getElementById('instruccion').innerText = "Reproduce el patrón seleccionando las estrellas correctas.";
     }, 3000); // Muestra el patrón por 3 segundos
@@ -43,34 +44,6 @@ function seleccionarEstrella(num) {
 document.addEventListener("DOMContentLoaded", () => {
     if (pantallaActual === 1) mostrarPatron();
 });
-
-// Minijuego 2: Secuencia Musical
-let secuenciaCristales = [1, 2, 3];
-let intentoCristales = [];
-function tocarCristal(num) {
-    intentoCristales.push(num);
-    if (intentoCristales.length === secuenciaCristales.length) {
-        if (JSON.stringify(intentoCristales) === JSON.stringify(secuenciaCristales)) {
-            document.getElementById('mensaje2').innerText = "A veces pienso que en lugar del deporte debería haber elegido la música.";
-            mensajesDescifrados.carta2 = true;
-        }
-        intentoCristales = [];
-    }
-}
-
-// Minijuego 3: Recoger Luces Correctas
-let secuenciaLuces = ['¿', 'Qué', 'instrumento', 'cojo', '?'];
-let intentoLuces = [];
-function recogerLuz(palabra) {
-    intentoLuces.push(palabra);
-    if (intentoLuces.length === secuenciaLuces.length) {
-        if (JSON.stringify(intentoLuces) === JSON.stringify(secuenciaLuces)) {
-            document.getElementById('mensaje3').innerText = "¿Y qué instrumento cojo? ¿El piano? A mí me gusta.";
-            mensajesDescifrados.carta3 = true;
-        }
-        intentoLuces = [];
-    }
-}
 
 // Función para avanzar a la siguiente pantalla
 function avanzarPantalla() {
