@@ -31,6 +31,7 @@ function retrocederPantalla() {
     }
 }
 
+// Función para simular el efecto de tipeo al descifrar el mensaje
 function descifrarTexto(cartaId, fraseDescifrada) {
     let carta = document.getElementById(cartaId);
     let i = 0;
