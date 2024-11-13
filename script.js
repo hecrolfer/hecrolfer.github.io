@@ -8,6 +8,48 @@ const mensajesDescifrados = {
     carta3: false
 };
 
+// Minijuego 1: Emparejar Estrellas
+let patronEstrellas = [1, 2, 3, 4];
+let seleccionEstrellas = [];
+function seleccionarEstrella(num) {
+    seleccionEstrellas.push(num);
+    if (seleccionEstrellas.length === patronEstrellas.length) {
+        if (JSON.stringify(seleccionEstrellas) === JSON.stringify(patronEstrellas)) {
+            document.getElementById('mensaje1').innerText = "El tiempo es solo un número, nunca es tarde para aprender.";
+            mensajesDescifrados.carta1 = true;
+        }
+        seleccionEstrellas = [];
+    }
+}
+
+// Minijuego 2: Secuencia Musical
+let secuenciaCristales = [1, 2, 3];
+let intentoCristales = [];
+function tocarCristal(num) {
+    intentoCristales.push(num);
+    if (intentoCristales.length === secuenciaCristales.length) {
+        if (JSON.stringify(intentoCristales) === JSON.stringify(secuenciaCristales)) {
+            document.getElementById('mensaje2').innerText = "A veces pienso que en lugar del deporte debería haber elegido la música.";
+            mensajesDescifrados.carta2 = true;
+        }
+        intentoCristales = [];
+    }
+}
+
+// Minijuego 3: Recoger Luces Correctas
+let secuenciaLuces = ['¿', 'Qué', 'instrumento', 'cojo', '?'];
+let intentoLuces = [];
+function recogerLuz(palabra) {
+    intentoLuces.push(palabra);
+    if (intentoLuces.length === secuenciaLuces.length) {
+        if (JSON.stringify(intentoLuces) === JSON.stringify(secuenciaLuces)) {
+            document.getElementById('mensaje3').innerText = "¿Y qué instrumento cojo? ¿El piano? A mí me gusta.";
+            mensajesDescifrados.carta3 = true;
+        }
+        intentoLuces = [];
+    }
+}
+
 // Función para avanzar a la siguiente pantalla
 function avanzarPantalla() {
     if (pantallaActual === pantallas.length - 3 && !todosMensajesDescifrados()) {
@@ -29,26 +71,6 @@ function retrocederPantalla() {
         pantallaActual--;
         pantallas[pantallaActual].classList.add('visible');
     }
-}
-
-// Función para simular el efecto de tipeo al descifrar el mensaje
-function descifrarTexto(cartaId, fraseDescifrada) {
-    let carta = document.getElementById(cartaId);
-    let i = 0;
-
-    // Reseteamos el texto para el efecto de tipeo
-    carta.innerText = '';
-    mensajesDescifrados[cartaId] = true; // Marca como descifrado
-
-    // Función para mostrar las letras una por una
-    function tipo() {
-        if (i < fraseDescifrada.length) {
-            carta.innerText += fraseDescifrada.charAt(i);
-            i++;
-            setTimeout(tipo, 50); // Ajusta el tiempo para cambiar la velocidad del efecto
-        }
-    }
-    tipo(); // Inicia el efecto de tipeo
 }
 
 // Función para verificar si todos los mensajes han sido descifrados

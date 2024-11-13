@@ -10,49 +10,65 @@
     <!-- Pantalla de Introducción -->
     <div id="pantalla-inicio" class="pantalla visible">
         <h1>Bienvenida a un Planeta Extraño</h1>
-        <p>Al aterrizar en este planeta, te encuentras con cristales luminosos que parecen proyectar mensajes holográficos en el aire. Sientes que cada mensaje guarda un secreto importante, esperando a ser descifrado.</p>
+        <p>Al aterrizar en este planeta, te encuentras con cristales luminosos que parecen proyectar mensajes holográficos en el aire. Sientes que cada paso te acerca a algo importante.</p>
         <button onclick="avanzarPantalla()">Comenzar la Aventura</button>
     </div>
 
-    <!-- Primer Mensaje Holográfico -->
+    <!-- Pantalla 1: Desierto Luminoso -->
     <div id="pantalla-frase1" class="pantalla">
         <h2>Desierto Luminoso</h2>
-        <div class="holograma">
-            <p class="texto-cifrado" id="carta1">¿*?л@vи- т3мпр⍜ @пгл@ ⧂п⍜#яедн3р</p>
+        <p>El Desierto Luminoso está cubierto de arena negra que brilla como estrellas. En el centro, encuentras un enigma visual en forma de constelación.</p>
+        <!-- Minijuego: Emparejar Estrellas -->
+        <p>Haz clic en las estrellas para reproducir el patrón correcto y desbloquear el mensaje.</p>
+        <div class="minijuego" id="estrellas">
+            <!-- Estrellas: Clic en el orden correcto para resolver -->
+            <button onclick="seleccionarEstrella(1)">★</button>
+            <button onclick="seleccionarEstrella(2)">★</button>
+            <button onclick="seleccionarEstrella(3)">★</button>
+            <button onclick="seleccionarEstrella(4)">★</button>
         </div>
-        <p><em>"Este holograma emite un destello y proyecta un mensaje cifrado en el aire. Parece un consejo o un secreto que alguien dejó aquí para ti."</em></p>
-        <button onclick="descifrarTexto('carta1', 'Nunca es tarde para aprender')">Descifrar Mensaje</button>
+        <p class="mensaje-descifrado" id="mensaje1"></p>
         <button onclick="avanzarPantalla()">Explorar más allá</button>
     </div>
 
-    <!-- Segundo Mensaje Holográfico -->
+    <!-- Pantalla 2: Campo de Cristales -->
     <div id="pantalla-frase2" class="pantalla">
         <h2>Campo de Cristales</h2>
-        <div class="holograma">
-            <p class="texto-cifrado" id="carta2">&@ в3cz3ы тk⍜@ аилуl м5$@нг3y eл ⍜rdэ⧂ $l м6z1c@.</p>
+        <p>En el Campo de Cristales, cada cristal emite una nota al ser tocado. En el centro del campo, una estructura circular espera que reproduzcas la melodía correcta.</p>
+        <!-- Minijuego: Secuencia Musical -->
+        <p>Toca los cristales en el orden correcto para revelar el mensaje.</p>
+        <div class="minijuego" id="cristales">
+            <button onclick="tocarCristal(1)">🔮</button>
+            <button onclick="tocarCristal(2)">🔮</button>
+            <button onclick="tocarCristal(3)">🔮</button>
         </div>
-        <p><em>"Los cristales alrededor parecen reflejar decisiones pasadas. Cada uno guarda un mensaje, esperando ser revelado."</em></p>
-        <button onclick="descifrarTexto('carta2', 'A veces pienso que en lugar del deporte tendría que haber elegido la música')">Descifrar Mensaje</button>
-        <button onclick="avanzarPantalla()">Explorar más allá</button>
+        <p class="mensaje-descifrado" id="mensaje2"></p>
         <button onclick="retrocederPantalla()">Volver atrás</button>
+        <button onclick="avanzarPantalla()">Explorar más allá</button>
     </div>
 
-    <!-- Tercer Mensaje Holográfico -->
+    <!-- Pantalla 3: Bosque de Luces Flotantes -->
     <div id="pantalla-frase3" class="pantalla">
         <h2>Bosque de Luces Flotantes</h2>
-        <div class="holograma">
-            <p class="texto-cifrado" id="carta3">¿& к@ℰ ⧋@%тром3иТ⧂ C⍜рр3 ? ⍜l pl&@? A  m@ m3 ƃшst@.</p>
+        <p>Las luces flotan alrededor de los árboles, y algunas forman palabras fugaces. Necesitas atraparlas en el orden correcto para completar el mensaje.</p>
+        <!-- Minijuego: Recoger Luces Correctas -->
+        <p>Recoge las luces en el orden correcto para descifrar el mensaje.</p>
+        <div class="minijuego" id="luces">
+            <button onclick="recogerLuz('¿')">¿</button>
+            <button onclick="recogerLuz('Qué')">Qué</button>
+            <button onclick="recogerLuz('instrumento')">instrumento</button>
+            <button onclick="recogerLuz('cojo')">cojo</button>
+            <button onclick="recogerLuz('?')">?</button>
         </div>
-        <p><em>"Aquí, las luces del bosque parecen crear una energía única, invitándote a descubrir el propósito final de tu viaje."</em></p>
-        <button onclick="descifrarTexto('carta3', '¿Y qué instrumento cojo? ¿El piano? A mí me gusta')">Descifrar Mensaje</button>
-        <button onclick="avanzarPantalla()">Descubrir el secreto oculto</button>
+        <p class="mensaje-descifrado" id="mensaje3"></p>
         <button onclick="retrocederPantalla()">Volver atrás</button>
+        <button onclick="avanzarPantalla()">Descubrir el secreto oculto</button>
     </div>
 
     <!-- Pantalla Final - Revelación del Regalo -->
     <div id="pantalla-final" class="pantalla">
         <h2>El Último Susurro</h2>
-        <p>Has llegado al final de tu viaje y descubierto los mensajes ocultos. Abre el regalo que tienes frente a ti, y este planeta te revelará su secreto final.</p>
+        <p>Has llegado al final de tu viaje. Abre el regalo que tienes frente a ti, y el planeta te revelará su secreto final.</p>
         <button onclick="mostrarUltimaFrase()">Ya he abierto el regalo</button>
         <button onclick="retrocederPantalla()">Volver atrás</button>
     </div>
