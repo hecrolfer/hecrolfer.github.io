@@ -3,47 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartas de un Planeta Extraño</title>
+    <title>Mensajes de un Planeta Extraño</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Pantalla de Introducción -->
     <div id="pantalla-inicio" class="pantalla visible">
         <h1>Bienvenida a un Planeta Extraño</h1>
-        <p>Sari, al aterrizar en este planeta, sientes una energía desconocida. En el suelo, encuentras la primera de muchas cartas, como si el planeta te estuviera guiando. ¿Te atreves a descifrarlas?</p>
+        <p>Al aterrizar en este planeta, te encuentras con cristales luminosos que parecen proyectar mensajes holográficos en el aire. Sientes que cada mensaje guarda un secreto importante, esperando a ser descifrado.</p>
         <button onclick="avanzarPantalla()">Comenzar la Aventura</button>
     </div>
 
-    <!-- Primera Carta - Desierto Luminoso -->
+    <!-- Primer Mensaje Holográfico -->
     <div id="pantalla-frase1" class="pantalla">
         <h2>Desierto Luminoso</h2>
-        <div class="carta">
+        <div class="holograma">
             <p class="texto-cifrado" id="carta1">¿*?л@vи- т3мпр⍜ @пгл@ ⧂п⍜#яедн3р</p>
         </div>
-        <p><em>"En el silencio del desierto, este planeta ha estado esperando a alguien con un corazón dispuesto a escuchar. Descifra las palabras y hallarás el primer secreto."</em></p>
-        <button onclick="descifrarTexto('carta1', 'Nunca es tarde para aprender')">Descifrar Carta</button>
+        <p><em>"Este holograma emite un destello y proyecta un mensaje cifrado en el aire. Parece un consejo o un secreto que alguien dejó aquí para ti."</em></p>
+        <button onclick="descifrarTexto('carta1', 'Nunca es tarde para aprender')">Descifrar Mensaje</button>
         <button onclick="avanzarPantalla()">Explorar más allá</button>
     </div>
 
-    <!-- Segunda Carta - Campo de Cristales -->
+    <!-- Segundo Mensaje Holográfico -->
     <div id="pantalla-frase2" class="pantalla">
         <h2>Campo de Cristales</h2>
-        <div class="carta">
+        <div class="holograma">
             <p class="texto-cifrado" id="carta2">&@ в3cz3ы тk⍜@ аилуl м5$@нг3y eл ⍜rdэ⧂ $l м6z1c@.</p>
         </div>
-        <p><em>"En este campo de cristales, cada piedra refleja decisiones y sueños. Aquellos que han pasado por aquí dejaron sus deseos grabados. Sigue descifrando, porque estás más cerca de conocer el mensaje que este planeta guarda para ti."</em></p>
-        <button onclick="descifrarTexto('carta2', 'A veces pienso que en lugar del deporte tendría que haber elegido la música')">Descifrar Carta</button>
+        <p><em>"Los cristales alrededor parecen reflejar decisiones pasadas. Cada uno guarda un mensaje, esperando ser revelado."</em></p>
+        <button onclick="descifrarTexto('carta2', 'A veces pienso que en lugar del deporte tendría que haber elegido la música')">Descifrar Mensaje</button>
         <button onclick="avanzarPantalla()">Seguir explorando el planeta</button>
     </div>
 
-    <!-- Tercera Carta - Bosque de Luces Flotantes -->
+    <!-- Tercer Mensaje Holográfico -->
     <div id="pantalla-frase3" class="pantalla">
         <h2>Bosque de Luces Flotantes</h2>
-        <div class="carta">
+        <div class="holograma">
             <p class="texto-cifrado" id="carta3">¿& к@ℰ ⧋@%тром3иТ⧂ C⍜рр3 ? ⍜l pl&@? A  m@ m3 ƃшst@.</p>
         </div>
-        <p><em>"Aquí, bajo las luces flotantes, el planeta revela su propósito. Estás cerca del final, y lo que has estado buscando también ha estado buscándote. La última carta te dará la clave para entender todo."</em></p>
-        <button onclick="descifrarTexto('carta3', '¿Y qué instrumento cojo? ¿El piano? A mí me gusta')">Descifrar Carta</button>
+        <p><em>"Aquí, las luces del bosque parecen crear una energía única, invitándote a descubrir el propósito final de tu viaje."</em></p>
+        <button onclick="descifrarTexto('carta3', '¿Y qué instrumento cojo? ¿El piano? A mí me gusta')">Descifrar Mensaje</button>
         <button onclick="avanzarPantalla()">Descubrir el secreto oculto</button>
     </div>
 
