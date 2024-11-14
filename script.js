@@ -68,19 +68,13 @@ function jugadaHumana(pos) {
     }
 }
 
-// Función para manejar el turno del alienígena
+// Función mejorada para manejar el turno del alienígena con lógica más avanzada
 function jugadaAlien() {
-    let movimientosDisponibles = tablero.map((val, idx) => val === "" ? idx : null).filter(val => val !== null);
-    let movimiento;
-    if (Math.random() < 0.2) {
-        movimiento = movimientosDisponibles[Math.floor(Math.random() * movimientosDisponibles.length)];
-    } else {
-        movimiento = mejorMovimiento("X") || mejorMovimiento("O") || movimientosDisponibles[Math.floor(Math.random() * movimientosDisponibles.length)];
-    }
+    let movimiento = mejorMovimiento("X"); // Busca el mejor movimiento para la IA
     tablero[movimiento] = "X";
     actualizarTablero();
     if (verificarVictoria("X")) {
-        mostrarPopupPerdida(); // Mostrar popup de pérdida en caso de derrota
+        mostrarPopupPerdida(); // Mostrar popup de derrota en caso de derrota del jugador
     } else if (tableroCompleto()) {
         animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
     } else {
@@ -141,19 +135,54 @@ function verificarVictoria(jugador) {
     );
 }
 
-// Función para encontrar el mejor movimiento para la IA
+// Función mejorada para encontrar el mejor movimiento usando lógica avanzada
 function mejorMovimiento(jugador) {
+    let mejorPuntuacion = -Infinity;
+    let movimientoOptimo;
+
     for (let i = 0; i < tablero.length; i++) {
         if (tablero[i] === "") {
             tablero[i] = jugador;
-            if (verificarVictoria(jugador)) {
-                tablero[i] = "";
-                return i;
-            }
+            let puntuacion = minimax(tablero, 0, false);
             tablero[i] = "";
+            if (puntuacion > mejorPuntuacion) {
+                mejorPuntuacion = puntuacion;
+                movimientoOptimo = i;
+            }
         }
     }
-    return null;
+    return movimientoOptimo;
+}
+
+// Función Minimax simplificada para calcular el mejor movimiento
+function minimax(tablero, profundidad, esMaximizador) {
+    if (verificarVictoria("X")) return 10 - profundidad;
+    if (verificarVictoria("O")) return profundidad - 10;
+    if (tableroCompleto()) return 0;
+
+    if (esMaximizador) {
+        let mejorPuntuacion = -Infinity;
+        for (let i = 0; i < tablero.length; i++) {
+            if (tablero[i] === "") {
+                tablero[i] = "X";
+                let puntuacion = minimax(tablero, profundidad + 1, false);
+                tablero[i] = "";
+                mejorPuntuacion = Math.max(puntuacion, mejorPuntuacion);
+            }
+        }
+        return mejorPuntuacion;
+    } else {
+        let mejorPuntuacion = Infinity;
+        for (let i = 0; i < tablero.length; i++) {
+            if (tablero[i] === "") {
+                tablero[i] = "O";
+                let puntuacion = minimax(tablero, profundidad + 1, true);
+                tablero[i] = "";
+                mejorPuntuacion = Math.min(puntuacion, mejorPuntuacion);
+            }
+        }
+        return mejorPuntuacion;
+    }
 }
 
 // Función para mostrar la última frase después de abrir el regalo
