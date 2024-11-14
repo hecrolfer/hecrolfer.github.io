@@ -119,12 +119,18 @@
         <div id="letras-intentadas">Letras intentadas: <span id="letras-intentadas-lista"></span></div>
         <div id="ahorcado-intentos">Intentos restantes: <span id="intentos-restantes">6</span></div>
         <div class="botones-centro">
-            <input type="text" id="letra-input" maxlength="1" placeholder="Introduce una letra">
+            <input type="text" id="letra-input" maxlength="1" title="Introduce una letra para adivinar la frase">
             <button onclick="intentarLetra()">Intentar letra</button>
         </div>
     </div>
 
-
+        <!-- Popup de "¿Volver a intentar?" -->
+    <div id="popup-volver-intentar" class="popup">
+        <div class="popup-contenido">
+            <p>¿Volver a intentar?</p>
+            <button onclick="reiniciarAhorcado()" class="boton-ok">OK</button>
+        </div>
+    </div>
 
 
     <!-- Pantalla Final - Revelación del Regalo -->

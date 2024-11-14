@@ -6,19 +6,24 @@ let intentosFallidos = 0; // Contador para los intentos fallidos del jugador
 
 // Función para avanzar a la siguiente pantalla
 function avanzarPantalla() {
-    pantallas[pantallaActual].classList.remove('visible');
-    pantallaActual++;
-    if (pantallaActual < pantallas.length) {
-        pantallas[pantallaActual].classList.add('visible');
+    // Oculta todas las pantallas antes de mostrar la nueva
+    pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
+    
+    // Verifica que la pantalla actual esté dentro de los límites
+    if (pantallaActual < pantallas.length - 1) {
+        pantallaActual++;
+        pantallas[pantallaActual].classList.add('visible'); // Muestra solo la pantalla actual
     }
 }
 
 // Función para retroceder a la pantalla anterior
 function retrocederPantalla() {
+    // Oculta todas las pantallas antes de mostrar la nueva
+    pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
+
     if (pantallaActual > 0) {
-        pantallas[pantallaActual].classList.remove('visible');
         pantallaActual--;
-        pantallas[pantallaActual].classList.add('visible');
+        pantallas[pantallaActual].classList.add('visible'); // Muestra solo la pantalla actual
     }
 }
 
@@ -229,17 +234,21 @@ let movimientoIzquierda = false;
 let movimientoDerecha = false;
 let velocidadMovimiento = 5; // Ajusta la velocidad del personaje
 
+const velocidadInicialRocas = 4; // Velocidad inicial de caída de las rocas
+const intervaloInicialGeneracionRocas = 500; // Intervalo inicial de generación de rocas en milisegundos
 
 // Función para iniciar el juego de esquivar rocas
 function iniciarJuego() {
     rocks = [];
     esquivadas = 0;
     sariX = canvas.width / 2 - 25; // Reiniciar la posición de Sari al centro
+    rockSpeed = velocidadInicialRocas; // Reiniciar la velocidad de las rocas
+    rockGenerationInterval = intervaloInicialGeneracionRocas; // Reiniciar el intervalo de generación de rocas
     document.getElementById("continuar-btn").disabled = true;
     clearInterval(gameInterval);
     clearInterval(rockInterval);
     gameInterval = setInterval(actualizarJuego, 20);
-    rockInterval = setInterval(generarRoca, rockGenerationInterval); // Ajuste de generación de rocas
+    rockInterval = setInterval(generarRoca, rockGenerationInterval); // Usar el intervalo reiniciado
 }
 
 // Generar una roca en una posición aleatoria
@@ -308,7 +317,6 @@ function colision(rect1, rect2) {
     );
 }
 
-// Mostrar el popup de derrota
 function mostrarPopupDerrota() {
     clearInterval(gameInterval);
     clearInterval(rockInterval);
@@ -318,7 +326,7 @@ function mostrarPopupDerrota() {
 // Cerrar el popup de derrota y reiniciar el juego
 function cerrarPopupDerrota() {
     document.getElementById("popup-derrota").style.display = "none";
-    iniciarJuego();
+    iniciarJuego(); // Llama a iniciarJuego para reiniciar con valores iniciales
 }
 
 // Función para manejar el movimiento de Sari con las flechas
@@ -351,7 +359,7 @@ function mostrarPopupEnhorabuena() {
 
 function cerrarPopupEnhorabuena() {
     document.getElementById("popup-enhorabuena").style.display = "none";
-    document.getElementById("continuar-btn").disabled = false; // Habilitar el botón para continuar
+    document.getElementById("continuar-btn").disabled = false; // Habilita el botón para continuar
 }
 
 // Frase oculta para adivinar
@@ -382,10 +390,9 @@ function intentarLetra() {
         }
 
         if (intentosRestantes === 0) {
-            mostrarPopupDerrota(); // Opcional: puedes mostrar un popup o mensaje de derrota
-            reiniciarAhorcado();
+            mostrarPopupVolverIntentar(); // Mostrar popup para volver a intentar
         } else if (!fraseActual.includes("_")) {
-            mostrarPopupVictoria(); // Opcional: puedes mostrar un popup o mensaje de victoria
+            //mostrarPopupVictoria(); // Mostrar popup de victoria al adivinar la frase
             reiniciarAhorcado();
         }
     }
@@ -395,16 +402,27 @@ function intentarLetra() {
 // Función para actualizar la frase oculta
 function actualizarFraseOculta() {
     fraseActual = fraseObjetivo
-        .split("")
-        .map((letra) =>
-            letra === " " ? " " : (letrasIntentadas.includes(letra.toUpperCase()) ? letra : "_")
+        .split(" ")
+        .map(palabra =>
+            palabra
+                .split("")
+                .map(letra => (letrasIntentadas.includes(letra.toUpperCase()) ? letra : "_"))
+                .join(" ")
         )
-        .join(" ");
+        .join("   "); // Añade tres espacios entre palabras
+
+    // Actualiza el texto en la pantalla
     document.getElementById("frase-oculta").innerText = fraseActual;
 }
 
+function mostrarPopupVolverIntentar() {
+    document.getElementById("popup-volver-intentar").style.display = "block";
+}
+
 // Reiniciar el juego de ahorcado
+// Cerrar el popup y reiniciar el juego
 function reiniciarAhorcado() {
+    document.getElementById("popup-volver-intentar").style.display = "none";
     fraseActual = "_ _ _ _ _   _ _   _ _ _ _ _   _ _ _ _   _ _ _ _ _ _ _";
     intentosRestantes = 6;
     letrasIntentadas = [];
@@ -412,3 +430,18 @@ function reiniciarAhorcado() {
     document.getElementById("intentos-restantes").innerText = intentosRestantes;
     actualizarFraseOculta();
 }
+// Agregar tooltip en el campo de entrada de letra
+document.getElementById("letra-input").addEventListener("focus", function () {
+    this.setAttribute("title", "Introduce una letra para adivinar la frase");
+});
+
+function irAPantalla(n) {
+    pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
+    if (n >= 0 && n < pantallas.length) {
+        pantallaActual = n;
+        pantallas[pantallaActual].classList.add('visible');
+    } else {
+        console.warn("Número de pantalla fuera de rango");
+    }
+}
+

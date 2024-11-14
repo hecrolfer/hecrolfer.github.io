@@ -293,3 +293,38 @@ button[disabled]:hover::after {
     width: 50px;
     margin-right: 10px;
 }
+
+/* Estilo para el popup de "¿Volver a intentar?" */
+#popup-volver-intentar {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    color: #ffd700;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+}
+
+/* Estilo del botón OK en el popup */
+.boton-ok {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.boton-ok:hover {
+    background-color: #666;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+}
