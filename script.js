@@ -207,3 +207,108 @@ function mostrarUltimaFrase() {
     document.getElementById('pantalla-final').classList.remove('visible');
     document.getElementById('pantalla-final-revelacion').classList.add('visible');
 }
+
+
+// Variables del juego de esquivar rocas
+let canvas = document.getElementById("juegoCanvas");
+let ctx = canvas.getContext("2d");
+
+let sari = new Image();
+sari.src = "assets/images/sari.PNG";
+let rockImage = new Image();
+rockImage.src = "assets/images/rocks.png";
+
+let sariX = canvas.width / 2 - 25; // Posición inicial de Sari
+let sariY = canvas.height - 60; // Altura fija de Sari
+let sariWidth = 50;
+let sariHeight = 50;
+
+let rocks = [];
+let rockSpeed = 2; // Velocidad inicial de caída de las rocas
+let esquivadas = 0; // Contador de rocas esquivadas
+let gameInterval;
+let rockInterval;
+
+// Función para iniciar el juego de esquivar rocas
+function iniciarJuego() {
+    rocks = [];
+    esquivadas = 0;
+    document.getElementById("continuar-btn").disabled = true;
+    clearInterval(gameInterval);
+    clearInterval(rockInterval);
+    gameInterval = setInterval(actualizarJuego, 20);
+    rockInterval = setInterval(generarRoca, 1000);
+}
+
+// Generar una roca en una posición aleatoria
+function generarRoca() {
+    let rockX = Math.random() * (canvas.width - 30);
+    rocks.push({ x: rockX, y: -30, width: 30, height: 30 });
+}
+
+// Actualizar el juego en cada frame
+function actualizarJuego() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(sari, sariX, sariY, sariWidth, sariHeight);
+
+    // Dibujar y mover rocas
+    for (let i = 0; i < rocks.length; i++) {
+        let rock = rocks[i];
+        rock.y += rockSpeed;
+        ctx.drawImage(rockImage, rock.x, rock.y, rock.width, rock.height);
+
+        // Comprobar colisión con Sari
+        if (colision(rock, { x: sariX, y: sariY, width: sariWidth, height: sariHeight })) {
+            mostrarPopupDerrota();
+            return;
+        }
+
+        // Remover rocas que salen de la pantalla y aumentar el contador
+        if (rock.y > canvas.height) {
+            rocks.splice(i, 1);
+            esquivadas++;
+            i--;
+
+            // Aumentar velocidad y desbloquear el botón al esquivar 50 rocas
+            if (esquivadas === 50) {
+                clearInterval(gameInterval);
+                clearInterval(rockInterval);
+                document.getElementById("continuar-btn").disabled = false;
+                alert("Enhorabuena, has conseguido sortear las trampas");
+                return;
+            }
+        }
+    }
+}
+
+// Función para detectar colisiones
+function colision(rect1, rect2) {
+    return (
+        rect1.x < rect2.x + rect2.width &&
+        rect1.x + rect1.width > rect2.x &&
+        rect1.y < rect2.y + rect2.height &&
+        rect1.y + rect1.height > rect2.y
+    );
+}
+
+// Mostrar el popup de derrota
+function mostrarPopupDerrota() {
+    clearInterval(gameInterval);
+    clearInterval(rockInterval);
+    document.getElementById("popup-derrota").style.display = "block";
+}
+
+// Cerrar el popup de derrota y reiniciar el juego
+function cerrarPopupDerrota() {
+    document.getElementById("popup-derrota").style.display = "none";
+    iniciarJuego();
+}
+
+// Función para manejar el movimiento de Sari con las flechas
+document.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowLeft" && sariX > 0) {
+        sariX -= 20;
+    } else if (event.key === "ArrowRight" && sariX < canvas.width - sariWidth) {
+        sariX += 20;
+    }
+});

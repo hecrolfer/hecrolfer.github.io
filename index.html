@@ -70,6 +70,23 @@
             <button onclick="retrocederPantalla()">Huir como una cobarde</button>
         </div>
     </div>
+    <!-- Pantalla del juego de esquivar rocas -->
+    <div id="pantalla-trampas" class="pantalla">
+        <h2>Esquiva las Trampas</h2>
+        <p>¡Cuidado! Está lleno de trampas y piedras cayendo. Usa las flechas para moverte y esquivar las rocas.</p>
+        <canvas id="juegoCanvas" width="600" height="400"></canvas>
+        <div class="botones-centro">
+            <button id="continuar-btn" onclick="avanzarPantalla()" disabled>Continuar</button>
+        </div>
+    </div>
+
+    <!-- Popup de derrota -->
+    <div id="popup-derrota" class="popup">
+        <div class="popup-contenido">
+            <span class="cerrar-popup" onclick="cerrarPopupDerrota()">&times;</span>
+            <p>Has muerto :( pero por suerte, es un juego :)</p>
+        </div>
+    </div>
 
 
     <!-- Pantalla Final - Revelación del Regalo -->
