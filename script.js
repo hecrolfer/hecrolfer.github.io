@@ -3,20 +3,8 @@ const pantallas = document.querySelectorAll('.pantalla');
 let tablero = ["", "", "", "", "", "", "", "", ""];
 let jugadorActual = "O";
 
-// Objeto para verificar que todos los mensajes han sido descifrados
-const mensajesDescifrados = {
-    carta1: false,
-    carta2: false,
-    carta3: false
-};
-
 // Función para avanzar a la siguiente pantalla
 function avanzarPantalla() {
-    if (pantallaActual === pantallas.length - 3 && !todosMensajesDescifrados()) {
-        alert("Debes descifrar todos los mensajes antes de continuar.");
-        return;
-    }
-
     pantallas[pantallaActual].classList.remove('visible');
     pantallaActual++;
     if (pantallaActual < pantallas.length) {
@@ -42,6 +30,7 @@ function mostrarPopupCagueta() {
 function cerrarPopup() {
     document.getElementById("popup-cagueta").style.display = "none";
     document.getElementById("popup-perdida").style.display = "none";
+    document.getElementById("popup-victoria").style.display = "none";
 }
 
 // Función para aceptar el reto y mostrar el juego de tres en raya
@@ -69,11 +58,8 @@ function jugadaHumana(pos) {
         tablero[pos] = "O";
         actualizarTablero();
         if (verificarVictoria("O")) {
-            document.getElementById("mensaje1").innerText = "¡Has ganado! El alienígena se rinde y te deja continuar.";
-            document.getElementById("explorar-btn").disabled = false;
-            document.getElementById("explorar-btn").removeAttribute("title");
+            mostrarPopupVictoria(); // Mostrar popup de victoria si el jugador gana
         } else if (tableroCompleto()) {
-            document.getElementById("mensaje1").innerText = "Es un empate. Inténtalo de nuevo.";
             animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
         } else {
             jugadorActual = "X";
@@ -96,7 +82,6 @@ function jugadaAlien() {
     if (verificarVictoria("X")) {
         mostrarPopupPerdida(); // Mostrar popup de pérdida en caso de derrota
     } else if (tableroCompleto()) {
-        document.getElementById("mensaje1").innerText = "Es un empate. Inténtalo de nuevo.";
         animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
     } else {
         jugadorActual = "O";
@@ -126,10 +111,17 @@ function reiniciarTablero() {
     document.getElementById("explorar-btn").setAttribute("title", "El alien te impide continuar hasta que le ganes.");
 }
 
-// Función para mostrar el popup de pérdida
+// Función para mostrar el popup de derrota
 function mostrarPopupPerdida() {
     document.getElementById("popup-perdida").style.display = "block";
     reiniciarTablero();
+}
+
+// Función para mostrar el popup de victoria y desbloquear el botón
+function mostrarPopupVictoria() {
+    document.getElementById("popup-victoria").style.display = "block";
+    document.getElementById("explorar-btn").disabled = false;
+    document.getElementById("explorar-btn").removeAttribute("title");
 }
 
 // Función para verificar si el tablero está completo
@@ -162,11 +154,6 @@ function mejorMovimiento(jugador) {
         }
     }
     return null;
-}
-
-// Función para verificar si todos los mensajes han sido descifrados
-function todosMensajesDescifrados() {
-    return Object.values(mensajesDescifrados).every(descifrado => descifrado);
 }
 
 // Función para mostrar la última frase después de abrir el regalo
