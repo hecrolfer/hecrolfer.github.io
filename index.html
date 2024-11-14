@@ -66,10 +66,11 @@
             Sus columnas se elevan hacia el cielo, creando una sensación de eternidad. La entrada es amplia, con una puerta abierta que te invita a explorar más allá.
         </p>
         <div class="botones-reto">
-            <button onclick="avanzarPantalla()">Entrar a la estructura</button>
+            <button onclick="entrarPantallaTrampas()">Entrar a la estructura</button>
             <button onclick="retrocederPantalla()">Huir como una cobarde</button>
         </div>
     </div>
+
     <!-- Pantalla del juego de esquivar rocas -->
     <div id="pantalla-trampas" class="pantalla">
         <h2>Esquiva las Trampas</h2>
@@ -87,7 +88,6 @@
             <p>Has muerto :( pero por suerte, es un juego :)</p>
         </div>
     </div>
-
 
     <!-- Pantalla Final - Revelación del Regalo -->
     <div id="pantalla-final" class="pantalla">
@@ -112,7 +112,7 @@
         </div>
     </div>
 
-    <!-- Popup de derrota -->
+    <!-- Popup de derrota en Tic Tac Toe -->
     <div id="popup-perdida" class="popup">
         <div class="popup-contenido">
             <span class="cerrar-popup" onclick="cerrarPopup()">&times;</span>
@@ -120,7 +120,7 @@
         </div>
     </div>
 
-    <!-- Popup de victoria -->
+    <!-- Popup de victoria en Tic Tac Toe -->
     <div id="popup-victoria" class="popup">
         <div class="popup-contenido">
             <span class="cerrar-popup" onclick="cerrarPopup()">&times;</span>

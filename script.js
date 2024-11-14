@@ -208,15 +208,18 @@ function mostrarUltimaFrase() {
     document.getElementById('pantalla-final-revelacion').classList.add('visible');
 }
 
-
-// Variables del juego de esquivar rocas
 let canvas = document.getElementById("juegoCanvas");
 let ctx = canvas.getContext("2d");
 
 let sari = new Image();
 sari.src = "assets/images/sari.PNG";
+sari.onload = () => console.log("Imagen de Sari cargada correctamente.");
+sari.onerror = () => console.error("Error al cargar la imagen de Sari.");
+
 let rockImage = new Image();
 rockImage.src = "assets/images/rocks.png";
+rockImage.onload = () => console.log("Imagen de rocas cargada correctamente.");
+rockImage.onerror = () => console.error("Error al cargar la imagen de las rocas.");
 
 let sariX = canvas.width / 2 - 25; // Posición inicial de Sari
 let sariY = canvas.height - 60; // Altura fija de Sari
@@ -233,6 +236,7 @@ let rockInterval;
 function iniciarJuego() {
     rocks = [];
     esquivadas = 0;
+    sariX = canvas.width / 2 - 25; // Reiniciar la posición de Sari al centro
     document.getElementById("continuar-btn").disabled = true;
     clearInterval(gameInterval);
     clearInterval(rockInterval);
@@ -312,3 +316,9 @@ document.addEventListener("keydown", function (event) {
         sariX += 20;
     }
 });
+
+// Iniciar el juego al cargar la pantalla de trampas
+function entrarPantallaTrampas() {
+    document.getElementById("pantalla-trampas").classList.add("visible");
+    iniciarJuego();
+}
