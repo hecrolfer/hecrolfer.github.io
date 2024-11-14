@@ -9,72 +9,51 @@
   <body>
     <!-- Pantalla de Introducción -->
     <div id="pantalla-inicio" class="pantalla visible">
-      <h1>Bienvenida a un Planeta Extraño</h1>
-      <p>
-        Al aterrizar en este planeta, te encuentras con cristales luminosos que
-        parecen proyectar mensajes holográficos en el aire. Sientes que cada
-        paso te acerca a algo importante.
-      </p>
-      <button onclick="avanzarPantalla()">Comenzar la Aventura</button>
+        <h1>Bienvenida a un Planeta Extraño</h1>
+        <p>Al aterrizar en este planeta, te encuentras con cristales luminosos que parecen proyectar mensajes holográficos en el aire. Sientes que cada mensaje guarda un secreto importante, esperando a ser descifrado.</p>
+        <div class="botones-centro">
+            <button onclick="avanzarPantalla()">Comenzar la Aventura</button>
+        </div>
     </div>
 
     <!-- Pantalla 1: Desierto Luminoso con la introducción de la criatura alienígena -->
     <div id="pantalla-frase1" class="pantalla">
-      <h2>Desierto Luminoso</h2>
-      <p>
-        Parece que estás en una especie de desierto…<br /><br />
-        De repente, escuchas un sonido extraño, aunque sorprendentemente
-        agradable.<br /><br />
-        “Dios mío, ¡qué cosa tan mona!” piensas, mientras aparece frente a ti
-        una pequeña criatura muy parecida a los gatos de tu planeta. Al
-        principio, das un paso atrás, cautelosa... pero parece inofensiva.<br /><br />
-        Observas que la criatura se comunica de una forma peculiar, emitiendo
-        sonidos y gestos incomprensibles. Entonces, te das cuenta de que… ¡te
-        está retando! Parece que quiere jugar contigo, a un juego que te resulta
-        vagamente familiar…<br /><br />
-        No parece dispuesta a dejarte avanzar hasta que aceptes su propuesta… ¡y
-        consigas ganarle!
-      </p>
-      
-    <!-- Botones para aceptar el reto o "huir" -->
-    <div class="botones-reto">
-        <button onclick="aceptarReto()">Acepto el reto</button>
-        <button onclick="mostrarPopup()" class="gallina-boton">
-            <span class="gallina-texto">Soy una gallina</span>
-            <img src="assets/images/chicken.gif" alt="Gallina" class="gallina-icono">
-        </button>
+        <h2>Desierto Luminoso</h2>
+        <p>
+            Parece que estás en una especie de desierto…<br><br>
+            De repente, escuchas un sonido extraño, aunque sorprendentemente agradable.<br><br>
+            “Dios mío, ¡qué cosa tan mona!” piensas, mientras aparece frente a ti una pequeña criatura muy parecida a los gatos de tu planeta. Al principio, das un paso atrás, cautelosa... pero parece inofensiva.<br><br>
+            Observas que la criatura se comunica de una forma peculiar, emitiendo sonidos y gestos incomprensibles. Entonces, te das cuenta de que… ¡te está retando! Parece que quiere jugar contigo, a un juego que te resulta vagamente familiar…<br><br>
+            No parece dispuesta a dejarte avanzar hasta que aceptes su propuesta… ¡y consigas ganarle!
+        </p>
+    
+        <div class="botones-reto">
+            <button onclick="aceptarReto()">Acepto el reto</button>
+            <button onclick="mostrarPopup()" class="gallina-boton">
+                <span class="gallina-texto">Soy una gallina</span>
+                <img src="assets/images/chicken.gif" alt="Gallina" class="gallina-icono">
+            </button>
+        </div>
     </div>
-
-
-    </div>
-
+    
     <!-- Pantalla del Tic Tac Toe (Tres en Raya) -->
     <div id="pantalla-tic-tac-toe" class="pantalla">
-      <h2>Desafío del Tres en Raya</h2>
-      <p>Gana el juego para que la criatura te deje avanzar en tu aventura.</p>
-
-      <!-- Minijuego: Tres en Raya -->
-      <div id="tres-en-raya">
-        <div class="celda" onclick="jugadaHumana(0)"></div>
-        <div class="celda" onclick="jugadaHumana(1)"></div>
-        <div class="celda" onclick="jugadaHumana(2)"></div>
-        <div class="celda" onclick="jugadaHumana(3)"></div>
-        <div class="celda" onclick="jugadaHumana(4)"></div>
-        <div class="celda" onclick="jugadaHumana(5)"></div>
-        <div class="celda" onclick="jugadaHumana(6)"></div>
-        <div class="celda" onclick="jugadaHumana(7)"></div>
-        <div class="celda" onclick="jugadaHumana(8)"></div>
-      </div>
-
-      <p class="mensaje-descifrado" id="mensaje1"></p>
-      <button
-        id="explorar-btn"
-        onclick="avanzarPantalla()"
-        disabled
-        title="El alien te impide continuar hasta que le ganes."
-      >
-        Explorar más allá
-      </button>
+        <h2>Desafío del Tres en Raya</h2>
+        <p>Gana el juego para que la criatura te deje avanzar en tu aventura.</p>
+        <div id="tres-en-raya">
+            <div class="celda" onclick="jugadaHumana(0)"></div>
+            <div class="celda" onclick="jugadaHumana(1)"></div>
+            <div class="celda" onclick="jugadaHumana(2)"></div>
+            <div class="celda" onclick="jugadaHumana(3)"></div>
+            <div class="celda" onclick="jugadaHumana(4)"></div>
+            <div class="celda" onclick="jugadaHumana(5)"></div>
+            <div class="celda" onclick="jugadaHumana(6)"></div>
+            <div class="celda" onclick="jugadaHumana(7)"></div>
+            <div class="celda" onclick="jugadaHumana(8)"></div>
+        </div>
+        <div class="botones-centro">
+            <button id="explorar-btn" onclick="avanzarPantalla()" disabled title="El alien te impide continuar hasta que le ganes.">Explorar más allá</button>
+        </div>
     </div>
 
     <!-- Popup para el botón de la gallina -->
@@ -84,7 +63,6 @@
             <p>¿En serio? ¿Eres una cagueta? Sabes que no vas a poder avanzar hasta que no ganes...</p>
         </div>
     </div>
-
 
     <!-- Pantalla 2: Campo de Cristales -->
     <div id="pantalla-frase2" class="pantalla">
