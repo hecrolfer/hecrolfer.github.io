@@ -68,6 +68,15 @@ p, .texto-cifrado, em {
     transform: scale(1.05);
 }
 
+/* Colores específicos para el jugador y el alienígena */
+.celda.O {
+    color: #00ff00; /* Verde para el usuario */
+}
+
+.celda.X {
+    color: #ff4500; /* Naranja/rojo para el alienígena */
+}
+
 /* Botones generales */
 button {
     padding: 10px 20px;

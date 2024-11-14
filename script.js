@@ -58,10 +58,17 @@ function jugadaAlien() {
 }
 
 // Función para actualizar el tablero en el HTML
+// Actualización en actualizarTablero para añadir clases específicas
 function actualizarTablero() {
     const celdas = document.querySelectorAll(".celda");
     celdas.forEach((celda, index) => {
         celda.innerText = tablero[index];
+        celda.classList.remove("O", "X"); // Elimina clases previas
+        if (tablero[index] === "O") {
+            celda.classList.add("O"); // Añade clase 'O' para el jugador
+        } else if (tablero[index] === "X") {
+            celda.classList.add("X"); // Añade clase 'X' para el alienígena
+        }
     });
 }
 
