@@ -235,3 +235,27 @@ button[disabled]:hover::after {
     color: #ff0000;
     font-weight: bold;
 }
+
+
+/* Estilo para el popup de felicitación */
+#popup-enhorabuena .popup-contenido {
+    background-color: #4CAF50; /* Color de fondo alegre (verde) */
+    color: #fff;
+    border: 2px solid #ffd700;
+}
+
+.imagen-giratoria {
+    width: 80px;
+    height: 80px;
+    margin-top: 15px;
+    animation: girar 2s linear infinite; /* Animación de giro continuo */
+}
+
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

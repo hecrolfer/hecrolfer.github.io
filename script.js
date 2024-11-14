@@ -279,12 +279,19 @@ function actualizarJuego() {
             esquivadas++;
             i--;
 
-            // Aumentar velocidad y desbloquear el botón al esquivar 50 rocas
+            // Aumentar dificultad progresivamente cada 10 rocas esquivadas
+            if (esquivadas % 10 === 0) {
+                rockSpeed += 0.5; // Incrementa la velocidad de caída de las rocas
+                clearInterval(rockInterval); // Limpia el intervalo anterior
+                rockGenerationInterval -= 50; // Aumenta la frecuencia de generación de rocas
+                rockInterval = setInterval(generarRoca, Math.max(rockGenerationInterval, 200)); // Reinicia el intervalo con la nueva frecuencia (límite mínimo de 200 ms)
+            }
+
+            // Mostrar el popup de felicitación al esquivar 50 rocas
             if (esquivadas === 50) {
                 clearInterval(gameInterval);
                 clearInterval(rockInterval);
-                document.getElementById("continuar-btn").disabled = false;
-                alert("Enhorabuena, has conseguido sortear las trampas");
+                mostrarPopupEnhorabuena(); // Llama al popup de felicitación
                 return;
             }
         }
@@ -331,10 +338,18 @@ document.addEventListener("keyup", function (event) {
     }
 });
 
-
 // Iniciar el juego al cargar la pantalla de trampas
 function entrarPantallaTrampas() {
     pantallas.forEach(pantalla => pantalla.classList.remove('visible')); // Asegúrate de que solo una pantalla esté visible
     document.getElementById("pantalla-trampas").classList.add("visible");
     iniciarJuego();
+}
+
+function mostrarPopupEnhorabuena() {
+    document.getElementById("popup-enhorabuena").style.display = "block";
+}
+
+function cerrarPopupEnhorabuena() {
+    document.getElementById("popup-enhorabuena").style.display = "none";
+    document.getElementById("continuar-btn").disabled = false; // Habilitar el botón para continuar
 }
