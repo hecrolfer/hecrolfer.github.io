@@ -22,6 +22,7 @@ function cerrarPopup() {
 
 // Resto de funciones del juego de tres en raya
 
+// Actualización en jugadaHumana para detectar y manejar empates
 function jugadaHumana(pos) {
     if (tablero[pos] === "" && jugadorActual === "O") {
         tablero[pos] = "O";
@@ -32,7 +33,7 @@ function jugadaHumana(pos) {
             document.getElementById("explorar-btn").removeAttribute("title");
         } else if (tableroCompleto()) {
             document.getElementById("mensaje1").innerText = "Es un empate. Inténtalo de nuevo.";
-            reiniciarTablero();
+            animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
         } else {
             jugadorActual = "X";
             setTimeout(jugadaAlien, 500);
@@ -52,10 +53,10 @@ function jugadaAlien() {
     actualizarTablero();
     if (verificarVictoria("X")) {
         document.getElementById("mensaje1").innerText = "El alienígena ha ganado. Inténtalo de nuevo.";
-        reiniciarTablero();
+        animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de pérdida
     } else if (tableroCompleto()) {
         document.getElementById("mensaje1").innerText = "Es un empate. Inténtalo de nuevo.";
-        reiniciarTablero();
+        animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
     } else {
         jugadorActual = "O";
     }
@@ -65,11 +66,11 @@ function actualizarTablero() {
     const celdas = document.querySelectorAll(".celda");
     celdas.forEach((celda, index) => {
         celda.innerText = tablero[index];
-        celda.classList.remove("O", "X");
+        celda.classList.remove("O", "X", "desvanecer"); // Elimina clases previas y desvanecimiento
         if (tablero[index] === "O") {
-            celda.classList.add("O");
+            celda.classList.add("O"); // Añade clase 'O' para el jugador
         } else if (tablero[index] === "X") {
-            celda.classList.add("X");
+            celda.classList.add("X"); // Añade clase 'X' para el alienígena
         }
     });
 }
@@ -88,6 +89,19 @@ function verificarVictoria(jugador) {
 function tableroCompleto() {
     return tablero.every(celda => celda !== "");
 }
+
+// Función para iniciar el desvanecimiento y reiniciar el tablero después de un empate
+function animacionDesvanecerTablero() {
+    const celdas = document.querySelectorAll(".celda");
+    celdas.forEach(celda => {
+        celda.classList.add("desvanecer"); // Añadimos la clase de animación
+    });
+
+    setTimeout(() => {
+        reiniciarTablero();
+    }, 1000); // Esperamos 1 segundo para que termine la animación antes de reiniciar
+}
+
 
 function reiniciarTablero() {
     tablero = ["", "", "", "", "", "", "", "", ""];
