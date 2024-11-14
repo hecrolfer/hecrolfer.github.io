@@ -171,13 +171,15 @@ button[disabled]:hover::after {
 
 .popup-contenido {
     position: relative;
+    padding: 15px;
 }
 
 .cerrar-popup {
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 10px;
     font-size: 20px;
     cursor: pointer;
     color: #ff0000;
+    font-weight: bold;
 }
