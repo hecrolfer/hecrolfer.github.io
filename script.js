@@ -62,6 +62,7 @@ function jugadaHumana(pos) {
             mostrarPopupVictoria(); // Mostrar popup de victoria si el jugador gana
             intentosFallidos = 0; // Reiniciar contador si el jugador gana
         } else if (tableroCompleto()) {
+            intentosFallidos++; // Contar el empate como un intento fallido
             animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
         } else {
             jugadorActual = "X";
@@ -85,6 +86,7 @@ function jugadaAlien() {
         mostrarPopupPerdida(); // Mostrar popup de derrota en caso de derrota del jugador
         intentosFallidos++; // Incrementar contador si el jugador pierde
     } else if (tableroCompleto()) {
+        intentosFallidos++; // Incrementar contador en caso de empate
         animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
     } else {
         jugadorActual = "O";
