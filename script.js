@@ -71,27 +71,64 @@ function jugadaHumana(pos) {
     }
 }
 
-// Función para manejar el turno del alienígena con ajuste de dificultad
+// Función para manejar el turno del alienígena con movimientos aleatorios
 function jugadaAlien() {
     let movimiento;
-    if (intentosFallidos >= 3) {
-        movimiento = movimientoFacil("X"); // Bajar la dificultad tras 3 intentos fallidos
+
+    // Probabilidad de cometer un error (30-40%)
+    if (Math.random() < 0.35) {
+        // Realiza un movimiento aleatorio
+        movimiento = movimientoFacil("X");
     } else {
-        movimiento = mejorMovimiento("X"); // Jugar con dificultad normal
+        // Usa la estrategia básica de intentar ganar o bloquear
+        movimiento = movimientoEstrategico("X");
     }
-    
+
     tablero[movimiento] = "X";
     actualizarTablero();
+
     if (verificarVictoria("X")) {
         mostrarPopupPerdida(); // Mostrar popup de derrota en caso de derrota del jugador
-        intentosFallidos++; // Incrementar contador si el jugador pierde
     } else if (tableroCompleto()) {
-        intentosFallidos++; // Incrementar contador en caso de empate
         animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
     } else {
         jugadorActual = "O";
     }
 }
+
+
+// Nueva función para encontrar un movimiento estratégico básico
+// Función para encontrar un movimiento estratégico básico
+function movimientoEstrategico(jugador) {
+    // 1. Primero, intenta ganar si hay una oportunidad
+    for (let i = 0; i < tablero.length; i++) {
+        if (tablero[i] === "") {
+            tablero[i] = jugador;
+            if (verificarVictoria(jugador)) {
+                tablero[i] = ""; // Deshacer movimiento temporal
+                return i;
+            }
+            tablero[i] = ""; // Deshacer movimiento temporal
+        }
+    }
+
+    // 2. Luego, intenta bloquear al jugador si tiene una oportunidad de ganar
+    let oponente = jugador === "X" ? "O" : "X";
+    for (let i = 0; i < tablero.length; i++) {
+        if (tablero[i] === "") {
+            tablero[i] = oponente;
+            if (verificarVictoria(oponente)) {
+                tablero[i] = ""; // Deshacer movimiento temporal
+                return i;
+            }
+            tablero[i] = ""; // Deshacer movimiento temporal
+        }
+    }
+
+    // 3. Si no hay amenaza o oportunidad directa, elige un movimiento aleatorio
+    return movimientoFacil(jugador);
+}
+
 
 // Función para actualizar el tablero en el HTML
 function actualizarTablero() {
@@ -146,60 +183,15 @@ function verificarVictoria(jugador) {
     );
 }
 
-// Función para encontrar el mejor movimiento usando lógica avanzada
-function mejorMovimiento(jugador) {
-    let mejorPuntuacion = -Infinity;
-    let movimientoOptimo;
-
-    for (let i = 0; i < tablero.length; i++) {
-        if (tablero[i] === "") {
-            tablero[i] = jugador;
-            let puntuacion = minimax(tablero, 0, false);
-            tablero[i] = "";
-            if (puntuacion > mejorPuntuacion) {
-                mejorPuntuacion = puntuacion;
-                movimientoOptimo = i;
-            }
-        }
-    }
-    return movimientoOptimo;
-}
-
-// Función Minimax para calcular el mejor movimiento en modo difícil
-function minimax(tablero, profundidad, esMaximizador) {
-    if (verificarVictoria("X")) return 10 - profundidad;
-    if (verificarVictoria("O")) return profundidad - 10;
-    if (tableroCompleto()) return 0;
-
-    if (esMaximizador) {
-        let mejorPuntuacion = -Infinity;
-        for (let i = 0; i < tablero.length; i++) {
-            if (tablero[i] === "") {
-                tablero[i] = "X";
-                let puntuacion = minimax(tablero, profundidad + 1, false);
-                tablero[i] = "";
-                mejorPuntuacion = Math.max(puntuacion, mejorPuntuacion);
-            }
-        }
-        return mejorPuntuacion;
-    } else {
-        let mejorPuntuacion = Infinity;
-        for (let i = 0; i < tablero.length; i++) {
-            if (tablero[i] === "") {
-                tablero[i] = "O";
-                let puntuacion = minimax(tablero, profundidad + 1, true);
-                tablero[i] = "";
-                mejorPuntuacion = Math.min(puntuacion, mejorPuntuacion);
-            }
-        }
-        return mejorPuntuacion;
-    }
-}
-
-// Función para movimiento más fácil
+// Movimiento completamente aleatorio para el alienígena
+// Movimiento aleatorio
 function movimientoFacil(jugador) {
-    let movimientosDisponibles = tablero.map((val, idx) => val === "" ? idx : null).filter(val => val !== null);
-    return movimientosDisponibles[Math.floor(Math.random() * movimientosDisponibles.length)];
+    let movimientosDisponibles = tablero
+        .map((val, idx) => (val === "" ? idx : null))
+        .filter((val) => val !== null);
+    return movimientosDisponibles[
+        Math.floor(Math.random() * movimientosDisponibles.length)
+    ];
 }
 
 // Función para mostrar la última frase después de abrir el regalo
@@ -227,10 +219,16 @@ let sariWidth = 50;
 let sariHeight = 50;
 
 let rocks = [];
-let rockSpeed = 2; // Velocidad inicial de caída de las rocas
+let rockSpeed = 4; // Velocidad inicial de caída de las rocas
 let esquivadas = 0; // Contador de rocas esquivadas
 let gameInterval;
 let rockInterval;
+let rockGenerationInterval = 500; // Genera una roca cada 500 ms en lugar de 1000 ms
+
+let movimientoIzquierda = false;
+let movimientoDerecha = false;
+let velocidadMovimiento = 5; // Ajusta la velocidad del personaje
+
 
 // Función para iniciar el juego de esquivar rocas
 function iniciarJuego() {
@@ -241,7 +239,7 @@ function iniciarJuego() {
     clearInterval(gameInterval);
     clearInterval(rockInterval);
     gameInterval = setInterval(actualizarJuego, 20);
-    rockInterval = setInterval(generarRoca, 1000);
+    rockInterval = setInterval(generarRoca, rockGenerationInterval); // Ajuste de generación de rocas
 }
 
 // Generar una roca en una posición aleatoria
@@ -254,6 +252,14 @@ function generarRoca() {
 function actualizarJuego() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(sari, sariX, sariY, sariWidth, sariHeight);
+
+    // Movimiento fluido del personaje
+    if (movimientoIzquierda && sariX > 0) {
+        sariX -= velocidadMovimiento;
+    }
+    if (movimientoDerecha && sariX < canvas.width - sariWidth) {
+        sariX += velocidadMovimiento;
+    }
 
     // Dibujar y mover rocas
     for (let i = 0; i < rocks.length; i++) {
@@ -310,15 +316,25 @@ function cerrarPopupDerrota() {
 
 // Función para manejar el movimiento de Sari con las flechas
 document.addEventListener("keydown", function (event) {
-    if (event.key === "ArrowLeft" && sariX > 0) {
-        sariX -= 20;
-    } else if (event.key === "ArrowRight" && sariX < canvas.width - sariWidth) {
-        sariX += 20;
+    if (event.key === "ArrowLeft") {
+        movimientoIzquierda = true;
+    } else if (event.key === "ArrowRight") {
+        movimientoDerecha = true;
     }
 });
 
+document.addEventListener("keyup", function (event) {
+    if (event.key === "ArrowLeft") {
+        movimientoIzquierda = false;
+    } else if (event.key === "ArrowRight") {
+        movimientoDerecha = false;
+    }
+});
+
+
 // Iniciar el juego al cargar la pantalla de trampas
 function entrarPantallaTrampas() {
+    pantallas.forEach(pantalla => pantalla.classList.remove('visible')); // Asegúrate de que solo una pantalla esté visible
     document.getElementById("pantalla-trampas").classList.add("visible");
     iniciarJuego();
 }
