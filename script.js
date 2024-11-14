@@ -2,6 +2,7 @@ let pantallaActual = 0;
 const pantallas = document.querySelectorAll('.pantalla');
 let tablero = ["", "", "", "", "", "", "", "", ""];
 let jugadorActual = "O";
+let intentosFallidos = 0; // Contador para los intentos fallidos del jugador
 
 // Función para avanzar a la siguiente pantalla
 function avanzarPantalla() {
@@ -59,6 +60,7 @@ function jugadaHumana(pos) {
         actualizarTablero();
         if (verificarVictoria("O")) {
             mostrarPopupVictoria(); // Mostrar popup de victoria si el jugador gana
+            intentosFallidos = 0; // Reiniciar contador si el jugador gana
         } else if (tableroCompleto()) {
             animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
         } else {
@@ -68,13 +70,20 @@ function jugadaHumana(pos) {
     }
 }
 
-// Función mejorada para manejar el turno del alienígena con lógica más avanzada
+// Función para manejar el turno del alienígena con ajuste de dificultad
 function jugadaAlien() {
-    let movimiento = mejorMovimiento("X"); // Busca el mejor movimiento para la IA
+    let movimiento;
+    if (intentosFallidos >= 3) {
+        movimiento = movimientoFacil("X"); // Bajar la dificultad tras 3 intentos fallidos
+    } else {
+        movimiento = mejorMovimiento("X"); // Jugar con dificultad normal
+    }
+    
     tablero[movimiento] = "X";
     actualizarTablero();
     if (verificarVictoria("X")) {
         mostrarPopupPerdida(); // Mostrar popup de derrota en caso de derrota del jugador
+        intentosFallidos++; // Incrementar contador si el jugador pierde
     } else if (tableroCompleto()) {
         animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
     } else {
@@ -135,7 +144,7 @@ function verificarVictoria(jugador) {
     );
 }
 
-// Función mejorada para encontrar el mejor movimiento usando lógica avanzada
+// Función para encontrar el mejor movimiento usando lógica avanzada
 function mejorMovimiento(jugador) {
     let mejorPuntuacion = -Infinity;
     let movimientoOptimo;
@@ -154,7 +163,7 @@ function mejorMovimiento(jugador) {
     return movimientoOptimo;
 }
 
-// Función Minimax simplificada para calcular el mejor movimiento
+// Función Minimax para calcular el mejor movimiento en modo difícil
 function minimax(tablero, profundidad, esMaximizador) {
     if (verificarVictoria("X")) return 10 - profundidad;
     if (verificarVictoria("O")) return profundidad - 10;
@@ -183,6 +192,12 @@ function minimax(tablero, profundidad, esMaximizador) {
         }
         return mejorPuntuacion;
     }
+}
+
+// Función para movimiento más fácil
+function movimientoFacil(jugador) {
+    let movimientosDisponibles = tablero.map((val, idx) => val === "" ? idx : null).filter(val => val !== null);
+    return movimientosDisponibles[Math.floor(Math.random() * movimientosDisponibles.length)];
 }
 
 // Función para mostrar la última frase después de abrir el regalo
