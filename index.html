@@ -77,7 +77,7 @@
         <p>¡Cuidado! Está lleno de trampas y piedras cayendo. Usa las flechas para moverte y esquivar las rocas.</p>
         <canvas id="juegoCanvas" width="600" height="400"></canvas>
         <div class="botones-centro">
-            <button id="continuar-btn" onclick="avanzarPantalla()" disabled>Continuar</button>
+            <button id="continuar-btn" onclick="avanzarPantalla()" disabled>Adentrarte</button>
         </div>
     </div>
 
@@ -86,7 +86,7 @@
         <div class="popup-contenido">
             <span class="cerrar-popup" onclick="cerrarPopupDerrota()">&times;</span>
             <p>Has muerto ☠️☠️ </p>
-            <p>Pero por suerte, es un juego 😄</p>
+            <p>Pero, por suerte, es un juego 😄</p>
         </div>
     </div>
 
@@ -98,6 +98,33 @@
             <img src="assets/images/girar.PNG" alt="Felicidades" class="imagen-giratoria">
         </div>
     </div>
+
+    <!-- Pantalla de la Pared con el Mensaje Cifrado -->
+    <div id="pantalla-mensaje-cifrado" class="pantalla">
+        <h2>Pared Antigua</h2>
+        <p>
+            Te acercas a una pared cubierta de símbolos extraños y grabados antiguos. Entre los grabados, notas algo que parece un mensaje cifrado. La curiosidad te invade, y sientes que ese mensaje guarda algo importante.
+        </p>
+        <p class="texto-cifrado">--- --- --- --- ---   ---   -----   ---   ----</p>
+        <div class="botones-centro">
+            <button onclick="intentarDescifrar()">Intentar descifrar</button>
+        </div>
+    </div>
+
+        <!-- Pantalla del Juego de Ahorcado -->
+    <div id="pantalla-ahorcado" class="pantalla">
+        <h2>Juego de Ahorcado</h2>
+        <p>Adivina la frase oculta:</p>
+        <p id="frase-oculta">_ _ _ _ _   _ _   _ _ _ _ _   _ _ _ _   _ _ _ _ _ _ _</p>
+        <div id="letras-intentadas">Letras intentadas: <span id="letras-intentadas-lista"></span></div>
+        <div id="ahorcado-intentos">Intentos restantes: <span id="intentos-restantes">6</span></div>
+        <div class="botones-centro">
+            <input type="text" id="letra-input" maxlength="1" placeholder="Introduce una letra">
+            <button onclick="intentarLetra()">Intentar letra</button>
+        </div>
+    </div>
+
+
 
 
     <!-- Pantalla Final - Revelación del Regalo -->

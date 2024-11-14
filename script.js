@@ -353,3 +353,62 @@ function cerrarPopupEnhorabuena() {
     document.getElementById("popup-enhorabuena").style.display = "none";
     document.getElementById("continuar-btn").disabled = false; // Habilitar el botón para continuar
 }
+
+// Frase oculta para adivinar
+const fraseObjetivo = "Nunca es tarde para aprender";
+let fraseActual = "_ _ _ _ _   _ _   _ _ _ _ _   _ _ _ _   _ _ _ _ _ _ _";
+let intentosRestantes = 6;
+let letrasIntentadas = [];
+
+// Función para cambiar a la pantalla de ahorcado
+function intentarDescifrar() {
+    pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
+    document.getElementById("pantalla-ahorcado").classList.add("visible");
+    actualizarFraseOculta();
+}
+
+// Función para procesar un intento de letra
+function intentarLetra() {
+    const letraInput = document.getElementById("letra-input").value.toUpperCase();
+    if (letraInput && !letrasIntentadas.includes(letraInput)) {
+        letrasIntentadas.push(letraInput);
+        document.getElementById("letras-intentadas-lista").innerText = letrasIntentadas.join(", ");
+
+        if (fraseObjetivo.toUpperCase().includes(letraInput)) {
+            actualizarFraseOculta();
+        } else {
+            intentosRestantes--;
+            document.getElementById("intentos-restantes").innerText = intentosRestantes;
+        }
+
+        if (intentosRestantes === 0) {
+            mostrarPopupDerrota(); // Opcional: puedes mostrar un popup o mensaje de derrota
+            reiniciarAhorcado();
+        } else if (!fraseActual.includes("_")) {
+            mostrarPopupVictoria(); // Opcional: puedes mostrar un popup o mensaje de victoria
+            reiniciarAhorcado();
+        }
+    }
+    document.getElementById("letra-input").value = ""; // Limpiar el input
+}
+
+// Función para actualizar la frase oculta
+function actualizarFraseOculta() {
+    fraseActual = fraseObjetivo
+        .split("")
+        .map((letra) =>
+            letra === " " ? " " : (letrasIntentadas.includes(letra.toUpperCase()) ? letra : "_")
+        )
+        .join(" ");
+    document.getElementById("frase-oculta").innerText = fraseActual;
+}
+
+// Reiniciar el juego de ahorcado
+function reiniciarAhorcado() {
+    fraseActual = "_ _ _ _ _   _ _   _ _ _ _ _   _ _ _ _   _ _ _ _ _ _ _";
+    intentosRestantes = 6;
+    letrasIntentadas = [];
+    document.getElementById("letras-intentadas-lista").innerText = "";
+    document.getElementById("intentos-restantes").innerText = intentosRestantes;
+    actualizarFraseOculta();
+}

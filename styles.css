@@ -259,3 +259,37 @@ button[disabled]:hover::after {
         transform: rotate(360deg);
     }
 }
+
+/* Estilo para el texto cifrado en la pantalla de mensaje */
+.texto-cifrado {
+    font-size: 1.5em;
+    color: #ffd700;
+    letter-spacing: 0.2em;
+}
+
+/* Estilo para la frase oculta y los intentos en el juego de ahorcado */
+#frase-oculta {
+    font-size: 1.5em;
+    margin: 20px 0;
+    color: #ffd700;
+}
+
+#letras-intentadas {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #e0e0e0;
+}
+
+#ahorcado-intentos {
+    font-size: 1.2em;
+    color: #ff6347; /* Rojo para resaltar el conteo de intentos */
+    margin-top: 10px;
+}
+
+#letra-input {
+    padding: 8px;
+    font-size: 1em;
+    text-align: center;
+    width: 50px;
+    margin-right: 10px;
+}
