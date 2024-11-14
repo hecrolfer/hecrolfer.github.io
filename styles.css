@@ -127,6 +127,20 @@ button:active {
     color: #ff4500; /* Naranja/rojo para el alienígena */
 }
 
+/* Estilo para el desvanecimiento de las celdas en caso de empate o reinicio */
+.desvanecer {
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 /* Estilo del botón deshabilitado */
 button:disabled {
     background-color: #555;
@@ -188,18 +202,4 @@ button[disabled]:hover::after {
     color: #ffd700;
     font-size: 1.3em;
     margin-top: 15px;
-}
-
-/* Estilo para el desvanecimiento de las celdas en caso de empate o reinicio */
-.desvanecer {
-    animation: fadeOut 1s forwards;
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
 }

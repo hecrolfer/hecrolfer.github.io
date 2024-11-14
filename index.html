@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mensajes de un Planeta Extraño</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <!-- Pantalla de Introducción -->
     <div id="pantalla-inicio" class="pantalla visible">
         <h1>Bienvenida a un Planeta Extraño</h1>
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <!-- Pantalla 1: Desierto Luminoso con la introducción de la criatura alienígena -->
+    <!-- Primer Mensaje Holográfico en el Desierto Luminoso -->
     <div id="pantalla-frase1" class="pantalla">
         <h2>Desierto Luminoso</h2>
         <p>
@@ -26,16 +26,15 @@
             Observas que la criatura se comunica de una forma peculiar, emitiendo sonidos y gestos incomprensibles. Entonces, te das cuenta de que… ¡te está retando! Parece que quiere jugar contigo, a un juego que te resulta vagamente familiar…<br><br>
             No parece dispuesta a dejarte avanzar hasta que aceptes su propuesta… ¡y consigas ganarle!
         </p>
-    
         <div class="botones-reto">
             <button onclick="aceptarReto()">Acepto el reto</button>
-            <button onclick="mostrarPopup()" class="gallina-boton">
+            <button onclick="mostrarPopupCagueta()" class="gallina-boton">
                 <span class="gallina-texto">Soy una gallina</span>
                 <img src="assets/images/chicken.gif" alt="Gallina" class="gallina-icono">
             </button>
         </div>
     </div>
-    
+
     <!-- Pantalla del Tic Tac Toe (Tres en Raya) -->
     <div id="pantalla-tic-tac-toe" class="pantalla">
         <h2>Desafío del Tres en Raya</h2>
@@ -56,6 +55,21 @@
         </div>
     </div>
 
+    <!-- Pantalla de Empate y Reinicio -->
+    <div id="pantalla-final" class="pantalla">
+        <h2>El Último Susurro</h2>
+        <p>Has llegado al final de tu viaje y descubierto los mensajes ocultos. Abre el regalo que tienes frente a ti, y este planeta te revelará su secreto final.</p>
+        <button onclick="mostrarUltimaFrase()">Ya he abierto el regalo</button>
+        <button onclick="retrocederPantalla()">Volver atrás</button>
+    </div>
+
+    <!-- Pantalla de Revelación Final -->
+    <div id="pantalla-final-revelacion" class="pantalla">
+        <h2>Este es tu regalo</h2>
+        <p>Ahora que has descubierto el regalo, el último susurro del planeta te habla directamente: “¿Y qué instrumento cojo? ¿El piano? A mí me gusta.”</p>
+        <p>Sari, este piano es solo para ti… para que descubras las melodías que has llevado dentro todo este tiempo.</p>
+    </div>
+
     <!-- Popup para el botón de la gallina -->
     <div id="popup-cagueta" class="popup">
         <div class="popup-contenido">
@@ -64,72 +78,14 @@
         </div>
     </div>
 
-    <!-- Pantalla 2: Campo de Cristales -->
-    <div id="pantalla-frase2" class="pantalla">
-      <h2>Campo de Cristales</h2>
-      <p>
-        En el Campo de Cristales, cada cristal emite una nota al ser tocado. En
-        el centro del campo, una estructura circular espera que reproduzcas la
-        melodía correcta.
-      </p>
-      <!-- Minijuego: Secuencia Musical -->
-      <p>Toca los cristales en el orden correcto para revelar el mensaje.</p>
-      <div class="minijuego" id="cristales">
-        <button onclick="tocarCristal(1)">🔮</button>
-        <button onclick="tocarCristal(2)">🔮</button>
-        <button onclick="tocarCristal(3)">🔮</button>
-      </div>
-      <p class="mensaje-descifrado" id="mensaje2"></p>
-      <button onclick="retrocederPantalla()">Volver atrás</button>
-      <button onclick="avanzarPantalla()">Explorar más allá</button>
-    </div>
-
-    <!-- Pantalla 3: Bosque de Luces Flotantes -->
-    <div id="pantalla-frase3" class="pantalla">
-      <h2>Bosque de Luces Flotantes</h2>
-      <p>
-        Las luces flotan alrededor de los árboles, y algunas forman palabras
-        fugaces. Necesitas atraparlas en el orden correcto para completar el
-        mensaje.
-      </p>
-      <!-- Minijuego: Recoger Luces Correctas -->
-      <p>Recoge las luces en el orden correcto para descifrar el mensaje.</p>
-      <div class="minijuego" id="luces">
-        <button onclick="recogerLuz('¿')">¿</button>
-        <button onclick="recogerLuz('Qué')">Qué</button>
-        <button onclick="recogerLuz('instrumento')">instrumento</button>
-        <button onclick="recogerLuz('cojo')">cojo</button>
-        <button onclick="recogerLuz('?')">?</button>
-      </div>
-      <p class="mensaje-descifrado" id="mensaje3"></p>
-      <button onclick="retrocederPantalla()">Volver atrás</button>
-      <button onclick="avanzarPantalla()">Descubrir el secreto oculto</button>
-    </div>
-
-    <!-- Pantalla Final - Revelación del Regalo -->
-    <div id="pantalla-final" class="pantalla">
-      <h2>El Último Susurro</h2>
-      <p>
-        Has llegado al final de tu viaje. Abre el regalo que tienes frente a ti,
-        y el planeta te revelará su secreto final.
-      </p>
-      <button onclick="mostrarUltimaFrase()">Ya he abierto el regalo</button>
-      <button onclick="retrocederPantalla()">Volver atrás</button>
-    </div>
-
-    <!-- Pantalla de Revelación Final -->
-    <div id="pantalla-final-revelacion" class="pantalla">
-      <h2>Este es tu regalo</h2>
-      <p>
-        Ahora que has descubierto el regalo, el último susurro del planeta te
-        habla directamente: “¿Y qué instrumento cojo? ¿El piano? A mí me gusta.”
-      </p>
-      <p>
-        Sari, este piano es solo para ti… para que descubras las melodías que
-        has llevado dentro todo este tiempo.
-      </p>
+    <!-- Popup de derrota -->
+    <div id="popup-perdida" class="popup">
+        <div class="popup-contenido">
+            <span class="cerrar-popup" onclick="cerrarPopup()">&times;</span>
+            <p>JAJAJA, ¡¡HAS PERDIDO!! HASTA QUE NO GANES NO PODRÁS CONTINUAR 😈</p>
+        </div>
     </div>
 
     <script src="script.js"></script>
-  </body>
+</body>
 </html>

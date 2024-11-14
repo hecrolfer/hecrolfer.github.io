@@ -3,6 +3,47 @@ const pantallas = document.querySelectorAll('.pantalla');
 let tablero = ["", "", "", "", "", "", "", "", ""];
 let jugadorActual = "O";
 
+// Objeto para verificar que todos los mensajes han sido descifrados
+const mensajesDescifrados = {
+    carta1: false,
+    carta2: false,
+    carta3: false
+};
+
+// Función para avanzar a la siguiente pantalla
+function avanzarPantalla() {
+    if (pantallaActual === pantallas.length - 3 && !todosMensajesDescifrados()) {
+        alert("Debes descifrar todos los mensajes antes de continuar.");
+        return;
+    }
+
+    pantallas[pantallaActual].classList.remove('visible');
+    pantallaActual++;
+    if (pantallaActual < pantallas.length) {
+        pantallas[pantallaActual].classList.add('visible');
+    }
+}
+
+// Función para retroceder a la pantalla anterior
+function retrocederPantalla() {
+    if (pantallaActual > 0) {
+        pantallas[pantallaActual].classList.remove('visible');
+        pantallaActual--;
+        pantallas[pantallaActual].classList.add('visible');
+    }
+}
+
+// Función para mostrar el popup de "Soy una gallina"
+function mostrarPopupCagueta() {
+    document.getElementById("popup-cagueta").style.display = "block";
+}
+
+// Función para cerrar cualquier popup
+function cerrarPopup() {
+    document.getElementById("popup-cagueta").style.display = "none";
+    document.getElementById("popup-perdida").style.display = "none";
+}
+
 // Función para aceptar el reto y mostrar el juego de tres en raya
 function aceptarReto() {
     pantallas[pantallaActual].classList.remove('visible');
@@ -10,19 +51,19 @@ function aceptarReto() {
     pantallas[pantallaActual].classList.add('visible');
 }
 
-// Función para mostrar el popup si se hace clic en el botón de la gallina
-function mostrarPopup() {
-    document.getElementById("popup-cagueta").style.display = "block";
+// Función para iniciar el desvanecimiento y reiniciar el tablero después de un empate
+function animacionDesvanecerTablero() {
+    const celdas = document.querySelectorAll(".celda");
+    celdas.forEach(celda => {
+        celda.classList.add("desvanecer"); // Añadimos la clase de animación
+    });
+
+    setTimeout(() => {
+        reiniciarTablero();
+    }, 1000); // Esperamos 1 segundo para que termine la animación antes de reiniciar
 }
 
-// Función para cerrar el popup
-function cerrarPopup() {
-    document.getElementById("popup-cagueta").style.display = "none";
-}
-
-// Resto de funciones del juego de tres en raya
-
-// Actualización en jugadaHumana para detectar y manejar empates
+// Función para manejar el turno del jugador
 function jugadaHumana(pos) {
     if (tablero[pos] === "" && jugadorActual === "O") {
         tablero[pos] = "O";
@@ -41,6 +82,7 @@ function jugadaHumana(pos) {
     }
 }
 
+// Función para manejar el turno del alienígena
 function jugadaAlien() {
     let movimientosDisponibles = tablero.map((val, idx) => val === "" ? idx : null).filter(val => val !== null);
     let movimiento;
@@ -52,8 +94,7 @@ function jugadaAlien() {
     tablero[movimiento] = "X";
     actualizarTablero();
     if (verificarVictoria("X")) {
-        document.getElementById("mensaje1").innerText = "El alienígena ha ganado. Inténtalo de nuevo.";
-        animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de pérdida
+        mostrarPopupPerdida(); // Mostrar popup de pérdida en caso de derrota
     } else if (tableroCompleto()) {
         document.getElementById("mensaje1").innerText = "Es un empate. Inténtalo de nuevo.";
         animacionDesvanecerTablero(); // Activar animación y reiniciar en caso de empate
@@ -62,6 +103,7 @@ function jugadaAlien() {
     }
 }
 
+// Función para actualizar el tablero en el HTML
 function actualizarTablero() {
     const celdas = document.querySelectorAll(".celda");
     celdas.forEach((celda, index) => {
@@ -75,6 +117,27 @@ function actualizarTablero() {
     });
 }
 
+// Función para reiniciar el tablero después de la animación
+function reiniciarTablero() {
+    tablero = ["", "", "", "", "", "", "", "", ""];
+    actualizarTablero();
+    jugadorActual = "O";
+    document.getElementById("explorar-btn").disabled = true;
+    document.getElementById("explorar-btn").setAttribute("title", "El alien te impide continuar hasta que le ganes.");
+}
+
+// Función para mostrar el popup de pérdida
+function mostrarPopupPerdida() {
+    document.getElementById("popup-perdida").style.display = "block";
+    reiniciarTablero();
+}
+
+// Función para verificar si el tablero está completo
+function tableroCompleto() {
+    return tablero.every(celda => celda !== "");
+}
+
+// Función para verificar si hay un ganador
 function verificarVictoria(jugador) {
     const combinacionesGanadoras = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -86,31 +149,7 @@ function verificarVictoria(jugador) {
     );
 }
 
-function tableroCompleto() {
-    return tablero.every(celda => celda !== "");
-}
-
-// Función para iniciar el desvanecimiento y reiniciar el tablero después de un empate
-function animacionDesvanecerTablero() {
-    const celdas = document.querySelectorAll(".celda");
-    celdas.forEach(celda => {
-        celda.classList.add("desvanecer"); // Añadimos la clase de animación
-    });
-
-    setTimeout(() => {
-        reiniciarTablero();
-    }, 1000); // Esperamos 1 segundo para que termine la animación antes de reiniciar
-}
-
-
-function reiniciarTablero() {
-    tablero = ["", "", "", "", "", "", "", "", ""];
-    actualizarTablero();
-    jugadorActual = "O";
-    document.getElementById("explorar-btn").disabled = true;
-    document.getElementById("explorar-btn").setAttribute("title", "El alien te impide continuar hasta que le ganes.");
-}
-
+// Función para encontrar el mejor movimiento para la IA
 function mejorMovimiento(jugador) {
     for (let i = 0; i < tablero.length; i++) {
         if (tablero[i] === "") {
@@ -123,29 +162,6 @@ function mejorMovimiento(jugador) {
         }
     }
     return null;
-}
-
-function avanzarPantalla() {
-    if (pantallaActual === 1 && !mensajesDescifrados.carta1) {
-        alert("Debes ganar al alienígena en el tres en raya para continuar.");
-        return;
-    }
-
-    pantallas[pantallaActual].classList.remove('visible');
-    pantallaActual++;
-    if (pantallaActual < pantallas.length) {
-        pantallas[pantallaActual].classList.add('visible');
-    }
-}
-
-
-// Función para retroceder a la pantalla anterior
-function retrocederPantalla() {
-    if (pantallaActual > 0) {
-        pantallas[pantallaActual].classList.remove('visible');
-        pantallaActual--;
-        pantallas[pantallaActual].classList.add('visible');
-    }
 }
 
 // Función para verificar si todos los mensajes han sido descifrados
