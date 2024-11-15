@@ -464,3 +464,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("continuar-btn").onclick = avanzarPantalla;
 });
+document.addEventListener("keydown", function(event) {
+    // Detecta la tecla ESC
+    if (event.key === "Escape") {
+        // Busca todos los elementos con la clase "popup" y los oculta
+        const popups = document.querySelectorAll(".popup");
+        popups.forEach(popup => {
+            if (popup.style.display === "block") {
+                popup.style.display = "none";
+            }
+        });
+
+        // Reinicia el juego en caso de que el popup de derrota del juego de trampas esté abierto
+        if (document.getElementById("popup-derrota").style.display === "none") {
+            iniciarJuego();
+        }
+    }
+});
