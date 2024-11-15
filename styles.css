@@ -272,6 +272,7 @@ button[disabled]:hover::after {
     font-size: 1.5em;
     margin: 20px 0;
     color: #ffd700;
+    white-space: pre; /* Asegura que los espacios adicionales se respeten */
 }
 
 #letras-intentadas {
