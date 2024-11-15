@@ -355,11 +355,24 @@ function entrarPantallaTrampas() {
 
 function mostrarPopupEnhorabuena() {
     document.getElementById("popup-enhorabuena").style.display = "block";
+    const continuarBtn = document.getElementById("continuar-btn");
+    continuarBtn.disabled = true; // Deshabilitamos el botón al abrir el popup
 }
 
 function cerrarPopupEnhorabuena() {
     document.getElementById("popup-enhorabuena").style.display = "none";
-    document.getElementById("continuar-btn").disabled = false; // Habilita el botón para continuar
+    const continuarBtn = document.getElementById("continuar-btn");
+
+    // Aseguramos que no haya eventos duplicados
+    continuarBtn.removeEventListener("click", avanzarPantalla); // Elimina cualquier evento previo
+    continuarBtn.disabled = false; // Habilitamos el botón nuevamente
+
+    // Añadimos el evento para avanzar pantalla y luego deshabilitamos el botón
+    continuarBtn.addEventListener("click", function avanzar() {
+        avanzarPantalla();
+        continuarBtn.removeEventListener("click", avanzar); // Eliminamos el evento tras hacer clic
+        continuarBtn.disabled = true; // Deshabilitamos el botón tras el clic
+    });
 }
 
 // Frase oculta para adivinar
@@ -445,3 +458,9 @@ function irAPantalla(n) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    const continuarBtn = document.getElementById("continuar-btn");
+    continuarBtn.disabled = true; // Asegura que comienza deshabilitado
+
+    document.getElementById("continuar-btn").onclick = avanzarPantalla;
+});
