@@ -5,22 +5,29 @@
     box-sizing: border-box;
 }
 
+/* Tipografía y fondo */
 body {
-    font-family: 'Georgia', serif;
-    background-color: #1c1c1c;
-    color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+    background-image: url('assets/images/background.jpg'); /* Asegúrate de tener esta imagen */
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
     text-align: center;
 }
 
 .pantalla {
     display: none;
-    max-width: 600px;
-    padding: 20px;
+    max-width: 800px;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .visible {
@@ -28,49 +35,53 @@ body {
 }
 
 h1, h2 {
-    font-size: 2em;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5em;
     margin-bottom: 20px;
-    color: #ffd700;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
 }
 
 p, .texto-cifrado, em {
     font-size: 1.2em;
     color: #e0e0e0;
     margin-bottom: 20px;
+    line-height: 1.6;
 }
 
 /* Centramos los contenedores de botones */
 .botones-centro, .botones-reto {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
     margin-top: 20px;
 }
 
 /* Botones generales */
 button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     font-size: 1em;
-    background-color: #444;
-    color: #fff;
-    border: none;
+    background-color: #1a1a1a;
+    color: #00ffff;
+    border: 2px solid #00ffff;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 255, 255, 0.2);
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
 button:hover {
-    background-color: #666;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    background-color: #0d0d0d;
+    box-shadow: 0 6px 10px rgba(0, 255, 255, 0.3);
 }
 
 button:active {
-    background-color: #333;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: #333333;
+    box-shadow: 0 2px 4px rgba(0, 255, 255, 0.2);
 }
 
 /* Específico para el botón de la gallina */
@@ -80,12 +91,12 @@ button:active {
 
 .gallina-texto {
     font-size: 1em;
-    color: #fff;
+    color: #00ffff;
 }
 
 /* Tamaño del GIF de la gallina */
 .gallina-icono {
-    width: 60px; /* Aumentado ligeramente */
+    width: 50px;
     height: auto;
 }
 
@@ -105,16 +116,16 @@ button:active {
     align-items: center;
     justify-content: center;
     font-size: 2em;
-    background-color: #333;
+    background-color: #1a1a1a;
     color: #00ffff;
     cursor: pointer;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 8px rgba(0, 255, 255, 0.2);
     transition: background-color 0.3s, transform 0.2s;
 }
 
 .celda:hover {
-    background-color: #555;
+    background-color: #333333;
     transform: scale(1.05);
 }
 
@@ -124,7 +135,7 @@ button:active {
 }
 
 .celda.X {
-    color: #ff4500; /* Naranja/rojo para el alienígena */
+    color: #ff0000; /* Rojo para el alienígena */
 }
 
 /* Estilo para el desvanecimiento de las celdas en caso de empate o reinicio */
@@ -143,8 +154,8 @@ button:active {
 
 /* Estilo del botón deshabilitado */
 button:disabled {
-    background-color: #555;
-    color: #aaa;
+    background-color: #555555;
+    color: #777777;
     cursor: not-allowed;
     position: relative;
 }
@@ -153,20 +164,17 @@ button:disabled {
 button[disabled]:hover::after {
     content: attr(title);
     position: absolute;
-    top: -30px;
+    top: -40px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 8px 12px;
     border-radius: 5px;
     font-size: 0.9em;
     white-space: nowrap;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
+    z-index: 10;
 }
 
 /* Estilo del popup */
@@ -176,13 +184,13 @@ button[disabled]:hover::after {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
+    background-color: rgba(20, 20, 20, 0.95);
+    color: #e0e0e0;
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
     z-index: 1000;
-    width: 300px;
+    width: 350px;
     text-align: center;
 }
 
@@ -197,60 +205,26 @@ button[disabled]:hover::after {
     right: 10px;
     font-size: 20px;
     cursor: pointer;
-    color: #ff0000;
+    color: #00ffff;
     font-weight: bold;
 }
 
 /* Estilos para el mensaje descifrado */
 .mensaje-descifrado {
-    color: #ffd700;
+    color: #00ffff;
     font-size: 1.3em;
     margin-top: 15px;
 }
 
 #juegoCanvas {
-    border: 2px solid #ffd700;
-    background-color: #1c1c1c;
+    border: 2px solid #00ffff;
+    background-color: rgba(0, 0, 0, 0.9);
     margin-top: 20px;
 }
 
-#popup-derrota {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    width: 300px;
-    text-align: center;
-}
-
-.cerrar-popup {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #ff0000;
-    font-weight: bold;
-}
-
-
-/* Estilo para el popup de felicitación */
-#popup-enhorabuena .popup-contenido {
-    background-color: #4CAF50; /* Color de fondo alegre (verde) */
-    color: #fff;
-    border: 2px solid #ffd700;
-}
-
 .imagen-giratoria {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     margin-top: 15px;
     animation: girar 2s linear infinite; /* Animación de giro continuo */
 }
@@ -267,7 +241,7 @@ button[disabled]:hover::after {
 /* Estilo para el texto cifrado en la pantalla de mensaje */
 .texto-cifrado {
     font-size: 1.5em;
-    color: #ffd700;
+    color: #00ffff;
     letter-spacing: 0.2em;
 }
 
@@ -275,7 +249,7 @@ button[disabled]:hover::after {
 #frase-oculta {
     font-size: 1.5em;
     margin: 20px 0;
-    color: #ffd700;
+    color: #00ffff;
     white-space: pre; /* Asegura que los espacios adicionales se respeten */
 }
 
@@ -297,6 +271,10 @@ button[disabled]:hover::after {
     text-align: center;
     width: 50px;
     margin-right: 10px;
+    border: 1px solid #00ffff;
+    border-radius: 5px;
+    background-color: #1a1a1a;
+    color: #ffffff;
 }
 
 /* Estilo para el popup de "¿Volver a intentar?" */
@@ -306,11 +284,11 @@ button[disabled]:hover::after {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #333;
-    color: #ffd700;
+    background-color: rgba(20, 20, 20, 0.95);
+    color: #e0e0e0;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
     z-index: 1000;
     width: 300px;
     text-align: center;
@@ -320,17 +298,79 @@ button[disabled]:hover::after {
 .boton-ok {
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #444;
-    color: #fff;
-    border: none;
+    background-color: #1a1a1a;
+    color: #00ffff;
+    border: 2px solid #00ffff;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 255, 255, 0.2);
 }
 
 .boton-ok:hover {
-    background-color: #666;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    background-color: #0d0d0d;
+    box-shadow: 0 6px 10px rgba(0, 255, 255, 0.3);
 }
 
+/* Ajustes para el canvas del juego */
+#juegoCanvas {
+    border: 2px solid #00ffff;
+    background-color: rgba(0, 0, 0, 0.9);
+    margin-top: 20px;
+}
+
+/* Estilos para el input de texto */
+input[type="text"] {
+    border: 1px solid #00ffff;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Añadir animación de entrada suave para las pantallas */
+.pantalla.visible {
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Estilos para enlaces (si los hay) */
+a {
+    color: #00ffff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Ajustes para que el contenido sea responsive */
+@media (max-width: 768px) {
+    .pantalla {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    h1, h2 {
+        font-size: 2em;
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #tres-en-raya {
+        grid-template-columns: repeat(3, 80px);
+    }
+
+    .celda {
+        width: 80px;
+        height: 80px;
+    }
+}
