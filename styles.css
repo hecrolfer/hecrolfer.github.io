@@ -163,6 +163,10 @@ button[disabled]:hover::after {
     font-size: 0.9em;
     white-space: nowrap;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
 }
 
 /* Estilo del popup */
@@ -329,3 +333,4 @@ button[disabled]:hover::after {
     background-color: #666;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
 }
+
