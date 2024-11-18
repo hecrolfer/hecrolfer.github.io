@@ -405,12 +405,21 @@ function intentarLetra() {
         if (intentosRestantes === 0) {
             mostrarPopupVolverIntentar(); // Mostrar popup para volver a intentar
         } else if (!fraseActual.includes("_")) {
-            //mostrarPopupVictoria(); // Mostrar popup de victoria al adivinar la frase
-            reiniciarAhorcado();
+            mostrarPopupExitoAhorcado(); // Mostrar popup de éxito
         }
     }
     document.getElementById("letra-input").value = ""; // Limpiar el input
 }
+
+function mostrarPopupExitoAhorcado() {
+    document.getElementById("popup-exito-ahorcado").style.display = "block";
+}
+// Función para cerrar el popup de éxito y habilitar el botón
+function cerrarPopupExitoAhorcado() {
+    document.getElementById("popup-exito-ahorcado").style.display = "none";
+    document.getElementById("boton-continuar-ahorcado").disabled = false;
+}
+
 
 // Función para actualizar la frase oculta
 function actualizarFraseOculta() {
@@ -464,3 +473,120 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("continuar-btn").onclick = avanzarPantalla;
 });
+
+
+// --- Código para las Tres Puertas ---
+
+// Función para mostrar las puertas
+function mostrarPuertas() {
+    document.getElementById("contenedor-puertas").style.display = "block";
+}
+
+// Función para interactuar con las puertas
+let puertaSeleccionada = "";
+function interactuarPuerta(puerta) {
+    puertaSeleccionada = puerta;
+    const mensaje = document.getElementById("mensaje-puerta");
+    const botonAccion = document.getElementById("boton-accion-puerta");
+
+    if (puerta === "enfermeria") {
+        mensaje.innerHTML = "Elegiste un camino de cuidado y sanación. Este sendero floreció con tu empatía y dedicación, y sigue iluminando tu vida.";
+        botonAccion.innerText = "Cerrar";
+    } else if (puerta === "deporte") {
+        mensaje.innerHTML = "Este camino te enseñó a avanzar contra la corriente y a moverte con fuerza y determinación. Tu energía dejó una huella imborrable.";
+        botonAccion.innerText = "Cerrar";
+    } else if (puerta === "musica") {
+        mensaje.innerHTML = "Este camino no está terminado. Para recorrerlo, primero debes completarlo.";
+        botonAccion.innerText = "Completar el camino";
+    }
+    document.getElementById("popup-puerta").style.display = "block";
+}
+
+// Función para cerrar el popup de las puertas o avanzar al minijuego
+function accionPuerta() {
+    document.getElementById("popup-puerta").style.display = "none";
+    if (puertaSeleccionada === "musica") {
+        irAPantallaPorId("pantalla-camino-roto");
+    }
+}
+
+// Función para cerrar el popup de las puertas
+function cerrarPopupPuerta() {
+    document.getElementById("popup-puerta").style.display = "none";
+}
+
+// --- Código para el Minijuego del Camino Roto ---
+
+// Funciones de drag and drop
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+let piezasEncajadas = 0;
+function drop(ev) {
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("text");
+    const fragmento = document.getElementById(data);
+
+    // Agregar el fragmento al camino destino
+    ev.target.appendChild(fragmento);
+    fragmento.draggable = false; // Evitar que se vuelva a arrastrar
+    piezasEncajadas++;
+
+    // Mostrar mensaje breve
+    alert("Un paso más hacia adelante.");
+
+    if (piezasEncajadas === 5) {
+        // Habilitar botón para intentar abrir la puerta
+        document.getElementById("boton-intentar-abrir-puerta").disabled = false;
+    }
+}
+
+// Función para intentar abrir la puerta después de completar el camino
+function intentarAbrirPuerta() {
+    irAPantallaPorId("pantalla-puerta-bloqueada");
+}
+
+// --- Código para la Puerta Bloqueada y el Baúl ---
+
+function mostrarBaul() {
+    irAPantallaPorId("pantalla-baul");
+}
+
+function abrirRegalo() {
+    document.getElementById("area-contraseña").style.display = "block";
+}
+
+function comprobarContraseña() {
+    const contraseña = document.getElementById("input-contraseña").value.toLowerCase();
+    if (contraseña === "piano") {
+        alert("El baúl se ha abierto y has obtenido la llave.");
+        // Marcar que la puerta de la música está desbloqueada
+        puertaMusicaDesbloqueada = true;
+        irAPantallaPorId("pantalla-final-puerta-abierta");
+    } else {
+        mostrarPopupErrorContraseña();
+    }
+}
+
+// Popup de error de contraseña
+function mostrarPopupErrorContraseña() {
+    document.getElementById("popup-error-contraseña").style.display = "block";
+}
+
+function cerrarPopupErrorContraseña() {
+    document.getElementById("popup-error-contraseña").style.display = "none";
+}
+
+// Variable para saber si la puerta de la música está desbloqueada
+let puertaMusicaDesbloqueada = false;
+
+// Función para avanzar a una pantalla específica por su id
+function irAPantallaPorId(id) {
+    pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
+    document.getElementById(id).classList.add('visible');
+}

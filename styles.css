@@ -374,3 +374,82 @@ a:hover {
         height: 80px;
     }
 }
+
+.puertas {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.puerta {
+    width: 150px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.puerta img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #00ffff;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.puerta img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 255, 255, 0.3);
+}
+
+.puerta p {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #e0e0e0;
+}
+
+/* Estilos para el minijuego del camino roto */
+#area-camino {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.fragmento {
+    width: 50px;
+    height: 50px;
+    background-color: #1a1a1a;
+    color: #00ffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #00ffff;
+    border-radius: 5px;
+    cursor: grab;
+}
+
+#camino-destino {
+    width: 100%;
+    height: 100px;
+    border: 2px dashed #00ffff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para el baúl y la contraseña */
+#area-contraseña {
+    margin-top: 20px;
+}
+
+#input-contraseña {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #00ffff;
+    border-radius: 5px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    margin-right: 10px;
+}

@@ -77,8 +77,8 @@
 
     <!-- Pantalla del juego de esquivar rocas -->
     <div id="pantalla-trampas" class="pantalla">
-        <h2>Esquiva las Trampas</h2>
-        <p>¡Cuidado! Está lleno de trampas y piedras cayendo. Usa las flechas para moverte y esquivar las rocas.</p>
+        <h2>Esquiva las rocas</h2>
+        <p>¡Cuidado! Parece que la estructura es inestable. Usa las flechas para moverte y esquivar las rocas.</p>
         <canvas id="juegoCanvas" width="600" height="400"></canvas>
         <div class="botones-centro">
             <button id="continuar-btn" onclick="avanzarPantalla()" disabled>Adentrarte</button>
@@ -98,7 +98,7 @@
     <div id="popup-enhorabuena" class="popup">
         <div class="popup-contenido">
             <span class="cerrar-popup" onclick="cerrarPopupEnhorabuena()">&times;</span>
-            <p>¡Enhorabuena, has conseguido sortear las trampas!</p>
+            <p>¡Enhorabuena, has conseguido sortear las rocas!</p>
             <img src="assets/images/girar.PNG" alt="Felicidades" class="imagen-giratoria">
         </div>
     </div>
@@ -126,7 +126,113 @@
             <input type="text" id="letra-input" maxlength="1" title="Introduce una letra para adivinar la frase">
             <button onclick="intentarLetra()">Intentar letra</button>
         </div>
+        <!-- Botón que se desbloquea al adivinar la frase -->
+        <div class="botones-centro">
+            <button id="boton-continuar-ahorcado" onclick="avanzarPantalla()" disabled>Continuar por el pasadizo secreto</button>
+        </div>
     </div>
+
+    <!-- Popup de éxito al adivinar la frase -->
+    <div id="popup-exito-ahorcado" class="popup">
+        <div class="popup-contenido">
+            <span class="cerrar-popup" onclick="cerrarPopupExitoAhorcado()">&times;</span>
+            <p>¡Frase descifrada con éxito!</p>
+            <button onclick="cerrarPopupExitoAhorcado()">Continuar</button>
+        </div>
+    </div>
+
+        <!-- Pantalla de las Tres Puertas -->
+        <div id="pantalla-tres-puertas" class="pantalla">
+            <h2>El Enigma de las Tres Puertas</h2>
+            <p>"En tu vida has recorrido caminos que definieron quién eres. Algunos caminos se completaron, mientras que otros aún esperan ser recorridos. Atrévete a explorar lo que guardan estas puertas."</p>
+            <div class="botones-centro">
+                <button onclick="mostrarPuertas()">Explorar las puertas</button>
+            </div>
+            <div id="contenedor-puertas" style="display: none;">
+                <div class="puertas">
+                    <div class="puerta" id="puerta-enfermeria" onclick="interactuarPuerta('enfermeria')">
+                        <img src="assets/images/puerta_enfermeria.png" alt="Puerta de la enfermería">
+                        <p>Puerta de la enfermería</p>
+                    </div>
+                    <div class="puerta" id="puerta-deporte" onclick="interactuarPuerta('deporte')">
+                        <img src="assets/images/puerta_deporte.png" alt="Puerta del deporte">
+                        <p>Puerta del deporte</p>
+                    </div>
+                    <div class="puerta" id="puerta-musica" onclick="interactuarPuerta('musica')">
+                        <img src="assets/images/puerta_musica.png" alt="Puerta de la música">
+                        <p>Puerta de la música</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Popup de interacción con las puertas -->
+        <div id="popup-puerta" class="popup">
+            <div class="popup-contenido">
+                <span class="cerrar-popup" onclick="cerrarPopupPuerta()">&times;</span>
+                <p id="mensaje-puerta"></p>
+                <button id="boton-accion-puerta" onclick="accionPuerta()">Cerrar</button>
+            </div>
+        </div>
+    
+        <!-- Pantalla del Minijuego: El Camino Roto -->
+        <div id="pantalla-camino-roto" class="pantalla">
+            <h2>El Camino Incompleto</h2>
+            <p>"Este camino comenzó, pero quedó incompleto. Une las piezas para reconstruirlo y avanzar."</p>
+            <div id="area-camino">
+                <!-- Aquí irán los fragmentos del camino para arrastrar -->
+                <!-- Por simplicidad, usaremos divs representando los fragmentos -->
+                <div class="fragmento" id="fragmento-1" draggable="true" ondragstart="drag(event)">1</div>
+                <div class="fragmento" id="fragmento-2" draggable="true" ondragstart="drag(event)">2</div>
+                <div class="fragmento" id="fragmento-3" draggable="true" ondragstart="drag(event)">3</div>
+                <div class="fragmento" id="fragmento-4" draggable="true" ondragstart="drag(event)">4</div>
+                <div class="fragmento" id="fragmento-5" draggable="true" ondragstart="drag(event)">5</div>
+            </div>
+            <div id="camino-destino" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <!-- Área donde se ensamblará el camino -->
+            </div>
+            <div class="botones-centro">
+                <button id="boton-intentar-abrir-puerta" onclick="intentarAbrirPuerta()" disabled>Intentar abrir la puerta</button>
+            </div>
+        </div>
+    
+        <!-- Pantalla de la Puerta Bloqueada con el Baúl -->
+        <div id="pantalla-puerta-bloqueada" class="pantalla">
+            <h2>La Puerta Bloqueada</h2>
+            <p>"La puerta está bloqueada. Necesitarás una llave para abrirla."</p>
+            <div class="botones-centro">
+                <button onclick="mostrarBaul()">Busca la llave</button>
+            </div>
+        </div>
+    
+        <!-- Pantalla del Baúl con la Contraseña -->
+        <div id="pantalla-baul" class="pantalla">
+            <h2>El Baúl Misterioso</h2>
+            <p>"El camino está casi completo. Para encontrar la llave que lo abre, primero debes buscar en el mundo real. Abre tu regalo y descubrirás la respuesta."</p>
+            <div class="botones-centro">
+                <button onclick="abrirRegalo()">Abrir el regalo</button>
+            </div>
+            <div id="area-contraseña" style="display: none;">
+                <p>"Cuando tengas el regalo en tus manos, escribe la palabra que lo define."</p>
+                <input type="text" id="input-contraseña" placeholder="Escribe la contraseña">
+                <button onclick="comprobarContraseña()">Desbloquear</button>
+            </div>
+        </div>
+    
+        <!-- Popup de Error de Contraseña -->
+        <div id="popup-error-contraseña" class="popup">
+            <div class="popup-contenido">
+                <span class="cerrar-popup" onclick="cerrarPopupErrorContraseña()">&times;</span>
+                <p>Parece que todavía no tienes la llave correcta. Busca de nuevo en el regalo.</p>
+            </div>
+        </div>
+    
+        <!-- Pantalla Final tras abrir la puerta de la música -->
+        <div id="pantalla-final-puerta-abierta" class="pantalla">
+            <h2>El Camino Completado</h2>
+            <p>"Este era el paso que faltaba para completar el camino hacia la música. Ahora puedes retomarlo y dejarlo florecer."</p>
+            <p>"Nunca es tarde para caminar de nuevo por un sendero que te ha estado esperando."</p>
+        </div>    
 
         <!-- Popup de "¿Volver a intentar?" -->
     <div id="popup-volver-intentar" class="popup">
