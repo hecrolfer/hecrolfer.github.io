@@ -419,6 +419,10 @@ function mostrarPopupExitoAhorcado() {
 function cerrarPopupExitoAhorcado() {
     document.getElementById("popup-exito-ahorcado").style.display = "none";
     document.getElementById("boton-continuar-ahorcado").disabled = false;
+    document.getElementById("boton-continuar-ahorcado").onclick = function() {
+        avanzarPantalla();
+    };
+
 }
 
 
@@ -477,11 +481,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // --- Código para las Tres Puertas ---
-
-// Función para mostrar las puertas
-function mostrarPuertas() {
-    document.getElementById("contenedor-puertas").style.display = "block";
-}
 
 // Función para interactuar con las puertas
 let puertaSeleccionada = "";

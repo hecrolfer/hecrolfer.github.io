@@ -141,27 +141,43 @@
         </div>
     </div>
 
+    <!-- Pantalla del Pasadizo Secreto -->
+    <div id="pantalla-pasadizo" class="pantalla">
+        <h2>El Pasadizo Secreto</h2>
+        <p>
+            Al descifrar el mensaje, un mecanismo oculto se activa y una puerta secreta se abre ante ti. Con cautela, avanzas por un pasadizo oscuro y estrecho. Tras caminar un buen tramo, llegas al final del pasadizo y te encuentras frente a una imponente puerta antigua.
+        </p>
+        <div class="botones-centro">
+            <button onclick="avanzarPantalla()">Entrar a la sala</button>
+        </div>
+    </div>
+
+
         <!-- Pantalla de las Tres Puertas -->
-        <div id="pantalla-tres-puertas" class="pantalla">
-            <h2>El Enigma de las Tres Puertas</h2>
-            <p>"En tu vida has recorrido caminos que definieron quién eres. Algunos caminos se completaron, mientras que otros aún esperan ser recorridos. Atrévete a explorar lo que guardan estas puertas."</p>
-            <div class="botones-centro">
-                <button onclick="mostrarPuertas()">Explorar las puertas</button>
-            </div>
-            <div id="contenedor-puertas" style="display: none;">
-                <div class="puertas">
-                    <div class="puerta" id="puerta-enfermeria" onclick="interactuarPuerta('enfermeria')">
-                        <img src="assets/images/nursedoor.png">
-                    </div>
-                    <div class="puerta" id="puerta-deporte" onclick="interactuarPuerta('deporte')">
-                        <img src="assets/images/swimmingdoor.png">
-                    </div>
-                    <div class="puerta" id="puerta-musica" onclick="interactuarPuerta('musica')">
-                        <img src="assets/images/whitedoor.png">
-                    </div>
+       <!-- Pantalla de las Tres Puertas -->
+<div id="pantalla-tres-puertas" class="pantalla">
+    <h2>El Enigma de las Tres Puertas</h2>
+    <p>"En tu vida has recorrido caminos que definieron quién eres. Algunos caminos se completaron, mientras que otros aún esperan ser recorridos. Atrévete a explorar lo que guardan estas puertas."</p>
+        <!-- Eliminamos el botón de "Explorar las puertas" -->
+        <!-- <div class="botones-centro">
+            <button onclick="mostrarPuertas()">Explorar las puertas</button>
+        </div> -->
+        <!-- Aseguramos que el contenedor de puertas se muestra -->
+        <div id="contenedor-puertas">
+            <div class="puertas">
+                <div class="puerta" id="puerta-enfermeria" onclick="interactuarPuerta('enfermeria')">
+                    <img src="assets/images/nursedoor.png">
+                </div>
+                <div class="puerta" id="puerta-deporte" onclick="interactuarPuerta('deporte')">
+                    <img src="assets/images/swimmingdoor.png">
+                </div>
+                <div class="puerta" id="puerta-musica" onclick="interactuarPuerta('musica')">
+                    <img src="assets/images/whitedoor.png">
                 </div>
             </div>
         </div>
+    </div>
+
     
         <!-- Popup de interacción con las puertas -->
         <div id="popup-puerta" class="popup">
