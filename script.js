@@ -386,6 +386,7 @@ function intentarDescifrar() {
     pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
     document.getElementById("pantalla-ahorcado").classList.add("visible");
     actualizarFraseOculta();
+    pantallaActual = Array.from(pantallas).findIndex(p => p.id === "pantalla-ahorcado");
 }
 
 // Función para procesar un intento de letra
