@@ -486,10 +486,9 @@ document.addEventListener("DOMContentLoaded", function() {
 function interactuarPuerta(puerta) {
     puertaSeleccionada = puerta;
     const puertaElemento = document.getElementById(`puerta-${puerta}`);
-    const imagenPuerta = puertaElemento.querySelector('.puerta-imagen');
 
-    // Cambiar la imagen a la versión abierta
-    imagenPuerta.src = `assets/images/puerta_${puerta}_abierta.png`;
+    // Cambiar la imagen de fondo a la versión abierta
+    puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}_abierta.png')`;
 
     // Deshabilitar el onclick para evitar múltiples clics
     puertaElemento.onclick = null;

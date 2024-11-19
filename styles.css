@@ -379,28 +379,35 @@ a:hover {
 .puertas {
     display: flex;
     justify-content: center;
+    align-items: flex-end; /* Alinea las puertas en la parte inferior si tienen alturas diferentes */
     gap: 20px;
     margin-top: 20px;
-    /* Elimina el borde azul y ajusta el padding si es necesario */
-    /* border: 2px solid blue; */ /* Comentado o eliminado */
-    /* padding: 10px; */ /* Puedes ajustar el padding si lo deseas */
 }
+
 
 /* Estilos para cada puerta */
 .puerta {
     position: relative;
     overflow: hidden;
-    width: 150px; /* Ajusta el ancho deseado */
-    height: 250px; /* Ajusta la altura deseada */
+    width: 90px; /* Ajusta el ancho deseado */
+    height: 190px; /* Ajusta la altura deseada */
     cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-/* Estilos para las imágenes de las puertas */
-.puerta-imagen {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Asegura que la imagen llene el contenedor */
-    display: block;
+/* Establece la imagen de fondo para cada puerta cerrada */
+#puerta-enfermeria {
+    background-image: url('assets/images/puerta_enfermeria.png');
+}
+
+#puerta-natacion {
+    background-image: url('assets/images/puerta_natacion.png');
+}
+
+#puerta-musica {
+    background-image: url('assets/images/puerta_vacia.png');
 }
 
 
