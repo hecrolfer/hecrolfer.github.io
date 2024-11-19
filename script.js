@@ -483,23 +483,19 @@ document.addEventListener("DOMContentLoaded", function() {
 // --- Código para las Tres Puertas ---
 
 // Función para interactuar con las puertas
-let puertaSeleccionada = "";
 function interactuarPuerta(puerta) {
     puertaSeleccionada = puerta;
-    const mensaje = document.getElementById("mensaje-puerta");
-    const botonAccion = document.getElementById("boton-accion-puerta");
+    const puertaElemento = document.getElementById(`puerta-${puerta}`);
+    const imagenPuerta = puertaElemento.querySelector('.puerta-imagen');
 
-    if (puerta === "enfermeria") {
-        mensaje.innerHTML = "Elegiste un camino de cuidado y sanación. Este sendero floreció con tu empatía y dedicación, y sigue iluminando tu vida.";
-        botonAccion.innerText = "Cerrar";
-    } else if (puerta === "deporte") {
-        mensaje.innerHTML = "Este camino te enseñó a avanzar contra la corriente y a moverte con fuerza y determinación. Tu energía dejó una huella imborrable.";
-        botonAccion.innerText = "Cerrar";
-    } else if (puerta === "musica") {
-        mensaje.innerHTML = "Este camino no está terminado. Para recorrerlo, primero debes completarlo.";
-        botonAccion.innerText = "Completar el camino";
-    }
-    document.getElementById("popup-puerta").style.display = "block";
+    // Cambiar la imagen a la versión abierta
+    imagenPuerta.src = `assets/images/puerta_${puerta}_abierta.png`;
+
+    // Deshabilitar el onclick para evitar múltiples clics
+    puertaElemento.onclick = null;
+
+    // Si necesitas mostrar algún contenido después de abrir la puerta
+    mostrarContenidoSala(puerta);
 }
 
 // Función para cerrar el popup de las puertas o avanzar al minijuego
@@ -508,6 +504,7 @@ function accionPuerta() {
     if (puertaSeleccionada === "musica") {
         irAPantallaPorId("pantalla-camino-roto");
     }
+    // Para las otras puertas, no hagas nada más
 }
 
 // Función para cerrar el popup de las puertas
@@ -589,4 +586,23 @@ let puertaMusicaDesbloqueada = false;
 function irAPantallaPorId(id) {
     pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
     document.getElementById(id).classList.add('visible');
+}
+
+function mostrarContenidoSala(puerta) {
+    // Mostrar un popup o cambiar de pantalla con el contenido de la sala
+    const mensaje = document.getElementById("mensaje-puerta");
+    const botonAccion = document.getElementById("boton-accion-puerta");
+
+    if (puerta === "enfermeria") {
+        mensaje.innerHTML = "Al abrir la puerta, te encuentras en una sala blanca y luminosa...";
+        botonAccion.innerText = "Cerrar";
+    } else if (puerta === "deporte") {
+        mensaje.innerHTML = "Al abrir la puerta, te envuelve el aroma del cloro y el eco de risas lejanas...";
+        botonAccion.innerText = "Cerrar";
+    } else if (puerta === "musica") {
+        mensaje.innerHTML = "Este camino no está terminado. Para recorrerlo, primero debes completarlo.";
+        botonAccion.innerText = "Completar el camino";
+    }
+
+    document.getElementById("popup-puerta").style.display = "block";
 }
