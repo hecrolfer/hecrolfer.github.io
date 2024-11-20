@@ -604,7 +604,7 @@ function mostrarContenidoSala(puerta) {
     const botonAccion = document.getElementById("boton-accion-puerta");
 
     if (puerta === "enfermeria") {
-        mensaje.innerHTML = "Al abrir la puerta, te encuentras en una sala blanca y luminosa...";
+        mensaje.innerHTML = "Todo es blanco y huele a... ¿antiséptico? Me resulta todo demasiado familiar...";
         botonAccion.innerText = "Cerrar";
     } else if (puerta === "natacion") {
         mensaje.innerHTML = "Al abrir la puerta, te envuelve el aroma del cloro y el eco de risas lejanas...";
