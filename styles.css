@@ -463,3 +463,61 @@ a:hover {
     top: 10%; /* Coloca el popup en la parte superior */
     transform: translate(-50%, 0); /* Ajusta la transformación solo en el eje X */
 }
+.popup-enfermeria {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    width: 500px;
+    height: 400px;
+    background-image: url('assets/images/hospitalbackground.jpeg'); /* Ruta de la imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    position: fixed; /* Centrado en la pantalla */
+    top: 50%; /* Centrado verticalmente */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta el centrado */
+}
+
+.popup-enfermeria #boton-accion-puerta {
+    position: absolute;
+    bottom: 20px; /* Ajusta la distancia al borde inferior */
+    left: 20px; /* Ajusta la distancia al borde izquierdo */
+    background-color: rgba(0, 0, 50, 0.7);
+    color: #add8e6;
+    border: 2px solid #add8e6;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+/* Efecto hover en el botón */
+.popup-enfermeria #boton-accion-puerta:hover {
+    background-color: rgba(0, 0, 80, 0.9);
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 255, 0.5);
+}
+
+.popup-enfermeria #mensaje-puerta {
+    line-height: 1.5; /* Mejora la legibilidad */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Da un poco de profundidad al texto */
+}
+
+.popup-enfermeria p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center; /* Centrado del texto */
+}

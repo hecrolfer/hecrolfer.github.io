@@ -602,10 +602,15 @@ function mostrarContenidoSala(puerta) {
     const popup = document.getElementById("popup-puerta");
     const mensaje = document.getElementById("mensaje-puerta");
     const botonAccion = document.getElementById("boton-accion-puerta");
+    
+    // Restablecer estilos y clases previas
+    popup.classList.remove("popup-enfermeria");
 
     if (puerta === "enfermeria") {
         mensaje.innerHTML = "Todo es blanco y huele a... ¿antiséptico? Me resulta todo demasiado familiar...";
         botonAccion.innerText = "Cerrar";
+        // Añadir clase específica de estilo
+        popup.classList.add("popup-enfermeria");
     } else if (puerta === "natacion") {
         mensaje.innerHTML = "Al abrir la puerta, te envuelve el aroma del cloro y el eco de risas lejanas...";
         botonAccion.innerText = "Cerrar";
