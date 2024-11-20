@@ -187,28 +187,30 @@ button[disabled]:hover::after {
     transform: translate(-50%, -50%);
     background-color: rgba(20, 20, 20, 0.95); /* Fondo negro semitransparente */
     color: #e0e0e0;
-    padding: 30px;
+    padding: 40px 20px 20px 20px; /* Aumentado padding-top para dejar espacio para la "X" */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
     z-index: 1000;
     width: 350px; /* Ancho general para popups */
     text-align: center;
+    /* position: relative; */ /* Eliminado */
 }
 
 
 .popup-contenido {
-    position: relative;
-    padding: 0; /* Ajustar el padding a 0 para evitar desbordamientos */
+    padding: 0 20px;
 }
 
+/* Ajuste de la posición de la "X" de cierre en los popups */
 .cerrar-popup {
     position: absolute;
-    top: 5px;
-    right: 10px;
-    font-size: 20px;
+    top: 10px; /* Posición desde la parte superior del popup */
+    right: 15px; /* Posición desde la derecha del popup */
+    font-size: 24px; /* Tamaño de la "X" */
     cursor: pointer;
     color: #00ffff;
     font-weight: bold;
+    z-index: 1001; /* Asegura que la "X" esté por encima del contenido */
 }
 
 /* Estilos para el mensaje descifrado */

@@ -3,7 +3,7 @@ const pantallas = document.querySelectorAll('.pantalla');
 let tablero = ["", "", "", "", "", "", "", "", ""];
 let jugadorActual = "O";
 let intentosFallidos = 0; // Contador para los intentos fallidos del jugador
-
+let puertaSeleccionada = null; 
 // Variable para almacenar el estado de las puertas
 const puertasEstado = {
     enfermeria: false,
@@ -493,13 +493,16 @@ document.addEventListener("DOMContentLoaded", function() {
 function interactuarPuerta(puerta) {
     const puertaElemento = document.getElementById(`puerta-${puerta}`);
 
-    // Alternar entre abrir y cerrar la puerta
+    // Asignar la puerta seleccionada
+    puertaSeleccionada = puerta;
+
+    // Toggle door state
     if (puertasEstado[puerta]) {
-        // Si está abierta, cerrar la puerta
+        // Si está abierta, cerrarla
         puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.png')`;
         puertasEstado[puerta] = false;
     } else {
-        // Si está cerrada, abrir la puerta y mostrar el popup
+        // Si está cerrada, abrirla y mostrar el popup
         puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}_abierta.png')`;
         puertasEstado[puerta] = true;
 
@@ -520,6 +523,7 @@ function accionPuerta() {
 // Función para cerrar el popup de las puertas
 function cerrarPopupPuerta() {
     document.getElementById("popup-puerta").style.display = "none";
+    puertaSeleccionada = null; // Resetear la puerta seleccionada
 }
 
 // --- Código para el Minijuego del Camino Roto ---

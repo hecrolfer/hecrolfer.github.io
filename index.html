@@ -87,21 +87,21 @@
 
     <!-- Popup de derrota -->
     <div id="popup-derrota" class="popup">
+        <span class="cerrar-popup" onclick="cerrarPopupDerrota()">&times;</span>
         <div class="popup-contenido">
-            <span class="cerrar-popup" onclick="cerrarPopupDerrota()">&times;</span>
             <p>Has muerto ☠️☠️ </p>
             <p>Pero, por suerte, es un juego 😄</p>
         </div>
     </div>
 
         <!-- Popup de felicitación al esquivar las rocas -->
-    <div id="popup-enhorabuena" class="popup">
-        <div class="popup-contenido">
+        <div id="popup-enhorabuena" class="popup">
             <span class="cerrar-popup" onclick="cerrarPopupEnhorabuena()">&times;</span>
-            <p>¡Enhorabuena, has conseguido sortear las rocas!</p>
-            <img src="assets/images/girar.PNG" alt="Felicidades" class="imagen-giratoria">
+            <div class="popup-contenido">
+                <p>¡Enhorabuena, has conseguido sortear las rocas!</p>
+                <img src="assets/images/girar.PNG" alt="Felicidades" class="imagen-giratoria">
+            </div>
         </div>
-    </div>
 
     <!-- Pantalla de la Pared con el Mensaje Cifrado -->
     <div id="pantalla-mensaje-cifrado" class="pantalla">
@@ -170,14 +170,15 @@
     </div>
 
     
-<!-- Popup de interacción con las puertas -->
-<div id="popup-puerta" class="popup">
-    <div class="popup-contenido">
+    <!-- Popup de interacción con las puertas -->
+    <div id="popup-puerta" class="popup">
         <span class="cerrar-popup" onclick="cerrarPopupPuerta()">&times;</span>
-        <p id="mensaje-puerta"></p>
-        <button id="boton-accion-puerta" onclick="accionPuerta()">Cerrar</button>
+        <div class="popup-contenido">
+            <p id="mensaje-puerta"></p>
+            <button id="boton-accion-puerta" onclick="accionPuerta()">Cerrar</button>
+        </div>
     </div>
-</div>
+    
     
         <!-- Pantalla del Minijuego: El Camino Roto -->
         <div id="pantalla-camino-roto" class="pantalla">
