@@ -407,7 +407,7 @@ a:hover {
 }
 
 #puerta-musica {
-    background-image: url('assets/images/puerta_vacia.png');
+    background-image: url('assets/images/puerta_musica.png');
 }
 
 
@@ -456,4 +456,10 @@ a:hover {
     background-color: #1a1a1a;
     color: #ffffff;
     margin-right: 10px;
+}
+
+/* Ajuste del popup específico para las puertas */
+.popup-puerta {
+    top: 10%; /* Coloca el popup en la parte superior */
+    transform: translate(-50%, 0); /* Ajusta la transformación solo en el eje X */
 }
