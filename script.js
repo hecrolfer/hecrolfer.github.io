@@ -600,16 +600,17 @@ function irAPantallaPorId(id) {
 
 function mostrarContenidoSala(puerta) {
     const popup = document.getElementById("popup-puerta");
+    const popupContenido = popup.querySelector(".popup-contenido");
     const mensaje = document.getElementById("mensaje-puerta");
     const botonAccion = document.getElementById("boton-accion-puerta");
-    
+
     // Restablecer estilos y clases previas
-    popup.classList.remove("popup-enfermeria");
+    popup.classList.remove("popup-enfermeria"); // Remover la clase del popup principal
 
     if (puerta === "enfermeria") {
         mensaje.innerHTML = "Todo es blanco y huele a... ¿antiséptico? Me resulta todo demasiado familiar...";
         botonAccion.innerText = "Cerrar";
-        // Añadir clase específica de estilo
+        // Añadir clase específica de estilo al popup principal
         popup.classList.add("popup-enfermeria");
     } else if (puerta === "natacion") {
         mensaje.innerHTML = "Al abrir la puerta, te envuelve el aroma del cloro y el eco de risas lejanas...";
@@ -619,7 +620,6 @@ function mostrarContenidoSala(puerta) {
         botonAccion.innerText = "Completar el camino";
     }
 
-    // Aplicar estilos específicos para este popup
-    popup.classList.add("popup-puerta");
+    // Mostrar el popup
     popup.style.display = "block";
 }

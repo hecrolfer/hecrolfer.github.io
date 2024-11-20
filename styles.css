@@ -178,25 +178,27 @@ button[disabled]:hover::after {
 }
 
 /* Estilo del popup */
+/* Estilo general para todos los popups */
 .popup {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(20, 20, 20, 0.95);
+    background-color: rgba(20, 20, 20, 0.95); /* Fondo negro semitransparente */
     color: #e0e0e0;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
     z-index: 1000;
-    width: 350px;
+    width: 350px; /* Ancho general para popups */
     text-align: center;
 }
 
+
 .popup-contenido {
     position: relative;
-    padding: 15px;
+    padding: 0; /* Ajustar el padding a 0 para evitar desbordamientos */
 }
 
 .cerrar-popup {
@@ -463,31 +465,26 @@ a:hover {
     top: 10%; /* Coloca el popup en la parte superior */
     transform: translate(-50%, 0); /* Ajusta la transformación solo en el eje X */
 }
+
+/* Estilos específicos para el popup de la enfermería */
 .popup-enfermeria {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    width: 500px;
-    height: 400px;
-    background-image: url('assets/images/hospitalbackground.jpeg'); /* Ruta de la imagen */
+    width: 500px; /* Ancho específico para el popup de enfermería */
+    background-image: url('assets/images/hospitalbackground.jpeg'); /* Imagen de fondo específica */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
-    color: #ffffff;
-    position: fixed; /* Centrado en la pantalla */
-    top: 50%; /* Centrado verticalmente */
-    left: 50%; /* Centrado horizontalmente */
-    transform: translate(-50%, -50%); /* Ajusta el centrado */
+    padding: 20px; /* Ajusta el padding si es necesario */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye el contenido verticalmente */
+    height: 400px; /* Altura fija para posicionar el botón correctamente */
+    color: #ffffff; /* Asegura que el texto sea legible sobre la imagen */
 }
 
+
+/* Estilos para el botón dentro del popup de enfermería */
 .popup-enfermeria #boton-accion-puerta {
-    position: absolute;
-    bottom: 20px; /* Ajusta la distancia al borde inferior */
-    left: 20px; /* Ajusta la distancia al borde izquierdo */
+    align-self: flex-start; /* Alinea el botón a la izquierda */
     background-color: rgba(0, 0, 50, 0.7);
     color: #add8e6;
     border: 2px solid #add8e6;
@@ -498,8 +495,7 @@ a:hover {
     transition: all 0.3s ease;
 }
 
-
-/* Efecto hover en el botón */
+/* Efecto hover en el botón de enfermería */
 .popup-enfermeria #boton-accion-puerta:hover {
     background-color: rgba(0, 0, 80, 0.9);
     color: #ffffff;
@@ -520,4 +516,10 @@ a:hover {
     padding: 10px;
     border-radius: 8px;
     text-align: center; /* Centrado del texto */
+}
+@media (max-width: 768px) {
+    .popup-enfermeria {
+        width: 90%; /* Ajusta el ancho para pantallas pequeñas */
+        height: auto; /* Ajusta la altura automáticamente */
+    }
 }
