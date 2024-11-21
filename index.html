@@ -116,6 +116,7 @@
     </div>
 
         <!-- Pantalla del Juego de Ahorcado -->
+    <!-- Pantalla del Juego de Ahorcado -->
     <div id="pantalla-ahorcado" class="pantalla">
         <h2>Juego de Ahorcado</h2>
         <p>Adivina la frase oculta:</p>
@@ -130,16 +131,13 @@
         <div class="botones-centro">
             <button id="boton-continuar-ahorcado" onclick="avanzarPantalla()" disabled>Continuar por el pasadizo secreto</button>
         </div>
-    </div>
-
-    <!-- Popup de éxito al adivinar la frase -->
-    <div id="popup-exito-ahorcado" class="popup">
-        <div class="popup-contenido">
-            <span class="cerrar-popup" onclick="cerrarPopupExitoAhorcado()">&times;</span>
-            <p>¡Frase descifrada con éxito!</p>
-            <button onclick="cerrarPopupExitoAhorcado()">Continuar</button>
+        <!-- Nuevo contenedor para los símbolos y la frase final -->
+        <div id="animacion-frase" class="animacion-frase">
+            <p id="frase-simbolos" class="frase-simbolos">✶ ∇ ⌖ ☰ ⍟ ⌬   ⍣   ☽⌖⧫☿✧   ☍⍣   ⊛⍂☾☌</p>
+            <p id="frase-final" class="mensaje-descifrado"></p>
         </div>
     </div>
+
 
     <!-- Pantalla del Pasadizo Secreto -->
     <div id="pantalla-pasadizo" class="pantalla">

@@ -413,15 +413,12 @@ function intentarLetra() {
         if (intentosRestantes === 0) {
             mostrarPopupVolverIntentar(); // Mostrar popup para volver a intentar
         } else if (!fraseActual.includes("_")) {
-            mostrarPopupExitoAhorcado(); // Mostrar popup de éxito
+            mostrarFraseFinalAvanzada(); // Llamar a la nueva función para animar la frase
         }
     }
     document.getElementById("letra-input").value = ""; // Limpiar el input
 }
 
-function mostrarPopupExitoAhorcado() {
-    document.getElementById("popup-exito-ahorcado").style.display = "block";
-}
 // Función para cerrar el popup de éxito y habilitar el botón
 function cerrarPopupExitoAhorcado() {
     document.getElementById("popup-exito-ahorcado").style.display = "none";
@@ -653,4 +650,54 @@ function mostrarContenidoSala(puerta) {
 
     // Mostrar el popup
     popup.style.display = "block";
+}
+
+function mostrarFraseFinal() {
+    const fraseFinalElement = document.getElementById("frase-final");
+    const continuarBtn = document.getElementById("boton-continuar-ahorcado");
+    const fraseOcultaElement = document.getElementById("frase-oculta");
+
+    // Ocultar la frase oculta
+    fraseOcultaElement.style.display = "none";
+
+    // Establecer la frase final
+    fraseFinalElement.innerText = fraseObjetivo;
+
+    // Añadir la clase 'visible' para iniciar la animación
+    setTimeout(() => {
+        fraseFinalElement.classList.add("visible");
+    }, 100); // Pequeño retraso para asegurar que se aplique la clase
+
+    // Desbloquear el botón al finalizar la animación (2 segundos)
+    setTimeout(() => {
+        continuarBtn.disabled = false;
+    }, 2100); // 2000ms de animación + 100ms de retraso
+}
+
+// Función para mostrar la frase final con animación avanzada
+function mostrarFraseFinalAvanzada() {
+    const fraseSimbolos = document.getElementById("frase-simbolos");
+    const fraseFinalElement = document.getElementById("frase-final");
+    const continuarBtn = document.getElementById("boton-continuar-ahorcado");
+    const fraseOcultaElement = document.getElementById("frase-oculta");
+
+    // Ocultar la frase oculta y mostrar los símbolos
+    fraseOcultaElement.style.display = "none";
+    fraseSimbolos.style.display = "block";
+
+    // Añadir clase para iniciar la transformación de los símbolos
+    setTimeout(() => {
+        fraseSimbolos.classList.add("transformado");
+    }, 500); // Espera medio segundo antes de iniciar la transformación
+
+    // Después de la transformación, mostrar la frase final con efecto de máquina de escribir
+    setTimeout(() => {
+        fraseFinalElement.innerText = fraseObjetivo;
+        fraseFinalElement.classList.add("visible");
+    }, 1500); // Espera 1.5 segundos antes de iniciar el tipo de escribir
+
+    // Desbloquear el botón al finalizar la animación (aproximadamente 3.5 segundos en total)
+    setTimeout(() => {
+        continuarBtn.disabled = false;
+    }, 3500); // 1.5s de transformación + 2s de escritura
 }
