@@ -683,19 +683,18 @@ function mostrarFraseFinalAvanzada() {
     const letraInput = document.getElementById("letra-input");
     const botonIntentar = document.querySelector("#pantalla-ahorcado button[onclick='intentarLetra()']");
 
-    // Ocultar la frase oculta y los símbolos
-    fraseOcultaElement.style.display = "none";
+    // Actualizar la frase oculta para mostrar la frase completa con espacios y capitalización original
+    const fraseObjetivo = "Nunca es tarde para aprender";
+    fraseOcultaElement.innerText = fraseObjetivo;
+
+    // Opcional: Si quieres mantener la animación en `frase-final`, procedemos a ocultar símbolos y animar
     fraseSimbolos.style.display = "none";
 
     // Limpiar cualquier contenido previo en frase-final
     fraseFinalElement.innerHTML = "";
 
-    // Definir la frase objetivo
-    const fraseObjetivo = "Nunca es tarde para aprender";
-    const fraseMayuscula = fraseObjetivo.toUpperCase();
-
     // Iterar sobre cada carácter y agregarlo con un retraso
-    fraseMayuscula.split("").forEach((char, index) => {
+    fraseObjetivo.split("").forEach((char, index) => {
         if (char === " ") {
             // Insertar un espacio directamente sin envolverlo en un span
             fraseFinalElement.innerHTML += " ";
