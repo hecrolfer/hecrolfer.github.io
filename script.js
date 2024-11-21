@@ -639,7 +639,7 @@ function mostrarContenidoSala(puerta) {
         botonAccion.innerText = "Salir y cerrar";
         popup.classList.add("popup-enfermeria");
     } else if (puerta === "natacion") {
-        mensaje.innerHTML = "Escucho gritos con eco y noto un picor en la nariz, creo que es del... ¿cloro?";
+        mensaje.innerHTML = "Escucho gritos, hay mucho eco y noto un picor en la nariz, creo que es del... ¿cloro?";
         botonAccion.innerText = "Salir y cerrar";
         popup.classList.add("popup-natacion");
 
