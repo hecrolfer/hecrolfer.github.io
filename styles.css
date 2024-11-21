@@ -538,3 +538,62 @@ a:hover {
     align-self: flex-start;
     margin-top: auto; /* Empuja el botón hacia la parte inferior */
 }
+
+/* Estilos específicos para el popup de natación */
+.popup-natacion {
+    width: 500px; /* Ancho específico para el popup de natación */
+    background-image: url('assets/images/swimmingbackground.jpeg'); /* Imagen de fondo específica */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px; /* Ajusta el padding si es necesario */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye el contenido verticalmente */
+    height: 400px; /* Altura fija para posicionar el botón correctamente */
+    color: #ffffff; /* Asegura que el texto sea legible sobre la imagen */
+    border-radius: 10px; /* Mantiene la consistencia con otros popups */
+}
+
+/* Ajustes específicos para el popup de natación */
+.popup-natacion .popup-contenido {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* Asegura que el botón se alinee a la izquierda en la parte inferior */
+.popup-natacion .popup-contenido button#boton-accion-puerta {
+    align-self: flex-start;
+    margin-top: auto; /* Empuja el botón hacia la parte inferior */
+}
+
+.popup-natacion #boton-accion-puerta:hover {
+    background-color: rgba(0, 0, 80, 0.9);
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 255, 0.5);
+}
+
+.popup-natacion p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center; /* Centrado del texto */
+}
+
+.popup-natacion #mensaje-puerta {
+    line-height: 1.5; /* Mejora la legibilidad */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Da un poco de profundidad al texto */
+}
+
+@media (max-width: 768px) {
+    .popup-natacion {
+        width: 90%; /* Ajusta el ancho para pantallas pequeñas */
+        height: auto; /* Ajusta la altura automáticamente */
+    }
+}

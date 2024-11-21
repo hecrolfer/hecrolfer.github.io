@@ -610,6 +610,8 @@ function mostrarContenidoSala(puerta) {
 
     // Restablecer estilos y clases previas
     popup.classList.remove("popup-enfermeria"); // Remover la clase del popup principal
+    popup.classList.remove("popup-natacion"); // Remover la clase del popup de natación si está presente
+
 
     if (puerta === "enfermeria") {
         mensaje.innerHTML = "Todo es blanco y huele a... ¿antiséptico? Me resulta todo demasiado familiar...";
@@ -617,7 +619,9 @@ function mostrarContenidoSala(puerta) {
         popup.classList.add("popup-enfermeria");
     } else if (puerta === "natacion") {
         mensaje.innerHTML = "Al abrir la puerta, te envuelve el aroma del cloro y el eco de risas lejanas...";
-        botonAccion.innerText = "Cerrar";
+        botonAccion.innerText = "Salir y cerrar";
+        popup.classList.add("popup-natacion");
+
     } else if (puerta === "musica") {
         mensaje.innerHTML = "Este camino no está terminado. Para recorrerlo, primero debes completarlo.";
         botonAccion.innerText = "Completar el camino";
