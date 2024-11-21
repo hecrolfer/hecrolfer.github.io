@@ -481,6 +481,11 @@ a:hover {
     justify-content: space-between; /* Distribuye el contenido verticalmente */
     height: 400px; /* Altura fija para posicionar el botón correctamente */
     color: #ffffff; /* Asegura que el texto sea legible sobre la imagen */
+    position: fixed; /* Asegura que el popup esté posicionado respecto a la ventana */
+    top: 15%; /* Mueve el popup más arriba */
+    left: 50%;
+    transform: translate(-50%, -5%); /* Ajusta la transformación para centrar correctamente */
+    border-radius: 10px; /* Mantiene la consistencia con otros popups */
 }
 
 
@@ -519,12 +524,7 @@ a:hover {
     border-radius: 8px;
     text-align: center; /* Centrado del texto */
 }
-@media (max-width: 768px) {
-    .popup-enfermeria {
-        width: 90%; /* Ajusta el ancho para pantallas pequeñas */
-        height: auto; /* Ajusta la altura automáticamente */
-    }
-}
+
 /* Ajustes específicos para el popup de enfermería */
 .popup-enfermeria .popup-contenido {
     display: flex;
@@ -552,6 +552,10 @@ a:hover {
     justify-content: space-between; /* Distribuye el contenido verticalmente */
     height: 400px; /* Altura fija para posicionar el botón correctamente */
     color: #ffffff; /* Asegura que el texto sea legible sobre la imagen */
+    position: fixed; /* Asegura que el popup esté posicionado respecto a la ventana */
+    top: 15%; /* Mueve el popup más arriba */
+    left: 50%;
+    transform: translate(-50%, -5%); /* Ajusta la transformación para centrar correctamente */
     border-radius: 10px; /* Mantiene la consistencia con otros popups */
 }
 
@@ -592,8 +596,10 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-    .popup-natacion {
+    .popup-enfermeria, .popup-natacion {
         width: 90%; /* Ajusta el ancho para pantallas pequeñas */
         height: auto; /* Ajusta la altura automáticamente */
+        top: 10%; /* Mueve el popup más arriba en pantallas pequeñas */
+        transform: translate(-50%, -10%); /* Ajusta la transformación para centrar correctamente */
     }
 }

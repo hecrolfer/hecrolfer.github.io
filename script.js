@@ -513,19 +513,43 @@ function interactuarPuerta(puerta) {
 
 // Función para cerrar el popup de las puertas o avanzar al minijuego
 function accionPuerta() {
+    const puerta = puertaSeleccionada; // Guardar la puerta seleccionada en una variable local
     document.getElementById("popup-puerta").style.display = "none";
-    if (puertaSeleccionada === "musica") {
+    
+    if (puerta === "musica") {
         irAPantallaPorId("pantalla-camino-roto");
+    } else if (puerta === "enfermeria" || puerta === "natacion") {
+        // Restablecer el estado de la puerta
+        puertasEstado[puerta] = false;
+        
+        // Actualizar la imagen de fondo de la puerta para reflejar que está cerrada
+        const puertaElemento = document.getElementById(`puerta-${puerta}`);
+        puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.png')`;
+        
+        // Resetear la puerta seleccionada
+        puertaSeleccionada = null;
     }
-    // Para las otras puertas, no hagas nada más
+    // Si hay más puertas en el futuro, puedes añadir más condiciones aquí
 }
 
 // Función para cerrar el popup de las puertas
 function cerrarPopupPuerta() {
+    const puerta = puertaSeleccionada; // Guardar la puerta seleccionada en una variable local
     document.getElementById("popup-puerta").style.display = "none";
-    puertaSeleccionada = null; // Resetear la puerta seleccionada
+    
+    if (puerta === "enfermeria" || puerta === "natacion") {
+        // Restablecer el estado de la puerta
+        puertasEstado[puerta] = false;
+        
+        // Actualizar la imagen de fondo de la puerta para reflejar que está cerrada
+        const puertaElemento = document.getElementById(`puerta-${puerta}`);
+        puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.png')`;
+        
+        // Resetear la puerta seleccionada
+        puertaSeleccionada = null;
+    }
+    // Si hay más puertas en el futuro, puedes añadir más condiciones aquí
 }
-
 // --- Código para el Minijuego del Camino Roto ---
 
 // Funciones de drag and drop
@@ -618,7 +642,7 @@ function mostrarContenidoSala(puerta) {
         botonAccion.innerText = "Salir y cerrar";
         popup.classList.add("popup-enfermeria");
     } else if (puerta === "natacion") {
-        mensaje.innerHTML = "Al abrir la puerta, te envuelve el aroma del cloro y el eco de risas lejanas...";
+        mensaje.innerHTML = "Escucho gritos con eco y noto un picor en la nariz, creo que es del... ¿cloro?";
         botonAccion.innerText = "Salir y cerrar";
         popup.classList.add("popup-natacion");
 
