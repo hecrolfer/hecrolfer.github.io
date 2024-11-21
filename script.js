@@ -644,8 +644,8 @@ function mostrarContenidoSala(puerta) {
         popup.classList.add("popup-natacion");
 
     } else if (puerta === "musica") {
-        mensaje.innerHTML = "Este camino no está terminado. Para recorrerlo, primero debes completarlo.";
-        botonAccion.innerText = "Completar el camino";
+        mensaje.innerHTML = "¡¡¡¡¡Ayyyy!!!!!!! El camino está sin acabar... y no puedo avanzar al final";
+        botonAccion.innerText = "Intentar reconstruirlo";
     }
 
     // Mostrar el popup
