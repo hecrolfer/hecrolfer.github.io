@@ -680,24 +680,44 @@ function mostrarFraseFinalAvanzada() {
     const fraseFinalElement = document.getElementById("frase-final");
     const continuarBtn = document.getElementById("boton-continuar-ahorcado");
     const fraseOcultaElement = document.getElementById("frase-oculta");
+    const letraInput = document.getElementById("letra-input");
+    const botonIntentar = document.querySelector("#pantalla-ahorcado button[onclick='intentarLetra()']");
 
-    // Ocultar la frase oculta y mostrar los símbolos
+    // Ocultar la frase oculta y los símbolos
     fraseOcultaElement.style.display = "none";
-    fraseSimbolos.style.display = "block";
+    fraseSimbolos.style.display = "none";
 
-    // Añadir clase para iniciar la transformación de los símbolos
-    setTimeout(() => {
-        fraseSimbolos.classList.add("transformado");
-    }, 500); // Espera medio segundo antes de iniciar la transformación
+    // Limpiar cualquier contenido previo en frase-final
+    fraseFinalElement.innerHTML = "";
 
-    // Después de la transformación, mostrar la frase final con efecto de máquina de escribir
-    setTimeout(() => {
-        fraseFinalElement.innerText = fraseObjetivo;
-        fraseFinalElement.classList.add("visible");
-    }, 1500); // Espera 1.5 segundos antes de iniciar el tipo de escribir
+    // Definir la frase objetivo
+    const fraseObjetivo = "Nunca es tarde para aprender";
+    const fraseMayuscula = fraseObjetivo.toUpperCase();
 
-    // Desbloquear el botón al finalizar la animación (aproximadamente 3.5 segundos en total)
+    // Iterar sobre cada carácter y agregarlo con un retraso
+    fraseMayuscula.split("").forEach((char, index) => {
+        if (char === " ") {
+            // Insertar un espacio directamente sin envolverlo en un span
+            fraseFinalElement.innerHTML += " ";
+        } else {
+            const span = document.createElement("span");
+            span.textContent = char;
+            span.classList.add("char");
+            span.style.animationDelay = `${index * 0.1}s`; // 0.1 segundos de retraso entre caracteres
+            fraseFinalElement.appendChild(span);
+        }
+    });
+
+    // Añadir la clase 'visible' para iniciar las animaciones
+    fraseFinalElement.classList.add("visible");
+
+    // Deshabilitar el input y el botón de intentar
+    letraInput.disabled = true;
+    botonIntentar.disabled = true;
+
+    // Desbloquear el botón tras la duración total de la animación
+    const totalAnimacion = fraseObjetivo.length * 100 + 500; // 0.1s por carácter + 0.5s extra
     setTimeout(() => {
         continuarBtn.disabled = false;
-    }, 3500); // 1.5s de transformación + 2s de escritura
+    }, totalAnimacion);
 }
