@@ -744,6 +744,7 @@ let lastTime = 0;
 let timerSaltos = null;
 const tiempoObjetivo = 30000; // 30 segundos en milisegundos
 let jugadorMuerto = false;
+let gameSaltosActivo = false;
 
 
 // Cargar la imagen del jugador para saltos
@@ -909,6 +910,9 @@ function actualizarJugadorSaltos() {
 
 // Función para actualizar el juego en cada frame
 function actualizarJuegoSaltos(timestamp) {
+    if (!gameSaltosActivo) {
+        return; // Detener la ejecución si el juego no está activo
+    }
     if (!lastTime) lastTime = timestamp;
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
@@ -991,6 +995,7 @@ async function iniciarJuegoSaltos() {
             clearInterval(rockInterval);
         }
         
+        gameSaltosActivo = true;
         gameSaltosInterval = requestAnimationFrame(actualizarJuegoSaltos);
         rockInterval = setInterval(generarRoca, rockGenerationInterval);
         
@@ -1107,9 +1112,13 @@ function mostrarPopupDerrotaSaltos() {
 
     console.log("Mostrando popup-derrota-saltos");
     jugadorMuerto = true; // Marca al jugador como muerto
+    gameSaltosActivo = false; // Detener el ciclo del juego
     detenerTemporizadorSaltos(); // Detener el temporizador al morir
     if (gameSaltosInterval) {
         cancelAnimationFrame(gameSaltosInterval);
+    }
+    if (rockInterval) {
+        clearInterval(rockInterval);
     }
 
     const popup = document.getElementById("popup-derrota-saltos");
@@ -1125,8 +1134,7 @@ function cerrarPopupDerrotaSaltos() {
     console.log("Cerrando popup-derrota-saltos");
     const popup = document.getElementById("popup-derrota-saltos");
     if (popup) {
-        popup.classList.remove('visible');
-        popup.classList.add('hidden');
+        popup.classList.remove('visible'); // Ocultar el popup
     } else {
         console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
     }
@@ -1134,7 +1142,12 @@ function cerrarPopupDerrotaSaltos() {
 
 // Función para reiniciar el juego de saltos
 function reiniciarJuegoSaltos() {
-    document.getElementById("popup-derrota-saltos").style.display = "none";
+    const popup = document.getElementById("popup-derrota-saltos");
+    if (popup) {
+        popup.classList.remove('visible'); // Ocultar el popup
+    }
+    jugadorMuerto = false; // Resetear la bandera de muerte
+    gameSaltosActivo = true; // Activar el juego nuevamente
     iniciarJuegoSaltos(); // Reinicia el juego
 }
 
