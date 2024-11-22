@@ -747,6 +747,7 @@ let jugadorMuerto = false;
 let gameSaltosActivo = false;
 let jugadorCayendo = false;
 
+let modoAuto = false;
 
 // Cargar la imagen del jugador para saltos
 let jugadorImgSaltos = new Image();
@@ -805,6 +806,7 @@ function iniciarSueloSaltos() {
 
 // Generar un agujero aleatorio
 function generarAgujeroSaltos() {
+    if (modoAuto) return 0; // No generar agujeros en modo automático
     const probabilidadAgujero = 0.3; // 30% de probabilidad de generar un agujero
     if (Math.random() < probabilidadAgujero) {
         const anchoAgujero = Math.floor(Math.random() * 50) + 30; // Ancho entre 30 y 80 píxeles
@@ -813,6 +815,7 @@ function generarAgujeroSaltos() {
     return 0;
 }
 
+// Actualizar el suelo
 // Actualizar el suelo
 function actualizarSueloSaltos() {
     // Mover los segmentos hacia la izquierda
@@ -872,7 +875,7 @@ function dibujarSueloSaltos() {
 // Función para dibujar al jugador
 function dibujarJugadorSaltos() {
     if (jugadorImgSaltos.complete) {
-        ctxSaltos.drawImage(jugadorImgSaltos, jugadorSaltos.x, jugadorSaltos.y, jugadorSaltos.width, jugadorSaltos.height);
+        ctxSaltos.drawImage(jugadorSaltos.img, jugadorSaltos.x, jugadorSaltos.y, jugadorSaltos.width, jugadorSaltos.height);
     }
 }
 
@@ -908,6 +911,11 @@ function actualizarJugadorSaltos() {
             // No resetear la velocidad vertical ni mostrar el popup aquí
         }
     }
+
+    // Mover automáticamente a Sari hacia la derecha en modo automático
+    if (modoAuto) {
+        jugadorSaltos.x += 3; // Velocidad de movimiento automático
+    }
 }
 
 
@@ -933,10 +941,17 @@ function actualizarJuegoSaltos(timestamp) {
     dibujarJugadorSaltos();
     actualizarJugadorSaltos();
 
+    // Si modoAuto, verificar si Sari ha salido del canvas
+    if (modoAuto) {
+        if (jugadorSaltos.x > canvasSaltos.width) {
+            mostrarPopupExitoSaltos(); // Mostrar el popup de victoria
+            return; // Salir de la función para no solicitar otro frame
+        }
+    }
+
     // Si el jugador está cayendo, verificar si ha salido del canvas
     if (jugadorCayendo) {
         if (jugadorSaltos.y > canvasSaltos.height) {
-            // El jugador ha caído fuera del canvas
             mostrarPopupDerrotaSaltos();
             return; // Salir de la función para no solicitar otro frame
         }
@@ -975,7 +990,8 @@ async function iniciarJuegoSaltos() {
         jugadorOriginalHeight = jugadorImgSaltos.height;
         jugadorSaltos.width = Math.round(jugadorOriginalWidth * escalaSaltos);
         jugadorSaltos.height = Math.round(jugadorOriginalHeight * escalaSaltos);
-        
+        jugadorSaltos.img = jugadorImgSaltos; // Asignar la imagen cargada al objeto jugador
+
         fondoScale = canvasSaltos.height / fondoImgSaltos.height;
         fondoImgSaltos.scaledWidth = Math.round(fondoImgSaltos.width * fondoScale);
         fondoImgSaltos.scaledHeight = canvasSaltos.height;
@@ -1007,14 +1023,12 @@ async function iniciarJuegoSaltos() {
             clearInterval(rockInterval);
         }
         
+        modoAuto = false; // Asegurarse de que modoAuto esté desactivado al iniciar
         gameSaltosActivo = true;
         gameSaltosInterval = requestAnimationFrame(actualizarJuegoSaltos);
-        rockInterval = setInterval(generarRoca, rockGenerationInterval);
+        iniciarTemporizadorSaltos(); // Iniciar el temporizador de 20 segundos
         
         console.log("Juego de saltos de plataformas iniciado.");
-        
-        // Iniciar el temporizador de 30 segundos
-        iniciarTemporizadorSaltos();
         
     } catch (error) {
         console.error(error);
@@ -1024,6 +1038,8 @@ async function iniciarJuegoSaltos() {
 
 // Función para manejar las teclas presionadas (solo salto)
 function manejarTeclasSaltos(e) {
+    if (modoAuto) return; // Ignorar inputs en modo automático
+
     // Manejar el salto
     if ((e.key === " " || e.key === "Spacebar") && jugadorSaltos.y === sueloSaltos.y - jugadorSaltos.height) { // Barra espaciadora para saltar
         jugadorSaltos.velY = -jugadorSaltos.fuerzaSalto;
@@ -1031,7 +1047,6 @@ function manejarTeclasSaltos(e) {
         console.log("Jugador saltó.");
     }
 }
-
 // Añadir eventos de teclado para saltosCanvas
 document.addEventListener("keydown", manejarTeclasSaltos);
 
@@ -1048,7 +1063,6 @@ function finalizarJuegoSaltos() {
     avanzarPantalla();
 }
 
-// Función para ingresar a la pantalla del juego de saltos
 function entrarPantallaJuegoSaltos() {
     console.log("Entrando a pantalla de juego de saltos de plataformas.");
     pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
@@ -1063,8 +1077,11 @@ jugadorImgSaltos.onload = () => {
     jugadorOriginalHeight = jugadorImgSaltos.height;
 
     // Calcula el tamaño ajustado del jugador manteniendo la proporción
-    jugadorSaltos.width = jugadorOriginalWidth * escalaSaltos;
-    jugadorSaltos.height = jugadorOriginalHeight * escalaSaltos;
+    jugadorSaltos.width = Math.round(jugadorOriginalWidth * escalaSaltos);
+    jugadorSaltos.height = Math.round(jugadorOriginalHeight * escalaSaltos);
+
+    // Asignar la imagen cargada al objeto jugador
+    jugadorSaltos.img = jugadorImgSaltos;
 
     // Verificar las dimensiones escaladas
     console.log(`Jugador Saltos - Width: ${jugadorSaltos.width}, Height: ${jugadorSaltos.height}`);
@@ -1094,7 +1111,7 @@ function actualizarDesplazamientoFondo() {
     }
 }
 
-// Función para iniciar el temporizador de 30 segundos
+// Función para iniciar el temporizador de 20 segundos
 function iniciarTemporizadorSaltos() {
     // Asegúrate de que cualquier temporizador anterior se haya limpiado
     if (timerSaltos) {
@@ -1102,8 +1119,7 @@ function iniciarTemporizadorSaltos() {
     }
     
     timerSaltos = setTimeout(() => {
-        // Tiempo cumplido, mostrar popup de éxito
-        mostrarPopupExitoSaltos();
+        activarModoAuto();
     }, tiempoObjetivo);
 }
 
@@ -1115,6 +1131,20 @@ function detenerTemporizadorSaltos() {
         console.log("Temporizador de saltos detenido.");
     }
 }
+
+function activarModoAuto() {
+    modoAuto = true;
+    console.log("Modo automático activado.");
+
+    // Remover todos los agujeros existentes en el suelo
+    sueloSaltos.segmentos.forEach(segmento => {
+        segmento.hole = false;
+    });
+
+    // Opcional: Ajustar el suelo para que sea completamente recto
+    // Esto ya se logra al establecer 'hole' en false para todos los segmentos
+}
+
 // Función para mostrar el popup de derrota en saltos
 function mostrarPopupDerrotaSaltos() {
     if (jugadorMuerto) {
