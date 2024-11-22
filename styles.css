@@ -662,7 +662,7 @@ a:hover {
 
 @keyframes fadeInChar {
     from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    to { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); -moz-transform: translateY(0); -ms-transform: translateY(0); -o-transform: translateY(0); }
 }
 
 
@@ -677,4 +677,59 @@ input:disabled {
     color: #777777;
     border: 2px solid #555555;
     cursor: not-allowed;
+}
+/* Estilos para el minijuego de saltos de plataformas */
+#pantalla-juego-saltos {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#pantalla-juego-saltos.visible {
+    display: flex;
+    animation: fadeIn 1s;
+}
+
+#saltosCanvas {
+    border: 2px solid #00ffff;
+    background-color: rgba(0, 0, 0, 0.9);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.botones-centro {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#continuar-saltos-btn {
+    padding: 12px 25px;
+    font-size: 1em;
+    background-color: #1a1a1a;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 255, 255, 0.2);
+}
+
+#continuar-saltos-btn:hover {
+    background-color: #0d0d0d;
+    box-shadow: 0 6px 10px rgba(0, 255, 255, 0.3);
+}
+
+#continuar-saltos-btn:disabled {
+    background-color: #555555;
+    color: #777777;
+    cursor: not-allowed;
+}
+
+/* Estilos específicos para el juego de saltos */
+#saltosCanvas {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
 }

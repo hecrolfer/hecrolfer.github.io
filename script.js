@@ -485,7 +485,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // --- Código para las Tres Puertas ---
-
 // Función para interactuar con las puertas
 function interactuarPuerta(puerta) {
     const puertaElemento = document.getElementById(`puerta-${puerta}`);
@@ -500,11 +499,16 @@ function interactuarPuerta(puerta) {
         puertasEstado[puerta] = false;
     } else {
         // Si está cerrada, abrirla y mostrar el popup
-        puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}_abierta.png')`;
-        puertasEstado[puerta] = true;
+        // Para la puerta de música, no abrirla directamente, sino mostrar un mensaje
+        if (puerta === "musica") {
+            mostrarContenidoSala(puerta); // Esto mostrará el mensaje específico
+        } else {
+            puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}_abierta.png')`;
+            puertasEstado[puerta] = true;
 
-        // Mostrar el popup solo al abrir la puerta
-        mostrarContenidoSala(puerta);
+            // Mostrar el popup solo al abrir la puerta
+            mostrarContenidoSala(puerta);
+        }
     }
 }
 
@@ -512,17 +516,18 @@ function interactuarPuerta(puerta) {
 function accionPuerta() {
     const puerta = puertaSeleccionada; // Guardar la puerta seleccionada en una variable local
     document.getElementById("popup-puerta").style.display = "none";
-    
+
     if (puerta === "musica") {
-        irAPantallaPorId("pantalla-camino-roto");
+        // Iniciar el minijuego de saltos de plataformas
+        entrarPantallaJuegoSaltos();
     } else if (puerta === "enfermeria" || puerta === "natacion") {
         // Restablecer el estado de la puerta
         puertasEstado[puerta] = false;
-        
+
         // Actualizar la imagen de fondo de la puerta para reflejar que está cerrada
         const puertaElemento = document.getElementById(`puerta-${puerta}`);
         puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.png')`;
-        
+
         // Resetear la puerta seleccionada
         puertaSeleccionada = null;
     }
@@ -533,19 +538,21 @@ function accionPuerta() {
 function cerrarPopupPuerta() {
     const puerta = puertaSeleccionada; // Guardar la puerta seleccionada en una variable local
     document.getElementById("popup-puerta").style.display = "none";
-    
+
     if (puerta === "enfermeria" || puerta === "natacion") {
         // Restablecer el estado de la puerta
         puertasEstado[puerta] = false;
-        
+
         // Actualizar la imagen de fondo de la puerta para reflejar que está cerrada
         const puertaElemento = document.getElementById(`puerta-${puerta}`);
         puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.png')`;
-        
+
         // Resetear la puerta seleccionada
         puertaSeleccionada = null;
+    } else if (puerta === "musica") {
+        // No cerrar la puerta de música, ya que no se abre
+        puertaSeleccionada = null;
     }
-    // Si hay más puertas en el futuro, puedes añadir más condiciones aquí
 }
 // --- Código para el Minijuego del Camino Roto ---
 
@@ -719,4 +726,196 @@ function mostrarFraseFinalAvanzada() {
     setTimeout(() => {
         continuarBtn.disabled = false;
     }, totalAnimacion);
+}
+// --- Código para el Minijuego de Saltos de Plataformas ---
+
+console.log("Minijuego de Saltos de Plataformas cargado.");
+
+// Variables para el juego de saltos
+let canvasSaltos = document.getElementById("saltosCanvas");
+if (canvasSaltos) {
+    console.log("Canvas Saltos encontrado:", canvasSaltos);
+} else {
+    console.error("Canvas Saltos no encontrado. Verifica el id del canvas.");
+}
+
+let ctxSaltos = canvasSaltos ? canvasSaltos.getContext("2d") : null;
+if (ctxSaltos) {
+    console.log("Contexto Saltos obtenido:", ctxSaltos);
+} else {
+    console.error("No se pudo obtener el contexto del canvas.");
+}
+
+let playerSaltos = {
+    x: 50,
+    y: 300,
+    width: 50,
+    height: 50,
+    velX: 0,
+    velY: 0,
+    jumping: false,
+    grounded: false,
+    speed: 5,
+    jumpStrength: 15
+};
+
+let platformsSaltos = [
+    { x: 0, y: 350, width: 600, height: 50 }, // Suelo
+    { x: 100, y: 300, width: 100, height: 10 },
+    { x: 250, y: 250, width: 100, height: 10 },
+    { x: 400, y: 200, width: 100, height: 10 },
+    { x: 550, y: 150, width: 100, height: 10 } // Plataforma final cerca de la puerta
+];
+
+let keysSaltos = {};
+
+let gameSaltosInterval;
+
+// Función para dibujar al jugador
+function dibujarJugadorSaltos() {
+    ctxSaltos.fillStyle = "#00ff00"; // Verde para el jugador
+    ctxSaltos.fillRect(playerSaltos.x, playerSaltos.y, playerSaltos.width, playerSaltos.height);
+    console.log("Dibujando jugador en:", playerSaltos.x, playerSaltos.y);
+}
+
+// Función para dibujar las plataformas
+function dibujarPlataformasSaltos() {
+    ctxSaltos.fillStyle = "#ffffff"; // Blanco para las plataformas
+    platformsSaltos.forEach(plataforma => {
+        ctxSaltos.fillRect(plataforma.x, plataforma.y, plataforma.width, plataforma.height);
+    });
+}
+
+// Función para manejar la física del jugador
+function actualizarJugadorSaltos() {
+    // Movimiento horizontal
+    if (keysSaltos["ArrowLeft"]) {
+        playerSaltos.velX = -playerSaltos.speed;
+    } else if (keysSaltos["ArrowRight"]) {
+        playerSaltos.velX = playerSaltos.speed;
+    } else {
+        playerSaltos.velX = 0;
+    }
+
+    // Aplicar gravedad
+    playerSaltos.velY += 1.0; // Gravedad
+    if (playerSaltos.velY > 20) {
+        playerSaltos.velY = 20; // Velocidad terminal
+    }
+
+    playerSaltos.x += playerSaltos.velX;
+    playerSaltos.y += playerSaltos.velY;
+
+    // Límites del canvas
+    if (playerSaltos.x < 0) playerSaltos.x = 0;
+    if (playerSaltos.x + playerSaltos.width > canvasSaltos.width) playerSaltos.x = canvasSaltos.width - playerSaltos.width;
+
+    // Colisiones con plataformas
+    playerSaltos.grounded = false;
+    platformsSaltos.forEach(plataforma => {
+        if (playerSaltos.x < plataforma.x + plataforma.width &&
+            playerSaltos.x + playerSaltos.width > plataforma.x &&
+            playerSaltos.y < plataforma.y + plataforma.height &&
+            playerSaltos.y + playerSaltos.height > plataforma.y) {
+
+            // Detectar si el jugador está cayendo sobre la plataforma
+            if (playerSaltos.velY > 0) {
+                playerSaltos.y = plataforma.y - playerSaltos.height;
+                playerSaltos.velY = 0;
+                playerSaltos.grounded = true;
+                playerSaltos.jumping = false;
+            }
+        }
+    });
+}
+
+// Función para actualizar el juego
+function actualizarJuegoSaltos() {
+    console.log("Actualizando juego de saltos de plataformas.");
+    ctxSaltos.clearRect(0, 0, canvasSaltos.width, canvasSaltos.height);
+
+    // Dibuja una línea de prueba para verificar si el canvas está funcionando
+    ctxSaltos.strokeStyle = "#00ffff";
+    ctxSaltos.beginPath();
+    ctxSaltos.moveTo(0, 0);
+    ctxSaltos.lineTo(canvasSaltos.width, canvasSaltos.height);
+    ctxSaltos.stroke();
+    console.log("Dibujando línea de prueba.");
+
+    dibujarPlataformasSaltos();
+    dibujarJugadorSaltos();
+    actualizarJugadorSaltos();
+
+    // Verificar si el jugador ha llegado a la plataforma final (puerta)
+    let plataformaFinal = platformsSaltos[platformsSaltos.length - 1];
+    if (playerSaltos.x + playerSaltos.width > plataformaFinal.x &&
+        playerSaltos.x < plataformaFinal.x + plataformaFinal.width &&
+        playerSaltos.y + playerSaltos.height <= plataformaFinal.y + plataformaFinal.height) {
+            console.log("Jugador ha llegado a la plataforma final.");
+            clearInterval(gameSaltosInterval);
+            document.getElementById("continuar-saltos-btn").disabled = false;
+    }
+}
+
+// Función para iniciar el juego de saltos
+function iniciarJuegoSaltos() {
+    console.log("Iniciando juego de saltos de plataformas.");
+
+    // Resetear el jugador
+    playerSaltos.x = 50;
+    playerSaltos.y = 300;
+    playerSaltos.velX = 0;
+    playerSaltos.velY = 0;
+    playerSaltos.jumping = false;
+    playerSaltos.grounded = false;
+
+    // Resetear las plataformas si es necesario
+    platformsSaltos = [
+        { x: 0, y: 350, width: 600, height: 50 }, // Suelo
+        { x: 100, y: 300, width: 100, height: 10 },
+        { x: 250, y: 250, width: 100, height: 10 },
+        { x: 400, y: 200, width: 100, height: 10 },
+        { x: 550, y: 150, width: 100, height: 10 } // Plataforma final cerca de la puerta
+    ];
+
+    // Limpiar cualquier evento previo
+    document.removeEventListener("keydown", manejarTeclasSaltos);
+    document.removeEventListener("keyup", manejarTeclasSaltos);
+
+    // Añadir eventos de teclado
+    document.addEventListener("keydown", manejarTeclasSaltos);
+    document.addEventListener("keyup", manejarTeclasSaltos);
+
+    // Iniciar el loop del juego
+    gameSaltosInterval = setInterval(actualizarJuegoSaltos, 20);
+    console.log("Loop del juego iniciado.");
+}
+
+// Función para manejar las teclas presionadas
+function manejarTeclasSaltos(e) {
+    keysSaltos[e.key] = e.type === "keydown";
+
+    // Manejar el salto
+    if (e.key === " " || e.key === "Spacebar") { // Barra espaciadora para saltar
+        if (playerSaltos.grounded && !playerSaltos.jumping) {
+            playerSaltos.velY = -playerSaltos.jumpStrength;
+            playerSaltos.jumping = true;
+            console.log("Jugador saltó.");
+        }
+    }
+}
+
+// Función para finalizar el juego de saltos y avanzar
+function finalizarJuegoSaltos() {
+    // Opcional: Mostrar un popup de felicitación antes de avanzar
+    alert("¡Has llegado a la puerta! La puerta se abre ante ti, permitiéndote continuar tu aventura.");
+    avanzarPantalla(); // Avanza a la siguiente pantalla en tu flujo
+}
+
+// Función para ingresar a la pantalla del juego de saltos
+function entrarPantallaJuegoSaltos() {
+    console.log("Entrando a pantalla de juego de saltos de plataformas.");
+    pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
+    document.getElementById("pantalla-juego-saltos").classList.add("visible");
+    iniciarJuegoSaltos();
 }
