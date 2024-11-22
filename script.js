@@ -745,6 +745,7 @@ let timerSaltos = null;
 const tiempoObjetivo = 30000; // 30 segundos en milisegundos
 let jugadorMuerto = false;
 let gameSaltosActivo = false;
+let jugadorCayendo = false;
 
 
 // Cargar la imagen del jugador para saltos
@@ -901,14 +902,16 @@ function actualizarJugadorSaltos() {
 
     // Detectar si el jugador cae por un agujero
     if (!sobreSuelo && jugadorSaltos.y + jugadorSaltos.height >= sueloSaltos.y) {
-        console.log("Jugador ha caído en un agujero.");
-        // Caída: finalizar el juego
-        mostrarPopupDerrotaSaltos();
+        if (!jugadorCayendo) { // Asegurarse de que solo se active una vez
+            console.log("Jugador ha caído en un agujero.");
+            jugadorCayendo = true; // Activar el estado de caída
+            // No resetear la velocidad vertical ni mostrar el popup aquí
+        }
     }
 }
 
 
-// Función para actualizar el juego en cada frame
+
 function actualizarJuegoSaltos(timestamp) {
     if (!gameSaltosActivo) {
         return; // Detener la ejecución si el juego no está activo
@@ -929,6 +932,15 @@ function actualizarJuegoSaltos(timestamp) {
 
     dibujarJugadorSaltos();
     actualizarJugadorSaltos();
+
+    // Si el jugador está cayendo, verificar si ha salido del canvas
+    if (jugadorCayendo) {
+        if (jugadorSaltos.y > canvasSaltos.height) {
+            // El jugador ha caído fuera del canvas
+            mostrarPopupDerrotaSaltos();
+            return; // Salir de la función para no solicitar otro frame
+        }
+    }
 
     // Solicitar el siguiente frame
     gameSaltosInterval = requestAnimationFrame(actualizarJuegoSaltos);
@@ -1123,11 +1135,12 @@ function mostrarPopupDerrotaSaltos() {
 
     const popup = document.getElementById("popup-derrota-saltos");
     if (popup) {
-        popup.classList.add('visible'); // Solo añade 'visible'
+        popup.classList.add('visible'); // Mostrar el popup
     } else {
         console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
     }
 }
+
 
 // Función para cerrar el popup de derrota en saltos
 function cerrarPopupDerrotaSaltos() {
@@ -1141,12 +1154,14 @@ function cerrarPopupDerrotaSaltos() {
 }
 
 // Función para reiniciar el juego de saltos
+// Función para reiniciar el juego de saltos
 function reiniciarJuegoSaltos() {
     const popup = document.getElementById("popup-derrota-saltos");
     if (popup) {
         popup.classList.remove('visible'); // Ocultar el popup
     }
     jugadorMuerto = false; // Resetear la bandera de muerte
+    jugadorCayendo = false; // Resetear la bandera de caída
     gameSaltosActivo = true; // Activar el juego nuevamente
     iniciarJuegoSaltos(); // Reinicia el juego
 }
