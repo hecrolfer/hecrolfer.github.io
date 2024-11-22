@@ -742,7 +742,7 @@ let canvasSaltos = document.getElementById("saltosCanvas");
 let ctxSaltos = canvasSaltos.getContext("2d");
 let lastTime = 0;
 let timerSaltos = null;
-const tiempoObjetivo = 30000; // 30 segundos en milisegundos
+const tiempoObjetivo = 20000; // 30 segundos en milisegundos
 let jugadorMuerto = false;
 let gameSaltosActivo = false;
 let jugadorCayendo = false;
@@ -764,8 +764,8 @@ let jugadorSaltos = {
     height: 50,
     velY: 0,
     saltando: false,
-    gravedad: 1.0,
-    fuerzaSalto: 15
+    gravedad: 0.5,
+    fuerzaSalto: 10
 };
 // Cargar la imagen de fondo para saltos
 // Cargar la imagen de fondo para saltos
