@@ -695,9 +695,10 @@ input:disabled {
     width: 800px; /* Debe coincidir con el atributo width en HTML */
     height: 400px; /* Debe coincidir con el atributo height en HTML */
     border: 2px solid #00ffff;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: #000000; /* Fondo negro para evitar áreas transparentes */
     margin-bottom: 20px;
     position: relative;
+    
 }
 
 .botones-centro {
