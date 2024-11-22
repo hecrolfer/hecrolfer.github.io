@@ -185,15 +185,20 @@ button[disabled]:hover::after {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(20, 20, 20, 0.95); /* Fondo negro semitransparente */
-    color: #e0e0e0;
-    padding: 40px 20px 20px 20px; /* Aumentado padding-top para dejar espacio para la "X" */
-    border-radius: 10px;
+    background-color: rgba(20, 20, 20, 0.95);
+    /*Fondonegrosemitransparente*/color: #e0e0e0;
+    padding: 40px 20px 20px 20px;
+    /*Aumentadopadding-topparadejarespacioparala"X"*/border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
     z-index: 1000;
-    width: 350px; /* Ancho general para popups */
-    text-align: center;
-    /* position: relative; */ /* Eliminado */
+    width: 350px;
+    /*Anchogeneralparapopups*/text-align: center;
+    /*position: relative;
+     */ /* Eliminado */:;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
 }
 
 
@@ -736,4 +741,124 @@ input:disabled {
         width: 100%;
         height: auto; /* Permite que la altura se ajuste proporcionalmente */
     }
+}
+
+/* Estilos para la Puerta de Música Cerrada */
+#puerta-musica-cerrada {
+    background-image: url('assets/images/puerta_musica.png'); /* Asegúrate de tener esta imagen */
+}
+
+/* Popup para indicar que se necesita una clave */
+#popup-clave-musica {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(20, 20, 20, 0.95); /* Fondo negro semitransparente */
+    color: #e0e0e0;
+    padding: 40px 20px 20px 20px; /* Aumentado padding-top para dejar espacio para la "X" */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
+    z-index: 1000;
+    width: 350px; /* Ancho general para popups */
+    text-align: center;
+}
+
+/* Popup de derrota en el juego de saltos */
+#popup-derrota-saltos {
+    /* Eliminado: display: none; */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(20, 20, 20, 0.95);
+    color: #e0e0e0;
+    padding: 40px 20px 20px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
+    z-index: 1000;
+    width: 350px;
+    text-align: center;
+}
+
+#popup-derrota-saltos .popup-contenido p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#popup-derrota-saltos .botones-centro button {
+    margin: 10px;
+}
+
+/* --- Popup de éxito en saltos --- */
+#popup-exito-saltos {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(20, 20, 20, 0.95);
+    color: #e0e0e0;
+    padding: 40px 20px 20px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
+    z-index: 1000;
+    width: 350px;
+    text-align: center;
+}
+
+#popup-exito-saltos .popup-contenido p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#popup-exito-saltos .popup-contenido button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #1a1a1a;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 255, 255, 0.2);
+}
+
+#popup-exito-saltos .popup-contenido button:hover {
+    background-color: #0d0d0d;
+    box-shadow: 0 6px 10px rgba(0, 255, 255, 0.3);
+}
+
+/* --- Puerta de Música Cerrada --- */
+#contenedor-puerta-musica {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#puerta-musica-cerrada {
+    width: 90px;
+    height: 190px;
+    background-image: url('assets/images/puerta_musica_cerrada.png'); /* Asegúrate de tener esta imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+
+.popup.visible {
+    display: block;
 }

@@ -44,6 +44,7 @@ function cerrarPopup() {
     document.getElementById("popup-cagueta").style.display = "none";
     document.getElementById("popup-perdida").style.display = "none";
     document.getElementById("popup-victoria").style.display = "none";
+    document.getElementById("popup-derrota-saltos").style.display = "none";
 }
 
 // Función para aceptar el reto y mostrar el juego de tres en raya
@@ -627,7 +628,12 @@ let puertaMusicaDesbloqueada = false;
 // Función para avanzar a una pantalla específica por su id
 function irAPantallaPorId(id) {
     pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
-    document.getElementById(id).classList.add('visible');
+    const pantalla = document.getElementById(id);
+    if (pantalla) {
+        pantalla.classList.add('visible');
+    } else {
+        console.warn(`Pantalla con id ${id} no encontrada`);
+    }
 }
 
 function mostrarContenidoSala(puerta) {
@@ -735,6 +741,11 @@ let gameSaltosInterval;
 let canvasSaltos = document.getElementById("saltosCanvas");
 let ctxSaltos = canvasSaltos.getContext("2d");
 let lastTime = 0;
+let timerSaltos = null;
+const tiempoObjetivo = 30000; // 30 segundos en milisegundos
+let jugadorMuerto = false;
+
+
 // Cargar la imagen del jugador para saltos
 let jugadorImgSaltos = new Image();
 jugadorImgSaltos.src = "assets/images/sariplatform.PNG"; // Asegúrate de que la ruta sea correcta
@@ -889,8 +900,9 @@ function actualizarJugadorSaltos() {
 
     // Detectar si el jugador cae por un agujero
     if (!sobreSuelo && jugadorSaltos.y + jugadorSaltos.height >= sueloSaltos.y) {
+        console.log("Jugador ha caído en un agujero.");
         // Caída: finalizar el juego
-        mostrarPopupDerrota();
+        mostrarPopupDerrotaSaltos();
     }
 }
 
@@ -972,12 +984,20 @@ async function iniciarJuegoSaltos() {
         fondoSpeed = 2;
         
         // Reiniciar el juego
-        clearInterval(gameSaltosInterval);
-        clearInterval(rockInterval);
+        if (gameSaltosInterval) {
+            cancelAnimationFrame(gameSaltosInterval);
+        }
+        if (rockInterval) {
+            clearInterval(rockInterval);
+        }
+        
         gameSaltosInterval = requestAnimationFrame(actualizarJuegoSaltos);
         rockInterval = setInterval(generarRoca, rockGenerationInterval);
         
         console.log("Juego de saltos de plataformas iniciado.");
+        
+        // Iniciar el temporizador de 30 segundos
+        iniciarTemporizadorSaltos();
         
     } catch (error) {
         console.error(error);
@@ -1000,9 +1020,14 @@ document.addEventListener("keydown", manejarTeclasSaltos);
 
 // Función para finalizar el juego de saltos y avanzar
 function finalizarJuegoSaltos() {
-    // Opcional: Mostrar un popup de felicitación antes de avanzar
+    detenerTemporizadorSaltos(); // Detener el temporizador al finalizar
+    if (gameSaltosInterval) {
+        cancelAnimationFrame(gameSaltosInterval);
+    }
+    if (rockInterval) {
+        clearInterval(rockInterval);
+    }
     alert("¡Has llegado a la puerta! La puerta se abre ante ti, permitiéndote continuar tu aventura.");
-    cancelAnimationFrame(gameSaltosInterval);
     avanzarPantalla();
 }
 
@@ -1050,4 +1075,112 @@ function actualizarDesplazamientoFondo() {
     if (fondoX <= -fondoImgSaltos.scaledWidth) {
         fondoX += fondoImgSaltos.scaledWidth;
     }
+}
+
+// Función para iniciar el temporizador de 30 segundos
+function iniciarTemporizadorSaltos() {
+    // Asegúrate de que cualquier temporizador anterior se haya limpiado
+    if (timerSaltos) {
+        clearTimeout(timerSaltos);
+    }
+    
+    timerSaltos = setTimeout(() => {
+        // Tiempo cumplido, mostrar popup de éxito
+        mostrarPopupExitoSaltos();
+    }, tiempoObjetivo);
+}
+
+// Función para detener el temporizador (llamada al finalizar el juego)
+function detenerTemporizadorSaltos() {
+    if (timerSaltos) {
+        clearTimeout(timerSaltos);
+        timerSaltos = null;
+        console.log("Temporizador de saltos detenido.");
+    }
+}
+// Función para mostrar el popup de derrota en saltos
+function mostrarPopupDerrotaSaltos() {
+    if (jugadorMuerto) {
+        console.log("Popup de derrota ya mostrado anteriormente.");
+        return; // Evita mostrar el popup múltiples veces
+    }
+
+    console.log("Mostrando popup-derrota-saltos");
+    jugadorMuerto = true; // Marca al jugador como muerto
+    detenerTemporizadorSaltos(); // Detener el temporizador al morir
+    if (gameSaltosInterval) {
+        cancelAnimationFrame(gameSaltosInterval);
+    }
+
+    const popup = document.getElementById("popup-derrota-saltos");
+    if (popup) {
+        popup.classList.add('visible'); // Solo añade 'visible'
+    } else {
+        console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
+    }
+}
+
+// Función para cerrar el popup de derrota en saltos
+function cerrarPopupDerrotaSaltos() {
+    console.log("Cerrando popup-derrota-saltos");
+    const popup = document.getElementById("popup-derrota-saltos");
+    if (popup) {
+        popup.classList.remove('visible');
+        popup.classList.add('hidden');
+    } else {
+        console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
+    }
+}
+
+// Función para reiniciar el juego de saltos
+function reiniciarJuegoSaltos() {
+    document.getElementById("popup-derrota-saltos").style.display = "none";
+    iniciarJuegoSaltos(); // Reinicia el juego
+}
+
+// Función para volver a las puertas
+function volverAPuertas() {
+    console.log("Función volverAPuertas() llamada");
+    cerrarPopupDerrotaSaltos(); // Cierra el popup de derrota en saltos
+    jugadorMuerto = false; // Restablece el estado del jugador a vivo
+    resetearJuegoSaltos(); // Reinicia el juego de saltos (definido más adelante)
+    irAPantallaPorId("pantalla-tres-puertas"); // Navega de vuelta a la pantalla de las puertas
+}
+
+// Función para mostrar el popup de éxito al superar 30 segundos
+function mostrarPopupExitoSaltos() {
+    document.getElementById("popup-exito-saltos").style.display = "block";
+}
+
+// Función para cerrar el popup de éxito en saltos
+function cerrarPopupExitoSaltos() {
+    document.getElementById("popup-exito-saltos").style.display = "none";
+    // Navegar a la pantalla de la puerta de música cerrada
+    irAPantallaPorId("pantalla-puerta-musica-cerrada");
+}
+
+
+function interactuarPuertaMusica() {
+    mostrarPopupClaveMusica();
+}
+
+// Función para mostrar el popup que indica que se necesita una clave
+function mostrarPopupClaveMusica() {
+    document.getElementById("popup-clave-musica").style.display = "block";
+}
+
+// Función para cerrar el popup de clave de música
+function cerrarPopupClaveMusica() {
+    document.getElementById("popup-clave-musica").style.display = "none";
+}
+
+function resetearJuegoSaltos() {
+    console.log("Reiniciando juego de saltos");
+    jugadorSaltos.x = 100;
+    jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
+    jugadorSaltos.velY = 0;
+    jugadorSaltos.saltando = false;
+    fondoX = 0;
+    fondoSpeed = 2;
+    iniciarSueloSaltos();
 }

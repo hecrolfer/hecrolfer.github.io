@@ -257,6 +257,42 @@
         </div>
     </div>
 
+    <!-- Popup de derrota en el juego de saltos -->
+<!-- Popup de derrota en el juego de saltos -->
+<div id="popup-derrota-saltos" class="popup">
+    <span class="cerrar-popup" onclick="cerrarPopupDerrotaSaltos()">&times;</span>
+    <div class="popup-contenido">
+        <p>No has podido llegar a la puerta.</p>
+        <div class="botones-centro">
+            <button onclick="reiniciarJuegoSaltos()">Intentar de nuevo</button>
+            <button onclick="volverAPuertas()">Volver a las puertas</button>
+        </div>
+    </div>
+</div>
+
+<!-- Pantalla de la Puerta de Música Cerrada -->
+<div id="pantalla-puerta-musica-cerrada" class="pantalla">
+    <h2>Puerta de Música</h2>
+    <div id="contenedor-puerta-musica">
+        <div class="puerta" id="puerta-musica-cerrada" onclick="interactuarPuertaMusica()"></div>
+    </div>
+    <!-- Popup para indicar que se necesita una clave -->
+    <div id="popup-clave-musica" class="popup">
+        <span class="cerrar-popup" onclick="cerrarPopupClaveMusica()">&times;</span>
+        <div class="popup-contenido">
+            <p>Ups, parece que necesita una clave para poder acceder.</p>
+        </div>
+    </div>
+</div>
+<!-- Popup de éxito al llegar a la puerta en saltos -->
+<div id="popup-exito-saltos" class="popup">
+    <span class="cerrar-popup" onclick="cerrarPopupExitoSaltos()">&times;</span>
+    <div class="popup-contenido">
+        <p>¡Has conseguido llegar a la puerta!</p>
+        <button onclick="cerrarPopupExitoSaltos()">OK</button>
+    </div>
+</div>
+
 
     <!-- Pantalla Final - Revelación del Regalo -->
     <div id="pantalla-final" class="pantalla">
@@ -300,3 +336,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
