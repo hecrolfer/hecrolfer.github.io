@@ -742,7 +742,7 @@ let jugadorOriginalWidth = 0;
 let jugadorOriginalHeight = 0;
 let jugadorWidth = 50; // Tamaño base, ajustaremos con escala
 let jugadorHeight = 50;
-const escalaSaltos = 0.14; // Ajusta este valor para escalar la imagen de Sari
+const escalaSaltos = 0.05; // Ajusta este valor para escalar la imagen de Sari
 
 // Variables para el jugador
 let jugadorSaltos = {
@@ -956,8 +956,12 @@ jugadorImgSaltos.onload = () => {
     jugadorSaltos.width = jugadorOriginalWidth * escalaSaltos;
     jugadorSaltos.height = jugadorOriginalHeight * escalaSaltos;
 
+    // Verificar las dimensiones escaladas
+    console.log(`Jugador Saltos - Width: ${jugadorSaltos.width}, Height: ${jugadorSaltos.height}`);
+
     // Ajustar la posición Y para que Sari esté completamente sobre el suelo
     jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
+    console.log(`Jugador Saltos - Posición Y: ${jugadorSaltos.y}`);
 };
 
 jugadorImgSaltos.onerror = () => console.error("Error al cargar la imagen del jugador para saltos.");
