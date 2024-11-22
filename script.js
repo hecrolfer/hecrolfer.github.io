@@ -729,72 +729,59 @@ function mostrarFraseFinalAvanzada() {
 }
 // --- Código para el Minijuego de Saltos de Plataformas ---
 
-console.log("Minijuego de Saltos de Plataformas cargado.");
-
-// Variables para el juego de saltos
-let canvasSaltos = document.getElementById("saltosCanvas");
-if (canvasSaltos) {
-    console.log("Canvas Saltos encontrado:", canvasSaltos);
-} else {
-    console.error("Canvas Saltos no encontrado. Verifica el id del canvas.");
-}
-
-let ctxSaltos = canvasSaltos ? canvasSaltos.getContext("2d") : null;
-if (ctxSaltos) {
-    console.log("Contexto Saltos obtenido:", ctxSaltos);
-} else {
-    console.error("No se pudo obtener el contexto del canvas.");
-}
-// Declaración de la variable gameSaltosInterval
+// Inicialización del canvas y contexto para saltos
 let gameSaltosInterval;
+let canvasSaltos = document.getElementById("saltosCanvas");
+let ctxSaltos = canvasSaltos.getContext("2d");
 
-// Cargar la imagen del jugador
-let jugadorImg = new Image();
-jugadorImg.src = "assets/images/sariplatform.PNG"; // Asegúrate de que el nombre y la ruta sean correctos
-jugadorImg.onload = () => console.log("Imagen del jugador cargada correctamente.");
-jugadorImg.onerror = () => console.error("Error al cargar la imagen del jugador.");
+// Cargar la imagen del jugador para saltos
+let jugadorImgSaltos = new Image();
+jugadorImgSaltos.src = "assets/images/sariplatform.PNG"; // Asegúrate de que la ruta sea correcta
 
-// Cargar la imagen de fondo
-let fondoImg = new Image();
-fondoImg.src = "assets/images/background.jpg"; // Asegúrate de que el nombre y la ruta sean correctos
-fondoImg.onload = () => console.log("Imagen de fondo cargada correctamente.");
-fondoImg.onerror = () => console.error("Error al cargar la imagen de fondo.");
+let jugadorOriginalWidth = 0;
+let jugadorOriginalHeight = 0;
+let jugadorWidth = 50; // Tamaño base, ajustaremos con escala
+let jugadorHeight = 50;
+const escalaSaltos = 0.14; // Ajusta este valor para escalar la imagen de Sari
 
 // Variables para el jugador
-let jugador = {
+let jugadorSaltos = {
     x: 100, // Posición fija en el eje X
-    y: 300, // Posición inicial en el eje Y
-    width: 50, // Ajusta según el tamaño de tu imagen
-    height: 50, // Ajusta según el tamaño de tu imagen
+    y: 300, // Posición inicial en el eje Y (se ajustará después de cargar la imagen)
+    width: 50, // Tamaño base, ajustaremos con escala
+    height: 50,
     velY: 0,
     saltando: false,
     gravedad: 1.0,
     fuerzaSalto: 15
 };
+// Cargar la imagen de fondo para saltos
+let fondoImgSaltos = new Image();
+fondoImgSaltos.src = "assets/images/backgroundplatform1.jpeg"; // Asegúrate de que la ruta sea correcta
+fondoImgSaltos.onload = () => console.log("Imagen de fondo cargada correctamente.");
+fondoImgSaltos.onerror = () => console.error("Error al cargar la imagen de fondo.");
 
 // Variables para el fondo
 let fondoX = 0;
 let fondoSpeed = 2;
 
 // Variables para el suelo con agujeros
-let suelo = {
-    y: 350, // Posición fija del suelo en el eje Y
+let sueloSaltos = {
+    y: 380, // Posición fija del suelo en el eje Y ajustada para que Sari esté completamente visible
     ancho: 600, // Ancho total del suelo
     segmentos: [], // Segmentos del suelo
     velocidad: 2
 };
-
 // Inicializar el suelo
-function iniciarSuelo() {
-    suelo.segmentos = [];
+function iniciarSueloSaltos() {
+    sueloSaltos.segmentos = [];
     // Crear segmentos iniciales sin agujeros
     for (let i = 0; i < Math.ceil(canvasSaltos.width / 100) + 1; i++) {
-        suelo.segmentos.push({ x: i * 100, width: 100, hole: false });
+        sueloSaltos.segmentos.push({ x: i * 100, width: 100, hole: false });
     }
 }
-
 // Generar un agujero aleatorio
-function generarAgujero() {
+function generarAgujeroSaltos() {
     const probabilidadAgujero = 0.3; // 30% de probabilidad de generar un agujero
     if (Math.random() < probabilidadAgujero) {
         const anchoAgujero = Math.floor(Math.random() * 50) + 30; // Ancho entre 30 y 80 píxeles
@@ -802,86 +789,87 @@ function generarAgujero() {
     }
     return 0;
 }
-
 // Actualizar el suelo
-function actualizarSuelo() {
+function actualizarSueloSaltos() {
     // Mover los segmentos hacia la izquierda
-    suelo.segmentos.forEach(segmento => {
-        segmento.x -= suelo.velocidad;
+    sueloSaltos.segmentos.forEach(segmento => {
+        segmento.x -= sueloSaltos.velocidad;
     });
 
     // Eliminar segmentos que han salido del canvas
-    if (suelo.segmentos.length > 0 && suelo.segmentos[0].x + suelo.segmentos[0].width < 0) {
-        suelo.segmentos.shift();
+    if (sueloSaltos.segmentos.length > 0 && sueloSaltos.segmentos[0].x + sueloSaltos.segmentos[0].width < 0) {
+        sueloSaltos.segmentos.shift();
     }
 
     // Añadir nuevos segmentos si es necesario
-    while (suelo.segmentos.length < Math.ceil(canvasSaltos.width / 100) + 1) {
-        let ultimoSegmento = suelo.segmentos[suelo.segmentos.length - 1];
-        let anchoAgujero = generarAgujero();
+    while (sueloSaltos.segmentos.length < Math.ceil(canvasSaltos.width / 100) + 1) {
+        let ultimoSegmento = sueloSaltos.segmentos[sueloSaltos.segmentos.length - 1];
+        let anchoAgujero = generarAgujeroSaltos();
         if (anchoAgujero > 0) {
             // Añadir un segmento con agujero
-            suelo.segmentos.push({ x: ultimoSegmento.x + ultimoSegmento.width, width: anchoAgujero, hole: true });
+            sueloSaltos.segmentos.push({ x: ultimoSegmento.x + ultimoSegmento.width, width: anchoAgujero, hole: true });
             // Añadir el segmento después del agujero
-            suelo.segmentos.push({ x: ultimoSegmento.x + ultimoSegmento.width + anchoAgujero, width: 100, hole: false });
+            sueloSaltos.segmentos.push({ x: ultimoSegmento.x + ultimoSegmento.width + anchoAgujero, width: 100, hole: false });
         } else {
             // Añadir un segmento sin agujero
-            suelo.segmentos.push({ x: ultimoSegmento.x + ultimoSegmento.width, width: 100, hole: false });
+            sueloSaltos.segmentos.push({ x: ultimoSegmento.x + ultimoSegmento.width, width: 100, hole: false });
         }
     }
 }
 
 // Función para dibujar el fondo
-function dibujarFondo() {
-    if (fondoImg.complete) {
-        ctxSaltos.drawImage(fondoImg, fondoX, 0, canvasSaltos.width, canvasSaltos.height);
-        ctxSaltos.drawImage(fondoImg, fondoX + canvasSaltos.width, 0, canvasSaltos.width, canvasSaltos.height);
+function dibujarFondoSaltos() {
+    if (fondoImgSaltos.complete) {
+        ctxSaltos.drawImage(fondoImgSaltos, fondoX, 0, canvasSaltos.width, canvasSaltos.height);
+        ctxSaltos.drawImage(fondoImgSaltos, fondoX + canvasSaltos.width, 0, canvasSaltos.width, canvasSaltos.height);
     }
 }
 
 // Función para dibujar el suelo
-function dibujarSuelo() {
+function dibujarSueloSaltos() {
     ctxSaltos.fillStyle = "#654321"; // Color marrón para el suelo
-    suelo.segmentos.forEach(segmento => {
+    sueloSaltos.segmentos.forEach(segmento => {
         if (!segmento.hole) {
-            ctxSaltos.fillRect(segmento.x, suelo.y, segmento.width, 10); // Altura del suelo: 10 píxeles
+            ctxSaltos.fillRect(segmento.x, sueloSaltos.y, segmento.width, 10); // Altura del suelo: 10 píxeles
         }
     });
 }
 
+
 // Función para dibujar al jugador
-function dibujarJugador() {
-    if (jugadorImg.complete) {
-        ctxSaltos.drawImage(jugadorImg, jugador.x, jugador.y, jugador.width, jugador.height);
+function dibujarJugadorSaltos() {
+    if (jugadorImgSaltos.complete) {
+        ctxSaltos.drawImage(jugadorImgSaltos, jugadorSaltos.x, jugadorSaltos.y, jugadorSaltos.width, jugadorSaltos.height);
     }
 }
+
 
 // Función para manejar la física del jugador
 function actualizarJugadorSaltos() {
     // Aplicar gravedad
-    jugador.velY += jugador.gravedad;
-    jugador.y += jugador.velY;
+    jugadorSaltos.velY += jugadorSaltos.gravedad;
+    jugadorSaltos.y += jugadorSaltos.velY;
 
     // Detectar colisión con el suelo
     let sobreSuelo = false;
-    suelo.segmentos.forEach(segmento => {
+    sueloSaltos.segmentos.forEach(segmento => {
         if (!segmento.hole) {
             if (
-                jugador.x < segmento.x + segmento.width &&
-                jugador.x + jugador.width > segmento.x &&
-                jugador.y + jugador.height >= suelo.y &&
-                jugador.y + jugador.height <= suelo.y + 10
+                jugadorSaltos.x < segmento.x + segmento.width &&
+                jugadorSaltos.x + jugadorSaltos.width > segmento.x &&
+                jugadorSaltos.y + jugadorSaltos.height >= sueloSaltos.y &&
+                jugadorSaltos.y + jugadorSaltos.height <= sueloSaltos.y + 10
             ) {
                 sobreSuelo = true;
-                jugador.y = suelo.y - jugador.height;
-                jugador.velY = 0;
-                jugador.saltando = false;
+                jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
+                jugadorSaltos.velY = 0;
+                jugadorSaltos.saltando = false;
             }
         }
     });
 
     // Detectar si el jugador cae por un agujero
-    if (!sobreSuelo && jugador.y + jugador.height >= suelo.y) {
+    if (!sobreSuelo && jugadorSaltos.y + jugadorSaltos.height >= sueloSaltos.y) {
         // Caída: finalizar el juego
         mostrarPopupDerrota();
     }
@@ -893,18 +881,18 @@ function actualizarJuegoSaltos() {
     ctxSaltos.clearRect(0, 0, canvasSaltos.width, canvasSaltos.height);
 
     // Dibujar y actualizar el fondo
-    dibujarFondo();
+    dibujarFondoSaltos();
     fondoX -= fondoSpeed;
     if (fondoX <= -canvasSaltos.width) {
         fondoX = 0;
     }
 
     // Dibujar y actualizar el suelo
-    dibujarSuelo();
-    actualizarSuelo();
+    dibujarSueloSaltos();
+    actualizarSueloSaltos();
 
     // Dibujar al jugador
-    dibujarJugador();
+    dibujarJugadorSaltos();
 
     // Actualizar la física del jugador
     actualizarJugadorSaltos();
@@ -915,13 +903,13 @@ function iniciarJuegoSaltos() {
     console.log("Iniciando juego de saltos de plataformas.");
 
     // Resetear el jugador
-    jugador.x = 100;
-    jugador.y = 300;
-    jugador.velY = 0;
-    jugador.saltando = false;
+    jugadorSaltos.x = 100;
+    jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
+    jugadorSaltos.velY = 0;
+    jugadorSaltos.saltando = false;
 
     // Inicializar el suelo
-    iniciarSuelo();
+    iniciarSueloSaltos();
 
     // Iniciar el loop del juego
     if (gameSaltosInterval) clearInterval(gameSaltosInterval);
@@ -929,17 +917,17 @@ function iniciarJuegoSaltos() {
     console.log("Loop del juego iniciado.");
 }
 
-// Función para manejar las teclas presionadas
+// Función para manejar las teclas presionadas (solo salto)
 function manejarTeclasSaltos(e) {
     // Manejar el salto
-    if ((e.key === " " || e.key === "Spacebar") && jugador.y === suelo.y - jugador.height) { // Barra espaciadora para saltar
-        jugador.velY = -jugador.fuerzaSalto;
-        jugador.saltando = true;
+    if ((e.key === " " || e.key === "Spacebar") && jugadorSaltos.y === sueloSaltos.y - jugadorSaltos.height) { // Barra espaciadora para saltar
+        jugadorSaltos.velY = -jugadorSaltos.fuerzaSalto;
+        jugadorSaltos.saltando = true;
         console.log("Jugador saltó.");
     }
 }
 
-// Añadir eventos de teclado
+// Añadir eventos de teclado para saltosCanvas
 document.addEventListener("keydown", manejarTeclasSaltos);
 
 // Función para finalizar el juego de saltos y avanzar
@@ -957,3 +945,19 @@ function entrarPantallaJuegoSaltos() {
     document.getElementById("pantalla-juego-saltos").classList.add("visible");
     iniciarJuegoSaltos();
 }
+
+// Evento para cargar las imágenes y ajustar dimensiones
+jugadorImgSaltos.onload = () => {
+    console.log("Imagen del jugador para saltos cargada correctamente.");
+    jugadorOriginalWidth = jugadorImgSaltos.width;
+    jugadorOriginalHeight = jugadorImgSaltos.height;
+
+    // Calcula el tamaño ajustado del jugador manteniendo la proporción
+    jugadorSaltos.width = jugadorOriginalWidth * escalaSaltos;
+    jugadorSaltos.height = jugadorOriginalHeight * escalaSaltos;
+
+    // Ajustar la posición Y para que Sari esté completamente sobre el suelo
+    jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
+};
+
+jugadorImgSaltos.onerror = () => console.error("Error al cargar la imagen del jugador para saltos.");

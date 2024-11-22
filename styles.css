@@ -670,6 +670,7 @@ a:hover {
     opacity: 0;
     display: inline-block;
     animation: fadeInChar 0.3s forwards;
+    -webkit-animation: fadeInChar 0.3s forwards;
 }
 
 input:disabled {
@@ -690,11 +691,9 @@ input:disabled {
     animation: fadeIn 1s;
 }
 
-/* Ajustes para el canvas del juego de saltos */
 #saltosCanvas {
-    width: 100%;
-    max-width: 600px;
-    height: 400px;
+    width: 800px; /* Debe coincidir con el atributo width en HTML */
+    height: 400px; /* Debe coincidir con el atributo height en HTML */
     border: 2px solid #00ffff;
     background-color: rgba(0, 0, 0, 0.9);
     margin-bottom: 20px;
@@ -731,9 +730,9 @@ input:disabled {
     cursor: not-allowed;
 }
 
-/* Estilos específicos para el juego de saltos */
-#saltosCanvas {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
+@media (max-width: 900px) {
+    #saltosCanvas {
+        width: 100%;
+        height: auto; /* Permite que la altura se ajuste proporcionalmente */
+    }
 }
