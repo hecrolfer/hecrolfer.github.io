@@ -1159,9 +1159,6 @@ function mostrarPopupDerrotaSaltos() {
     if (gameSaltosInterval) {
         cancelAnimationFrame(gameSaltosInterval);
     }
-    if (rockInterval) {
-        clearInterval(rockInterval);
-    }
 
     const popup = document.getElementById("popup-derrota-saltos");
     if (popup) {

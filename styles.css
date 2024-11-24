@@ -194,7 +194,7 @@ button[disabled]:hover::after {
     width: 350px;
     /*Anchogeneralparapopups*/text-align: center;
     /*position: relative;
-     */ /* Eliminado */:;
+     */ /* Eliminado */
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -221,12 +221,6 @@ button[disabled]:hover::after {
 .mensaje-descifrado.visible {
     opacity: 1;
     transform: translateY(0);
-}
-
-#juegoCanvas {
-    border: 2px solid #00ffff;
-    background-color: rgba(0, 0, 0, 0.9);
-    margin-top: 20px;
 }
 
 .imagen-giratoria {
@@ -334,6 +328,10 @@ input[type="text"] {
     font-size: 1em;
     background-color: #1a1a1a;
     color: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 /* Añadir animación de entrada suave para las pantallas */
@@ -765,37 +763,6 @@ input:disabled {
     text-align: center;
 }
 
-/* Popup de derrota en el juego de saltos */
-#popup-derrota-saltos {
-    /* Eliminado: display: none; */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(20, 20, 20, 0.95);
-    color: #e0e0e0;
-    padding: 40px 20px 20px 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
-    z-index: 1000;
-    width: 350px;
-    text-align: center;
-}
-
-#popup-derrota-saltos .popup-contenido p {
-    font-size: 1.2em;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
-    padding: 10px;
-    border-radius: 8px;
-}
-
-#popup-derrota-saltos .botones-centro button {
-    margin: 10px;
-}
-
 /* --- Popup de éxito en saltos --- */
 #popup-exito-saltos {
     display: none;
@@ -861,4 +828,32 @@ input:disabled {
 
 .popup.visible {
     display: block;
+}
+
+#popup-derrota-saltos .popup-contenido p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#popup-derrota-saltos .botones-centro button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #1a1a1a;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 255, 255, 0.2);
+}
+
+#popup-derrota-saltos .botones-centro button:hover {
+    background-color: #0d0d0d;
+    box-shadow: 0 6px 10px rgba(0, 255, 255, 0.3);
 }
