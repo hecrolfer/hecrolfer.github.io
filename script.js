@@ -974,6 +974,12 @@ function cargarImagen(src) {
 
 // Función para iniciar el juego de saltos después de cargar las imágenes
 async function iniciarJuegoSaltos() {
+    
+    jugadorMuerto = false; 
+    jugadorCayendo = false; // Resetear la bandera de caída
+
+    console.log("Variables reiniciadas: jugadorMuerto =", jugadorMuerto, ", jugadorCayendo =", jugadorCayendo);
+
     try {
         console.log("Cargando imágenes para el juego de saltos...");
         
@@ -1141,8 +1147,6 @@ function activarModoAuto() {
         segmento.hole = false;
     });
 
-    // Opcional: Ajustar el suelo para que sea completamente recto
-    // Esto ya se logra al establecer 'hole' en false para todos los segmentos
 }
 
 // Función para mostrar el popup de derrota en saltos
@@ -1162,6 +1166,7 @@ function mostrarPopupDerrotaSaltos() {
 
     const popup = document.getElementById("popup-derrota-saltos");
     if (popup) {
+        popup.style.display = '';
         popup.classList.add('visible'); // Mostrar el popup
     } else {
         console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
@@ -1175,6 +1180,7 @@ function cerrarPopupDerrotaSaltos() {
     const popup = document.getElementById("popup-derrota-saltos");
     if (popup) {
         popup.classList.remove('visible'); // Ocultar el popup
+        popup.style.display = '';
     } else {
         console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
     }
