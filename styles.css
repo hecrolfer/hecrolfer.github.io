@@ -809,16 +809,26 @@ input:disabled {
 
 /* --- Puerta de Música Cerrada --- */
 #contenedor-puerta-musica {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+    display: flex; /* Para que la puerta y el cofre estén en línea */
+    align-items: flex-end; /* Alinea la parte inferior de ambos elementos */
+    justify-content: center; /* Centra los elementos en el contenedor */
+    gap: 20px; /* Espacio entre la puerta y el cofre */
+}
+
+#cofre-musica {
+    width: 90px; /* Mantén el tamaño original del contenedor */
+    height: 90px;
+    background-image: url('assets/images/cofre_musica.png');
+    background-size: contain; /* Ajusta la imagen para que encaje completamente */
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 #puerta-musica-cerrada {
     width: 90px;
     height: 190px;
-    background-image: url('assets/images/puerta_musica_cerrada.png'); /* Asegúrate de tener esta imagen */
+    background-image: url('assets/images/puerta_musica.png'); /* Asegúrate de tener esta imagen */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
