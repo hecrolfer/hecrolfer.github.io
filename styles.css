@@ -851,6 +851,10 @@ input:disabled {
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 6px rgba(0, 255, 255, 0.2);
+    -webkit-transition: background-color 0.3s, box-shadow 0.3s;
+    -moz-transition: background-color 0.3s, box-shadow 0.3s;
+    -ms-transition: background-color 0.3s, box-shadow 0.3s;
+    -o-transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 #popup-derrota-saltos .botones-centro button:hover {
