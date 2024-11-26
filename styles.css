@@ -816,12 +816,8 @@ input:disabled {
 }
 
 #cofre-musica {
-    width: 90px; /* Mantén el tamaño original del contenedor */
-    height: 90px;
-    background-image: url('assets/images/cofre_musica.png');
-    background-size: contain; /* Ajusta la imagen para que encaje completamente */
-    background-position: center;
-    background-repeat: no-repeat;
+    width: auto; /* La imagen se ajustará automáticamente */
+    height: 90px; /* O ajusta según tus necesidades */
     cursor: pointer;
 }
 
