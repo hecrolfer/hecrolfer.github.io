@@ -358,20 +358,22 @@ document.addEventListener("keyup", function (event) {
 function entrarPantallaTrampas() {
     pantallas.forEach(pantalla => pantalla.classList.remove('visible')); // Asegúrate de que solo una pantalla esté visible
     document.getElementById("pantalla-trampas").classList.add("visible");
-    iniciarCuentaRegresiva();
+    iniciarCuentaRegresiva(); // Iniciar la cuenta regresiva
 }
 function iniciarCuentaRegresiva() {
     let contadorElemento = document.getElementById('contador');
     let tiempoRestante = 3; // Comenzar en 3
+    contadorElemento.innerText = tiempoRestante; // Mostrar el número inicial
+    contadorElemento.style.display = 'block'; // Asegurarse de que el contador esté visible
 
     let intervalo = setInterval(() => {
-        contadorElemento.innerText = tiempoRestante;
-        contadorElemento.style.animation = 'none'; // Reinicia la animación
-        void contadorElemento.offsetWidth; // Reflow para reiniciar la animación
-        contadorElemento.style.animation = 'fadeInOut 1s ease-in-out';
-
         tiempoRestante--;
-        if (tiempoRestante < 0) {
+        if (tiempoRestante > 0) {
+            contadorElemento.innerText = tiempoRestante;
+            contadorElemento.style.animation = 'none'; // Reinicia la animación
+            void contadorElemento.offsetWidth; // Reflow para reiniciar la animación
+            contadorElemento.style.animation = 'fadeInOut 1s ease-in-out';
+        } else {
             clearInterval(intervalo);
             contadorElemento.style.display = 'none'; // Ocultar el contador
             iniciarJuego(); // Iniciar el juego

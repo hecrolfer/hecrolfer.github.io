@@ -873,19 +873,27 @@ input:disabled {
 }
 
 #contador {
-    font-size: 3em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
+    font-size: 5em;
     color: #ff0000; /* Puedes cambiar el color si lo deseas */
     text-align: center;
-    margin-bottom: 20px; /* Añade espacio debajo del contador */
+    z-index: 2; /* Asegura que esté por encima del canvas */
+    pointer-events: none; /* Para que no interfiera con eventos del mouse */
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    font-family: 'Orbitron', sans-serif; /* Agrega la fuente Orbitron */
 }
 
 @keyframes fadeInOut {
-    0% { opacity: 0; }
+    0% { opacity: 1; }
     50% { opacity: 1; }
     100% { opacity: 0; }
 }
 
-#contador {
-    animation: fadeInOut 1s ease-in-out;
-    animation-fill-mode: forwards;
+#contenedor-juego {
+    position: relative;
+    display: inline-block; /* Para que se ajuste al tamaño del canvas */
 }

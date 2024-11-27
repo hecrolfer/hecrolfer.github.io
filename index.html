@@ -85,8 +85,13 @@
     <div id="pantalla-trampas" class="pantalla">
         <h2>Esquiva las rocas</h2>
         <p>¡Cuidado! Parece que la estructura es inestable. Usa las flechas para moverte y esquivar las rocas.</p>
-        <h2 id="contador"></h2>
-        <canvas id="juegoCanvas" width="600" height="400"></canvas>
+        <!-- Contenedor relativo -->
+        <div id="contenedor-juego">
+            <!-- Elemento para el contador -->
+            <div id="contador"></div>
+            <!-- Canvas del juego -->
+            <canvas id="juegoCanvas" width="600" height="400"></canvas>
+        </div>
         <div class="botones-centro">
             <button id="continuar-btn" onclick="avanzarPantalla()" disabled>Adentrarte</button>
         </div>
