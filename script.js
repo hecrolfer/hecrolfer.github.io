@@ -4,6 +4,11 @@ let tablero = ["", "", "", "", "", "", "", "", ""];
 let jugadorActual = "O";
 let intentosFallidos = 0; // Contador para los intentos fallidos del jugador
 let puertaSeleccionada = null; 
+let jugadorMuriendo = false;
+let contadorMuerte = 0;
+// Variables para almacenar la posición inicial de Sari al morir
+
+
 // Variable para almacenar el estado de las puertas
 const puertasEstado = {
     enfermeria: false,
@@ -228,6 +233,8 @@ rockImage.onerror = () => console.error("Error al cargar la imagen de las rocas.
 
 let sariX = canvas.width / 2 - 25; // Posición inicial de Sari
 let sariY = canvas.height - 60; // Altura fija de Sari
+let sariXInicial = sariX;
+let sariYInicial = sariY;
 let sariWidth = 50;
 let sariHeight = 50;
 
@@ -268,48 +275,97 @@ function generarRoca() {
 // Actualizar el juego en cada frame
 function actualizarJuego() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(sari, sariX, sariY, sariWidth, sariHeight);
 
-    // Movimiento fluido del personaje
-    if (movimientoIzquierda && sariX > 0) {
-        sariX -= velocidadMovimiento;
-    }
-    if (movimientoDerecha && sariX < canvas.width - sariWidth) {
-        sariX += velocidadMovimiento;
-    }
+    // Si el jugador está muriendo, ejecutar animación de muerte
+    if (jugadorMuriendo) {
+        contadorMuerte++;
 
-    // Dibujar y mover rocas
-    for (let i = 0; i < rocks.length; i++) {
-        let rock = rocks[i];
-        rock.y += rockSpeed;
-        ctx.drawImage(rockImage, rock.x, rock.y, rock.width, rock.height);
-
-        // Comprobar colisión con Sari
-        if (colision(rock, { x: sariX, y: sariY, width: sariWidth, height: sariHeight })) {
+        const progress = contadorMuerte / 50; // Progreso de la animación (0 a 1)
+    
+        // Calcular el ángulo de rotación y el factor de escalado
+        const rotationAngle = contadorMuerte * (Math.PI / 10); // Ajusta para controlar la velocidad de rotación
+        const scalingFactor = 1 + progress * 2; // Escala de 1 a 3
+    
+        // Calcular la posición actual moviéndose hacia el centro
+        const targetX = canvas.width / 2 - sariWidth / 2;
+        const targetY = canvas.height / 2 - sariHeight / 2;
+    
+        const currentX = sariXInicial + (targetX - sariXInicial) * progress;
+        const currentY = sariYInicial + (targetY - sariYInicial) * progress;
+    
+        // Aplicar transformaciones
+        ctx.save();
+    
+        // Mover al centro de Sari en la posición actual
+        ctx.translate(currentX + sariWidth / 2, currentY + sariHeight / 2);
+    
+        // Aplicar rotación y escalado
+        ctx.rotate(rotationAngle);
+        ctx.scale(scalingFactor, scalingFactor);
+    
+        // Dibujar a Sari centrada en (0, 0)
+        ctx.drawImage(sari, -sariWidth / 2, -sariHeight / 2, sariWidth, sariHeight);
+    
+        ctx.restore();
+    
+        // Deshabilitar movimiento
+        movimientoIzquierda = false;
+        movimientoDerecha = false;
+    
+        // Después de que la animación termine, mostrar el popup de derrota
+        if (contadorMuerte >= 50) { // Duración de la animación (ajusta este valor según prefieras)
             mostrarPopupDerrota();
             return;
         }
+    } else {
+        // Movimiento del jugador
+        if (movimientoIzquierda && sariX > 0) {
+            sariX -= velocidadMovimiento;
+        }
+        if (movimientoDerecha && sariX < canvas.width - sariWidth) {
+            sariX += velocidadMovimiento;
+        }
 
-        // Remover rocas que salen de la pantalla y aumentar el contador
-        if (rock.y > canvas.height) {
-            rocks.splice(i, 1);
-            esquivadas++;
-            i--;
+        // Dibujar al jugador
+        ctx.drawImage(sari, sariX, sariY, sariWidth, sariHeight);
 
-            // Aumentar dificultad progresivamente cada 10 rocas esquivadas
-            if (esquivadas % 10 === 0) {
-                rockSpeed += 0.5; // Incrementa la velocidad de caída de las rocas
-                clearInterval(rockInterval); // Limpia el intervalo anterior
-                rockGenerationInterval -= 50; // Aumenta la frecuencia de generación de rocas
-                rockInterval = setInterval(generarRoca, Math.max(rockGenerationInterval, 200)); // Reinicia el intervalo con la nueva frecuencia (límite mínimo de 200 ms)
+        // Dibujar y mover rocas
+        for (let i = 0; i < rocks.length; i++) {
+            let rock = rocks[i];
+            rock.y += rockSpeed;
+            ctx.drawImage(rockImage, rock.x, rock.y, rock.width, rock.height);
+
+            // Comprobar colisión con Sari
+            if (colision(rock, { x: sariX, y: sariY, width: sariWidth, height: sariHeight })) {
+                jugadorMuriendo = true; // Iniciar animación de muerte
+                contadorMuerte = 0; // Reiniciar contador de animación
+                sariXInicial = sariX; // Guardar posición inicial
+                sariYInicial = sariY;
+                clearInterval(rockInterval); // Detener generación de nuevas rocas
+                break; // Salir del bucle de rocas
             }
 
-            // Mostrar el popup de felicitación al esquivar 50 rocas
-            if (esquivadas === 50) {
-                clearInterval(gameInterval);
-                clearInterval(rockInterval);
-                mostrarPopupEnhorabuena(); // Llama al popup de felicitación
-                return;
+            // Remover rocas que salen de la pantalla y actualizar contador de esquivadas
+            if (rock.y > canvas.height) {
+                rocks.splice(i, 1);
+                esquivadas++;
+                i--;
+
+                // Aumentar dificultad progresivamente cada 10 rocas esquivadas
+                if (esquivadas % 10 === 0) {
+                    rockSpeed += 0.5; // Incrementa la velocidad de caída de las rocas
+                    clearInterval(rockInterval); // Limpia el intervalo anterior
+                    rockGenerationInterval -= 50; // Aumenta la frecuencia de generación de rocas
+                    rockInterval = setInterval(generarRoca, Math.max(rockGenerationInterval, 200)); // Reinicia el intervalo con la nueva frecuencia (límite mínimo de 200 ms)
+                }
+
+                // Mostrar el popup de felicitación al esquivar 50 rocas
+                if (esquivadas === 50) {
+                    clearInterval(gameInterval);
+                    clearInterval(rockInterval);
+                    mostrarPopupEnhorabuena(); // Llama al popup de felicitación
+                    return;
+                }
             }
         }
     }
@@ -334,11 +390,18 @@ function mostrarPopupDerrota() {
 // Cerrar el popup de derrota y reiniciar el juego
 function cerrarPopupDerrota() {
     document.getElementById("popup-derrota").style.display = "none";
-    iniciarJuego(); // Llama a iniciarJuego para reiniciar con valores iniciales
+    jugadorMuriendo = false; // Restablecer estado de muerte
+    contadorMuerte = 0; // Reiniciar contador de animación
+    sariX = canvas.width / 2 - 25; // Reiniciar la posición de Sari al centro
+    sariY = canvas.height - 60;
+    sariXInicial = sariX; // Actualizar posición inicial
+    sariYInicial = sariY;
+    iniciarJuego(); // Reiniciar el juego
 }
 
 // Función para manejar el movimiento de Sari con las flechas
 document.addEventListener("keydown", function (event) {
+    if (jugadorMuriendo) return; // No permitir movimiento si está muriendo
     if (event.key === "ArrowLeft") {
         movimientoIzquierda = true;
     } else if (event.key === "ArrowRight") {
@@ -347,6 +410,8 @@ document.addEventListener("keydown", function (event) {
 });
 
 document.addEventListener("keyup", function (event) {
+    if (jugadorMuriendo) return; // No permitir movimiento si está muriendo
+
     if (event.key === "ArrowLeft") {
         movimientoIzquierda = false;
     } else if (event.key === "ArrowRight") {
