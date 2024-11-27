@@ -871,3 +871,21 @@ input:disabled {
 #texto {
     text-align: justify;
 }
+
+#contador {
+    font-size: 3em;
+    color: #ff0000; /* Puedes cambiar el color si lo deseas */
+    text-align: center;
+    margin-bottom: 20px; /* Añade espacio debajo del contador */
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#contador {
+    animation: fadeInOut 1s ease-in-out;
+    animation-fill-mode: forwards;
+}

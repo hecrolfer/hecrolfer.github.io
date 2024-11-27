@@ -358,9 +358,25 @@ document.addEventListener("keyup", function (event) {
 function entrarPantallaTrampas() {
     pantallas.forEach(pantalla => pantalla.classList.remove('visible')); // Asegúrate de que solo una pantalla esté visible
     document.getElementById("pantalla-trampas").classList.add("visible");
-    setTimeout(() => {
-        iniciarJuego(); // Aquí se inicia el juego
-    }, 3000);
+    iniciarCuentaRegresiva();
+}
+function iniciarCuentaRegresiva() {
+    let contadorElemento = document.getElementById('contador');
+    let tiempoRestante = 3; // Comenzar en 3
+
+    let intervalo = setInterval(() => {
+        contadorElemento.innerText = tiempoRestante;
+        contadorElemento.style.animation = 'none'; // Reinicia la animación
+        void contadorElemento.offsetWidth; // Reflow para reiniciar la animación
+        contadorElemento.style.animation = 'fadeInOut 1s ease-in-out';
+
+        tiempoRestante--;
+        if (tiempoRestante < 0) {
+            clearInterval(intervalo);
+            contadorElemento.style.display = 'none'; // Ocultar el contador
+            iniciarJuego(); // Iniciar el juego
+        }
+    }, 1000); // Actualizar cada segundo
 }
 
 function mostrarPopupEnhorabuena() {
