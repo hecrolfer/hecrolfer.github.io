@@ -358,7 +358,9 @@ document.addEventListener("keyup", function (event) {
 function entrarPantallaTrampas() {
     pantallas.forEach(pantalla => pantalla.classList.remove('visible')); // Asegúrate de que solo una pantalla esté visible
     document.getElementById("pantalla-trampas").classList.add("visible");
-    iniciarJuego();
+    setTimeout(() => {
+        iniciarJuego(); // Aquí se inicia el juego
+    }, 3000);
 }
 
 function mostrarPopupEnhorabuena() {
