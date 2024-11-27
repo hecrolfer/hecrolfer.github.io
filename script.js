@@ -362,23 +362,25 @@ function entrarPantallaTrampas() {
 }
 function iniciarCuentaRegresiva() {
     let contadorElemento = document.getElementById('contador');
-    let tiempoRestante = 3; // Comenzar en 3
-    contadorElemento.innerText = tiempoRestante; // Mostrar el número inicial
+    let tiempoRestante = 5; // Comenzar en 3
     contadorElemento.style.display = 'block'; // Asegurarse de que el contador esté visible
 
-    let intervalo = setInterval(() => {
-        tiempoRestante--;
+    function actualizarContador() {
         if (tiempoRestante > 0) {
             contadorElemento.innerText = tiempoRestante;
             contadorElemento.style.animation = 'none'; // Reinicia la animación
             void contadorElemento.offsetWidth; // Reflow para reiniciar la animación
             contadorElemento.style.animation = 'fadeInOut 1s ease-in-out';
+
+            tiempoRestante--;
+            setTimeout(actualizarContador, 1000); // Llamar de nuevo después de 1 segundo
         } else {
-            clearInterval(intervalo);
             contadorElemento.style.display = 'none'; // Ocultar el contador
             iniciarJuego(); // Iniciar el juego
         }
-    }, 1000); // Actualizar cada segundo
+    }
+
+    actualizarContador(); // Iniciar la cuenta regresiva
 }
 
 function mostrarPopupEnhorabuena() {
