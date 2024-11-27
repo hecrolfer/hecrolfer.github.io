@@ -118,19 +118,25 @@
     <!-- Pantalla de la Pared con el Mensaje Cifrado -->
     <div id="pantalla-mensaje-cifrado" class="pantalla">
         <h2>Pared Antigua</h2>
-        <p>
-            Te acercas a una pared cubierta de símbolos extraños y grabados antiguos. Entre los grabados, notas algo que parece un mensaje cifrado. La curiosidad te invade, y sientes que ese mensaje guarda algo importante.
-        </p>
+            <p id="texto">
+                Apenas te recuperas de esquivar las trampas cuando algo en la pared frente a ti te detiene en seco.  
+                Es enorme, cubierta de símbolos extraños y grabados antiguos que parecen querer contarte algo... algo importante.<br><br>
+            
+                Te acercas despacio, como si la pared misma pudiera sentir tu curiosidad. Entre las marcas, notas algo diferente:
+                un mensaje tallado, más grande que el resto, que brilla con una intensidad que no puedes ignorar.<br><br>
+            
+                Es un idioma desconocido, pero sientes que no es casualidad que esté aquí, esperándote.<br><br>
+                ¿Qué dice? ¿Es una advertencia? ¿Una pista? No tienes opción: si quieres respuestas, tendrás que descifrarlo.  
+            </p>
         <p class="texto-cifrado">✶ ∇ ⌖ ☰ ⍟ ⌬   ⍣   ☽⌖⧫☿✧   ☍⍣   ⊛⍂☾☌</p>
         <div class="botones-centro">
             <button onclick="intentarDescifrar()">Intentar descifrar</button>
         </div>
     </div>
 
-        <!-- Pantalla del Juego de Ahorcado -->
     <!-- Pantalla del Juego de Ahorcado -->
     <div id="pantalla-ahorcado" class="pantalla">
-        <h2>Juego de Ahorcado</h2>
+        <h2>Descifra la frase</h2>
         <p>Adivina la frase oculta:</p>
         <p id="frase-oculta">_ _ _ _ _   _ _   _ _ _ _ _   _ _ _ _   _ _ _ _ _ _ _</p>
         <div id="letras-intentadas">Letras intentadas: <span id="letras-intentadas-lista"></span></div>
