@@ -867,3 +867,7 @@ input:disabled {
     background-color: #0d0d0d;
     box-shadow: 0 6px 10px rgba(0, 255, 255, 0.3);
 }
+
+#texto {
+    text-align: justify;
+}

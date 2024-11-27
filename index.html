@@ -12,24 +12,24 @@
     <!-- Pantalla de Introducción -->
     <div id="pantalla-inicio" class="pantalla visible">
         <h1>Aterrizaje forzoso</h1>
-        <p>Abres los ojos lentamente, todavía aturdida por el largo viaje. La luz roja del sistema de emergencia parpadea dentro de la cabina de tu nave. Algo ha salido mal.<br><br>
-        Al mirar por la escotilla, te encuentras con un panorama que te hiela la sangre: Un planeta envuelto en una niebla violeta, con formaciones rocosas que desafían la lógica y una extraña sensación de que no estás sola.<br><br>
+        <p id="texto">Abres los ojos lentamente, todavía aturdida por el largo viaje. La luz roja del sistema de emergencias parpadea dentro de la cabina de tu nave. Algo ha salido mal.<br><br>
+        Al mirar por la escotilla, te encuentras con un panorama que te hiela la sangre: <br> Un planeta envuelto en una niebla violeta, con formaciones rocosas que desafían la lógica y una extraña sensación de que no estás sola.<br><br>
         Algo te dice que debes salir fuera y descubrir algo que ahora mismo es totalmente desconocido para ti.</p>
         <div class="botones-centro">
-            <button onclick="avanzarPantalla()">Comenzar la Aventura</button>
+            <button onclick="avanzarPantalla()">Bajar de la nave</button>
         </div>
     </div>
 
     <!-- Primer Mensaje Holográfico en el Desierto Luminoso -->
     <div id="pantalla-frase1" class="pantalla">
-        <h2>Desierto Luminoso</h2>
-        <p>
-            Parece que estás en una especie de desierto…<br><br>
-            De repente, escuchas un sonido extraño, aunque sorprendentemente agradable.<br><br>
-            “Dios mío, ¡qué cosa tan mona!” piensas, mientras aparece frente a ti una pequeña criatura muy parecida a los gatos de tu planeta. Al principio, das un paso atrás, cautelosa... pero parece inofensiva.<br><br>
-            Observas que la criatura se comunica de una forma peculiar, emitiendo sonidos y gestos incomprensibles. Entonces, te das cuenta de que… ¡te está retando! Parece que quiere jugar contigo, a un juego que te resulta vagamente familiar…<br><br>
-            No parece dispuesta a dejarte avanzar hasta que aceptes su propuesta… ¡y consigas ganarle!
-        </p>
+        <h1>Primer contacto</h1>
+        <p id="texto">Al bajar de la nave, notas que la gravedad es sorprendentemente similar a la de la Tierra. A cada paso, tus botas se hunden ligeramente en un suelo blando y cristalino que cruje bajo tus pies. El aire, aunque extraño, no resulta sofocante, pero está impregnado de un olor metálico que no logras identificar.<br><br>
+        De repente, un movimiento fugaz entre la niebla te hace detenerte. Unos ojos brillantes, amarillos como dos lunas, te observan desde la penumbra.<br><br>
+        Con cautela, das un paso más y, para tu sorpresa, una criatura emerge de la niebla. Su aspecto es desconcertante: parece un gato, pero sus orejas son largas y puntiagudas, su cola se divide en dos, y su pelaje tiene un extraño brillo azulado que parece cambiar con la luz.<br><br>
+        El extraño ser te observa con curiosidad y, tras un momento de silencio, habla en un idioma que inexplicablemente entiendes: <br><br>
+        <i>“Forastera, no puedes avanzar sin jugar,  
+            si buscas respuestas, deberás ganar.”</i><br><br>
+            Antes de que puedas responder, el suelo frente a ti se ilumina, dibujando una cuadrícula que reconoces: ¡es un tablero de tres en raya!</p>
         <div class="botones-reto">
             <button onclick="aceptarReto()">Acepto el reto</button>
             <button onclick="mostrarPopupCagueta()" class="gallina-boton">
