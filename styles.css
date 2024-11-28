@@ -194,11 +194,11 @@ button[disabled]:hover::after {
     width: 350px;
     /*Anchogeneralparapopups*/text-align: center;
     /*position: relative;
-     */ /* Eliminado */
-    -webkit-transform: translate(-50%, -50%);
+    *//*Eliminado*/-webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
 }
 
 

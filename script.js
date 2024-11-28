@@ -1271,6 +1271,7 @@ function cerrarPopupDerrotaSaltos() {
     } else {
         console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
     }
+    reiniciarJuegoSaltos();
 }
 
 // Función para reiniciar el juego de saltos
