@@ -1271,10 +1271,8 @@ function cerrarPopupDerrotaSaltos() {
     } else {
         console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
     }
-    reiniciarJuegoSaltos();
 }
 
-// Función para reiniciar el juego de saltos
 // Función para reiniciar el juego de saltos
 function reiniciarJuegoSaltos() {
     const popup = document.getElementById("popup-derrota-saltos");
@@ -1292,8 +1290,9 @@ function volverAPuertas() {
     console.log("Función volverAPuertas() llamada");
     cerrarPopupDerrotaSaltos(); // Cierra el popup de derrota en saltos
     jugadorMuerto = false; // Restablece el estado del jugador a vivo
-    resetearJuegoSaltos(); // Reinicia el juego de saltos (definido más adelante)
+    jugadorCayendo = false; // Resetear la bandera de caída
     irAPantallaPorId("pantalla-tres-puertas"); // Navega de vuelta a la pantalla de las puertas
+    resetearJuegoSaltos();
 }
 
 // Función para mostrar el popup de éxito al superar 30 segundos
@@ -1324,12 +1323,11 @@ function cerrarPopupClaveMusica() {
 }
 
 function resetearJuegoSaltos() {
-    console.log("Reiniciando juego de saltos");
+    console.log("Reestableciendo valores del juego de saltos");
     jugadorSaltos.x = 100;
     jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
     jugadorSaltos.velY = 0;
     jugadorSaltos.saltando = false;
     fondoX = 0;
     fondoSpeed = 2;
-    iniciarSueloSaltos();
 }
