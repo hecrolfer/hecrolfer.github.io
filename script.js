@@ -744,8 +744,8 @@ function mostrarContenidoSala(puerta) {
         popup.classList.add("popup-natacion");
 
     } else if (puerta === "musica") {
-        mensaje.innerHTML = "¡¡¡¡¡Ayyyy!!!!!!! El camino está partido... no puedo llegar a la puerta";
-        botonAccion.innerText = "Intentar llegar hasta la puerta";
+        mensaje.innerHTML = "¡¡¡¡¡Ayyyy!!!!!!! El camino está partido... no puedes llegar a la puerta";
+        botonAccion.innerText = "Intentarlo igualmente";
     }
 
     // Mostrar el popup
