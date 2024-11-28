@@ -174,7 +174,6 @@ function reiniciarTablero() {
 // Función para mostrar el popup de derrota
 function mostrarPopupPerdida() {
     document.getElementById("popup-perdida").style.display = "block";
-    reiniciarTablero();
 }
 
 // Función para mostrar el popup de victoria y desbloquear el botón
@@ -211,6 +210,15 @@ function movimientoFacil(jugador) {
         Math.floor(Math.random() * movimientosDisponibles.length)
     ];
 }
+
+function cerrarPopupPerdida() {
+    const popup = document.getElementById("popup-perdida");
+    if (popup) {
+        popup.style.display = "none"; // Ocultar el popup
+    }
+    reiniciarTablero(); // Reiniciar el tablero después de cerrar el popup
+}
+
 
 // Función para mostrar la última frase después de abrir el regalo
 function mostrarUltimaFrase() {
