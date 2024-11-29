@@ -636,6 +636,7 @@ function cerrarPopupPuerta() {
     const popup = document.getElementById("popup-puerta");
 
     document.getElementById("popup-puerta").style.display = "none";    
+    
     popup.classList.remove("popup-enfermeria", "popup-natacion", "popup-musica");
 
     if (puerta === "enfermeria" || puerta === "natacion") {
@@ -743,6 +744,9 @@ function mostrarContenidoSala(puerta) {
     // Restablecer estilos y clases previas
     popup.classList.remove("popup-enfermeria", "popup-natacion", "popup-musica");
 
+    // Remover la clase 'centrar-boton' del botón de acción
+    botonAccion.classList.remove("centrar-boton");
+
     if (puerta === "enfermeria") {
         mensaje.innerHTML = "Todo es blanco y huele a... ¿antiséptico? Me resulta todo demasiado familiar...";
         botonAccion.innerText = "Salir y cerrar";
@@ -755,7 +759,8 @@ function mostrarContenidoSala(puerta) {
     } else if (puerta === "musica") {
         mensaje.innerHTML = "¡¡¡Ayyyy!!! El camino está partido... no puedes llegar a la puerta";
         botonAccion.innerText = "Intentarlo igualmente";
-        popup.classList.add("popup-musica"); // Añade la clase para centrar el botón
+        popup.classList.add("popup-musica");
+        botonAccion.classList.add("centrar-boton");
     }
     // Mostrar el popup
     popup.style.display = "block";

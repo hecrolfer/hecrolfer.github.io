@@ -898,3 +898,9 @@ input:disabled {
 .popup-musica .popup-contenido button#boton-accion-puerta {
     align-self: center; /* Centra el botón horizontalmente */
 }
+
+/* Clase para centrar el botón en el popup de música */
+.centrar-boton {
+    align-self: center; /* Centra el botón horizontalmente dentro del contenedor flex */
+    margin: 0 auto;     /* Asegura que el margen lateral automático centre el botón */
+}
