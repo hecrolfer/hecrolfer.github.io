@@ -1365,13 +1365,12 @@ function intentarAbrirCofre() {
     const inputContraseña = document.getElementById('input-contraseña-cofre').value.trim().toUpperCase(); // Normalizamos el texto
     const mensajeError = document.getElementById('mensaje-error-cofre');
     const cofreImagen = document.getElementById('cofre-musica'); // Referencia a la imagen del cofre
-    const llaveAnimada = document.getElementById('llave-animada'); // Imagen de la llave
 
 
     if (inputContraseña === contraseñaCorrecta) {
         mensajeError.style.display = 'none';
         cofreImagen.src = "assets/images/cofre_abierto.png"; 
-        llaveAnimada.classList.add('llave-visible');
+        mostrarAnimacionLlave();
         setTimeout(() => {
             cerrarPopupCofreMusica();
         }, 1500);
@@ -1381,6 +1380,21 @@ function intentarAbrirCofre() {
         mensajeError.style.display = 'block';
     }
 }
+
+function mostrarAnimacionLlave() {
+    const llave = document.getElementById('llave-animada');
+
+    // Asegurarnos de que comience con el estado "oculto"
+    llave.classList.remove('llave-desaparece');
+    llave.classList.add('llave-visible');
+
+    // Después de 1.5 segundos (duración de la animación de aparición), la llave desaparece
+    setTimeout(() => {
+        llave.classList.remove('llave-visible'); // Remueve la clase visible
+        llave.classList.add('llave-desaparece'); // Añade la clase para desvanecerse
+    }, 1500); // 1.5 segundos: duración de la animación
+}
+
 
 function mostrarMensajeNarrativo(texto) {
     const mensajeNarrativo = document.getElementById('mensaje-narrativo-puerta');

@@ -985,16 +985,24 @@ input:disabled {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.2); /* Tamaño reducido */
+    transform: translate(-50%, -50%) scale(0.01); /* Tamaño inicial muy pequeño */
     opacity: 0; /* Oculta inicialmente */
     pointer-events: none; /* No interactúa con el mouse o clics */
     transition: transform 1.5s ease, opacity 1.5s ease; /* Animación suave */
     z-index: 10; /* Asegura que esté encima del resto cuando sea visible */
+    -webkit-transform: translate(-50%, -50%) scale(0.01); /* Compatibilidad con navegadores antiguos */
+    -moz-transform: translate(-50%, -50%) scale(0.01);
+    -ms-transform: translate(-50%, -50%) scale(0.01);
+    -o-transform: translate(-50%, -50%) scale(0.01);
 }
 
 /* Estilo cuando la llave aparece */
 .llave-visible {
-    transform: translate(-50%, -50%) scale(0.5); /* Tamaño final */
+    transform: translate(-50%, -50%) scale(0.1); /* Tamaño final manejable */
     opacity: 1; /* Aparece */
     pointer-events: auto; /* Ahora permite interacción */
+    -webkit-transform: translate(-50%, -50%) scale(0.1);
+    -moz-transform: translate(-50%, -50%) scale(0.1);
+    -ms-transform: translate(-50%, -50%) scale(0.1);
+    -o-transform: translate(-50%, -50%) scale(0.1);
 }
