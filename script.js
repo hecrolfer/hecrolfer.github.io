@@ -1365,10 +1365,16 @@ function intentarAbrirCofre() {
     const inputContraseña = document.getElementById('input-contraseña-cofre').value.trim().toUpperCase(); // Normalizamos el texto
     const mensajeError = document.getElementById('mensaje-error-cofre');
     const cofreImagen = document.getElementById('cofre-musica'); // Referencia a la imagen del cofre
+    const llaveAnimada = document.getElementById('llave-animada'); // Imagen de la llave
+
 
     if (inputContraseña === contraseñaCorrecta) {
         mensajeError.style.display = 'none';
-        cofreImagen.src = "assets/images/cofre_abierto.png"; // Cambia la imagen del cofre a la abierta
+        cofreImagen.src = "assets/images/cofre_abierto.png"; 
+        llaveAnimada.classList.add('llave-visible');
+        setTimeout(() => {
+            cerrarPopupCofreMusica();
+        }, 1500);
         cerrarPopupCofreMusica();
         llaveObtenida = true;
     } else {

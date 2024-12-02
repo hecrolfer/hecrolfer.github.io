@@ -979,3 +979,22 @@ input:disabled {
 .boton-popup:hover {
     background-color: #0056b3;
 }
+
+/* Estilo inicial para la llave oculta */
+.llave-oculta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.2); /* Tamaño reducido */
+    opacity: 0; /* Oculta inicialmente */
+    pointer-events: none; /* No interactúa con el mouse o clics */
+    transition: transform 1.5s ease, opacity 1.5s ease; /* Animación suave */
+    z-index: 10; /* Asegura que esté encima del resto cuando sea visible */
+}
+
+/* Estilo cuando la llave aparece */
+.llave-visible {
+    transform: translate(-50%, -50%) scale(0.5); /* Tamaño final */
+    opacity: 1; /* Aparece */
+    pointer-events: auto; /* Ahora permite interacción */
+}
