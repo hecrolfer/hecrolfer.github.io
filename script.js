@@ -723,6 +723,8 @@ function cerrarPopupErrorContraseña() {
 
 // Variable para saber si la puerta de la música está desbloqueada
 let puertaMusicaDesbloqueada = false;
+let cofreMostrado = false;
+let llaveObtenida = false;
 
 // Función para avanzar a una pantalla específica por su id
 function irAPantallaPorId(id) {
@@ -1326,18 +1328,53 @@ function cerrarPopupExitoSaltos() {
 
 
 function interactuarPuertaMusica() {
-    mostrarPopupClaveMusica();
+    if(!llaveObtenida){
+        mostrarPopupClaveMusica();
+    }else{
+        desbloquearPuertaMusica();
+    }
 }
+
+function desbloquearPuertaMusica() {
+    alert("¡La puerta se ha desbloqueado!");
+    // Aquí puedes añadir lógica para avanzar a la siguiente pantalla
+}
+
 
 // Función para mostrar el popup que indica que se necesita una clave
 function mostrarPopupClaveMusica() {
-    document.getElementById("popup-clave-musica").style.display = "block";
+    const popup = document.getElementById('popup-clave-musica');
+    popup.style.display = 'block';
 }
 
 // Función para cerrar el popup de clave de música
 function cerrarPopupClaveMusica() {
-    document.getElementById("popup-clave-musica").style.display = "none";
+    const popup = document.getElementById('popup-clave-musica');
+    popup.style.display = 'none';
+    
+    if (!cofreMostrado) {
+        const cofre = document.getElementById('cofre-musica');
+        cofre.style.display = 'block'; // Asegurarse de que el cofre sea visible
+        cofre.setAttribute('data-visible', 'true'); // Actualizar atributo para la animación
+        cofreMostrado = true; // Actualizar el estado para que no vuelva a aparecer
+    }
 }
+
+function interactuarCofreMusica() {
+    if (!llaveObtenida) {
+        // Simular interacción con el cofre para introducir la contraseña
+        const contraseñaCorrecta = prompt("Introduce la contraseña del cofre:");
+        if (contraseñaCorrecta === "PIANO") { // Cambia "claveCorrecta" por la contraseña real
+            alert("¡Has obtenido la llave!");
+            llaveObtenida = true; // Marcar que la llave ha sido obtenida
+        } else {
+            alert("Contraseña incorrecta.");
+        }
+    } else {
+        alert("Ya tienes la llave.");
+    }
+}
+
 
 function resetearJuegoSaltos() {
     console.log("Reestableciendo valores del juego de saltos");
