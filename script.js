@@ -749,16 +749,19 @@ function mostrarContenidoSala(puerta) {
 
     if (puerta === "enfermeria") {
         mensaje.innerHTML = "Todo es blanco y huele a... ¿antiséptico? Me resulta todo demasiado familiar...";
+        mensaje.style.textAlign = "left";
         botonAccion.innerText = "Salir y cerrar";
         popup.classList.add("popup-enfermeria");
     } else if (puerta === "natacion") {
         mensaje.innerHTML = "Escucho gritos, hay mucho eco y noto un picor en la nariz, creo que es del... ¿cloro?";
+        mensaje.style.textAlign = "left";
         botonAccion.innerText = "Salir y cerrar";
         popup.classList.add("popup-natacion");
 
     } else if (puerta === "musica") {
-        mensaje.innerHTML = "¡¡¡Ayyyy!!! El camino está partido... no puedes llegar a la puerta";
-        botonAccion.innerText = "Intentarlo igualmente";
+        mensaje.innerHTML = "El camino está roto, pero puedo ver la puerta al otro lado.<br><br>Parece complicado... ¿Me arriesgo?";
+        mensaje.style.textAlign = "left";
+        botonAccion.innerText = "Intentar cruzar";
         popup.classList.add("popup-musica");
         botonAccion.classList.add("centrar-boton");
     }
