@@ -699,19 +699,6 @@ function mostrarBaul() {
 function abrirRegalo() {
     document.getElementById("area-contraseña").style.display = "block";
 }
-
-function comprobarContraseña() {
-    const contraseña = document.getElementById("input-contraseña").value.toLowerCase();
-    if (contraseña === "piano") {
-        alert("El baúl se ha abierto y has obtenido la llave.");
-        // Marcar que la puerta de la música está desbloqueada
-        puertaMusicaDesbloqueada = true;
-        irAPantallaPorId("pantalla-final-puerta-abierta");
-    } else {
-        mostrarPopupErrorContraseña();
-    }
-}
-
 // Popup de error de contraseña
 function mostrarPopupErrorContraseña() {
     document.getElementById("popup-error-contraseña").style.display = "block";
@@ -725,6 +712,8 @@ function cerrarPopupErrorContraseña() {
 let puertaMusicaDesbloqueada = false;
 let cofreMostrado = false;
 let llaveObtenida = false;
+const contraseñaCorrecta = "PIANO"; // Contraseña para abrir el cofre
+
 
 // Función para avanzar a una pantalla específica por su id
 function irAPantallaPorId(id) {
@@ -1357,23 +1346,46 @@ function cerrarPopupClaveMusica() {
         cofre.style.display = 'block'; // Asegurarse de que el cofre sea visible
         cofre.setAttribute('data-visible', 'true'); // Actualizar atributo para la animación
         cofreMostrado = true; // Actualizar el estado para que no vuelva a aparecer
+
+        mostrarMensajeNarrativo("No había visto ese cofre de lejos, ¿qué habrá dentro?");
+
     }
 }
 
 function interactuarCofreMusica() {
-    if (!llaveObtenida) {
-        // Simular interacción con el cofre para introducir la contraseña
-        const contraseñaCorrecta = prompt("Introduce la contraseña del cofre:");
-        if (contraseñaCorrecta === "PIANO") { // Cambia "claveCorrecta" por la contraseña real
-            alert("¡Has obtenido la llave!");
-            llaveObtenida = true; // Marcar que la llave ha sido obtenida
-        } else {
-            alert("Contraseña incorrecta.");
-        }
+    const popupCofre = document.getElementById('popup-cofre-musica');
+    popupCofre.style.display = 'block';
+}
+
+function cerrarPopupCofreMusica() {
+    const popupCofre = document.getElementById('popup-cofre-musica');
+    popupCofre.style.display = 'none';
+}
+// Función para intentar abrir el cofre
+function intentarAbrirCofre() {
+    const inputContraseña = document.getElementById('input-contraseña-cofre').value.trim().toUpperCase(); // Normalizamos el texto
+    const mensajeError = document.getElementById('mensaje-error-cofre');
+
+    if (inputContraseña === contraseñaCorrecta) {
+        mensajeError.style.display = 'none';
+        alert("¡Has abierto el cofre! Ahora tienes la llave.");
+        cerrarPopupCofreMusica();
     } else {
-        alert("Ya tienes la llave.");
+        mensajeError.style.display = 'block';
     }
 }
+
+function mostrarMensajeNarrativo(texto) {
+    const mensajeNarrativo = document.getElementById('mensaje-narrativo-puerta');
+    mensajeNarrativo.textContent = texto;
+    mensajeNarrativo.style.display = 'block';
+
+    // Ocultar automáticamente después de unos segundos
+    setTimeout(() => {
+        mensajeNarrativo.style.display = 'none';
+    }, 6000);
+}
+
 
 
 function resetearJuegoSaltos() {

@@ -241,22 +241,22 @@
             </div>
         </div>
 
-
-    
-        <!-- Pantalla del Baúl con la Contraseña -->
-        <div id="pantalla-baul" class="pantalla">
-            <h2>El Baúl Misterioso</h2>
-            <p>"El camino está casi completo. Para encontrar la llave que lo abre, primero debes buscar en el mundo real. Abre tu regalo y descubrirás la respuesta."</p>
-            <div class="botones-centro">
-                <button onclick="abrirRegalo()">Abrir el regalo</button>
-            </div>
-            <div id="area-contraseña" style="display: none;">
-                <p>"Cuando tengas el regalo en tus manos, escribe la palabra que lo define."</p>
-                <input type="text" id="input-contraseña" placeholder="Escribe la contraseña">
-                <button onclick="comprobarContraseña()">Desbloquear</button>
+        <div id="popup-cofre-musica" class="popup">
+            <span class="cerrar-popup" onclick="cerrarPopupCofreMusica()">&times;</span>
+            <div class="popup-contenido">
+                <p>Introduce la contraseña para abrirlo:</p>
+                <div class="input-container">
+                    <input type="text" id="input-contraseña-cofre" placeholder="Introduce la contraseña">
+                    <button class="boton-popup" onclick="intentarAbrirCofre()">Abrir</button>
+                </div>
+                <p id="mensaje-error-cofre" class="mensaje-error" style="display: none;">La contraseña es incorrecta. Inténtalo de nuevo.</p>
             </div>
         </div>
-    
+
+        <div id="mensaje-narrativo-puerta" class="mensaje-narrativo" style="display: none;">
+            <p>No había visto ese cofre de lejos, ¿qué habrá dentro?</p>
+        </div>
+
         <!-- Popup de Error de Contraseña -->
         <div id="popup-error-contraseña" class="popup">
             <div class="popup-contenido">
