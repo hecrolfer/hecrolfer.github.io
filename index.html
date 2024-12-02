@@ -244,10 +244,10 @@
         <div id="popup-cofre-musica" class="popup">
             <span class="cerrar-popup" onclick="cerrarPopupCofreMusica()">&times;</span>
             <div class="popup-contenido">
-                <p>Introduce la contraseña para abrirlo:</p>
+                <p>Abre tu regalo en el mundo real para descubrir la contraseña:</p>
                 <div class="input-container">
                     <input type="text" id="input-contraseña-cofre" placeholder="Introduce la contraseña">
-                    <button class="boton-popup" onclick="intentarAbrirCofre()">Abrir</button>
+                    <button class="boton-accion-puerta" onclick="intentarAbrirCofre()">Abrir</button>
                 </div>
                 <p id="mensaje-error-cofre" class="mensaje-error" style="display: none;">La contraseña es incorrecta. Inténtalo de nuevo.</p>
             </div>
@@ -296,7 +296,7 @@
     <h2>Puerta misteriosa</h2>
     <div id="contenedor-puerta-musica">
         <div class="puerta" id="puerta-musica-cerrada" onclick="interactuarPuertaMusica()"></div>
-        <img id="cofre-musica" src="assets/images/cofre.png" alt="Cofre de música" onclick="interactuarCofreMusica()" data-visible="false" style="display: none;">
+        <img id="cofre-musica" src="assets/images/cofre_cerrado.png" alt="Cofre de música" onclick="interactuarCofreMusica()" data-visible="false" style="display: none;">
     </div>
     <!-- Popup para indicar que se necesita una clave -->
     <div id="popup-clave-musica" class="popup">

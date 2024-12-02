@@ -1326,8 +1326,7 @@ function interactuarPuertaMusica() {
 
 function desbloquearPuertaMusica() {
     alert("¡La puerta se ha desbloqueado!");
-    // Aquí puedes añadir lógica para avanzar a la siguiente pantalla
-}
+    irAPantallaPorId("pantalla-final-puerta-abierta");}
 
 
 // Función para mostrar el popup que indica que se necesita una clave
@@ -1365,11 +1364,13 @@ function cerrarPopupCofreMusica() {
 function intentarAbrirCofre() {
     const inputContraseña = document.getElementById('input-contraseña-cofre').value.trim().toUpperCase(); // Normalizamos el texto
     const mensajeError = document.getElementById('mensaje-error-cofre');
+    const cofreImagen = document.getElementById('cofre-musica'); // Referencia a la imagen del cofre
 
     if (inputContraseña === contraseñaCorrecta) {
         mensajeError.style.display = 'none';
-        alert("¡Has abierto el cofre! Ahora tienes la llave.");
+        cofreImagen.src = "assets/images/cofre_abierto.png"; // Cambia la imagen del cofre a la abierta
         cerrarPopupCofreMusica();
+        llaveObtenida = true;
     } else {
         mensajeError.style.display = 'block';
     }
