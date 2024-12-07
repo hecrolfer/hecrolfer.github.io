@@ -1325,9 +1325,17 @@ function interactuarPuertaMusica() {
 }
 
 function desbloquearPuertaMusica() {
-    alert("¡La puerta se ha desbloqueado!");
-    irAPantallaPorId("pantalla-final-puerta-abierta");}
+    // Cambiar la imagen de la puerta a la versión abierta
+    document.getElementById("puerta-musica-cerrada").style.backgroundImage = "url('assets/images/puerta_musica_abierta.png')";
 
+    // Mostrar el popup en lugar del alert
+    document.getElementById("popup-puerta-musica-desbloqueada").style.display = "block";
+}
+
+function cruzarPuertaMusica() {
+    document.getElementById("popup-puerta-musica-desbloqueada").style.display = "none";
+    irAPantallaPorId("pantalla-final-puerta-abierta"); 
+}
 
 // Función para mostrar el popup que indica que se necesita una clave
 function mostrarPopupClaveMusica() {
@@ -1406,8 +1414,6 @@ function mostrarMensajeNarrativo(texto) {
         mensajeNarrativo.style.display = 'none';
     }, 6000);
 }
-
-
 
 function resetearJuegoSaltos() {
     console.log("Reestableciendo valores del juego de saltos");
