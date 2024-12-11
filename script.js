@@ -978,37 +978,49 @@ function actualizarJugadorSaltos(factor) {
     jugadorSaltos.velY += jugadorSaltos.gravedad * factor;
     jugadorSaltos.y += jugadorSaltos.velY * factor;
     
-    // Detectar colisión con el suelo
-    let sobreSuelo = false;
+    let apoyoTotal = 0;
+
+
     sueloSaltos.segmentos.forEach(segmento => {
         if (!segmento.hole) {
-            if (
-                jugadorSaltos.x < segmento.x + segmento.width &&
-                jugadorSaltos.x + jugadorSaltos.width > segmento.x &&
-                jugadorSaltos.y + jugadorSaltos.height >= sueloSaltos.y &&
-                jugadorSaltos.y + jugadorSaltos.height <= sueloSaltos.y + 10
-            ) {
-                sobreSuelo = true;
-                jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
-                jugadorSaltos.velY = 0;
-                jugadorSaltos.saltando = false;
+            const inicioJugador = jugadorSaltos.x;
+            const finJugador = jugadorSaltos.x + jugadorSaltos.width;
+            const inicioSegmento = segmento.x;
+            const finSegmento = segmento.x + segmento.width;
+
+            // Calcula el solapamiento horizontal entre el jugador y el segmento
+            const solapamiento = Math.max(0, Math.min(finJugador, finSegmento) - Math.max(inicioJugador, inicioSegmento));
+            const toleranciaVertical = 2; 
+
+            // Si hay solapamiento y el jugador está prácticamente sobre el suelo (dentro de esos 10px de margen)
+            if (solapamiento > 0 && 
+                jugadorSaltos.y + jugadorSaltos.height >= sueloSaltos.y && 
+                jugadorSaltos.y + jugadorSaltos.height <= sueloSaltos.y + 10 + toleranciaVertical) {
+                apoyoTotal += solapamiento;
             }
         }
     });
 
-    // Detectar si el jugador cae por un agujero
-    if (!sobreSuelo && jugadorSaltos.y + jugadorSaltos.height >= sueloSaltos.y) {
-        if (!jugadorCayendo) { // Asegurarse de que solo se active una vez
+    let sobreSuelo = (apoyoTotal > jugadorSaltos.width / 2);
+
+    if (sobreSuelo) {
+        jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
+        jugadorSaltos.velY = 0;
+        jugadorSaltos.saltando = false;
+        jugadorCayendo = false; // Asegurar que no esté cayendo
+    } else {
+        // Si no hay suficiente apoyo, se considera que cae por un agujero (si está a la altura del suelo)
+        if (!jugadorCayendo && jugadorSaltos.y + jugadorSaltos.height >= sueloSaltos.y) {
             console.log("Jugador ha caído en un agujero.");
-            jugadorCayendo = true; // Activar el estado de caída
-            // No resetear la velocidad vertical ni mostrar el popup aquí
+            jugadorCayendo = true;
         }
     }
 
-    // Mover automáticamente a Sari hacia la derecha en modo automático
-    if (modoAuto) {
-        jugadorSaltos.x += 3 * factor;
-    }
+        // Movimiento automático si está activo
+        if (modoAuto) {
+            jugadorSaltos.x += 3 * factor;
+        }
+    
 }
 
 
