@@ -902,7 +902,7 @@ function generarAgujeroSaltos() {
     if (modoAuto) return 0; // No generar agujeros en modo automático
     const probabilidadAgujero = 0.3; // 30% de probabilidad de generar un agujero
     if (Math.random() < probabilidadAgujero) {
-        const anchoAgujero = Math.floor(Math.random() * 50) + 30; // Ancho entre 30 y 80 píxeles
+        const anchoAgujero = Math.floor(Math.random() * 50) + 50; // Ancho entre 30 y 80 píxeles
         return anchoAgujero;
     }
     return 0;
