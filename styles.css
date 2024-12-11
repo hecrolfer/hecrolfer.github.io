@@ -783,7 +783,6 @@ input:disabled {
     line-height: 1.6;
     margin-bottom: 20px;
     color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.6);
     padding: 10px;
     border-radius: 8px;
 }
@@ -985,15 +984,17 @@ input:disabled {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.01); /* Tamaño inicial muy pequeño */
-    opacity: 0; /* Oculta inicialmente */
-    pointer-events: none; /* No interactúa con el mouse o clics */
-    transition: transform 1.5s ease, opacity 1.5s ease; /* Animación suave */
-    z-index: 10; /* Asegura que esté encima del resto cuando sea visible */
-    -webkit-transform: translate(-50%, -50%) scale(0.01); /* Compatibilidad con navegadores antiguos */
-    -moz-transform: translate(-50%, -50%) scale(0.01);
+    transform: translate(-50%, -50%) scale(0.01);
+    /*Tamañoinicialmuypequeño*/opacity: 0;
+    /*Ocultainicialmente*/pointer-events: none;
+    /*Nointeractúaconelmouseoclics*/transition: transform 1.5s ease, opacity 1.5s ease;
+    /*Animaciónsuave*/z-index: 10;
+    /*Aseguraqueestéencimadelrestocuandoseavisible*/-webkit-transform: translate(-50%, -50%) scale(0.01);
+    /*Compatibilidadconnavegadoresantiguos*/-moz-transform: translate(-50%, -50%) scale(0.01);
     -ms-transform: translate(-50%, -50%) scale(0.01);
     -o-transform: translate(-50%, -50%) scale(0.01);
+    -webkit-transform: translate(-50%, -50%) scale(0.01);
+    -moz-transform: translate(-50%, -50%) scale(0.01);
 }
 
 /* Estilo cuando la llave aparece */
