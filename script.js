@@ -858,7 +858,7 @@ let jugadorSaltos = {
     height: 50,
     velY: 0,
     saltando: false,
-    gravedad: 0.5,
+    gravedad: 0.8,
     fuerzaSalto: 10
 };
 // Cargar la imagen de fondo para saltos
@@ -886,7 +886,7 @@ let sueloSaltos = {
     y: 380, // Posición fija del suelo en el eje Y ajustada para que Sari esté completamente visible
     ancho: 600, // Ancho total del suelo
     segmentos: [], // Segmentos del suelo
-    velocidad: 2
+    velocidad: 5
 };
 // Inicializar el suelo
 function iniciarSueloSaltos() {
@@ -1113,7 +1113,7 @@ async function iniciarJuegoSaltos() {
         
         // Resetear variables de fondo
         fondoX = 0;
-        fondoSpeed = 2;
+        fondoSpeed = 3;
         
         // Reiniciar el juego
         if (gameSaltosInterval) {
