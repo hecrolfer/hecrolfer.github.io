@@ -6,8 +6,6 @@ let intentosFallidos = 0; // Contador para los intentos fallidos del jugador
 let puertaSeleccionada = null; 
 let jugadorMuriendo = false;
 let contadorMuerte = 0;
-// Variables para almacenar la posición inicial de Sari al morir
-
 
 // Variable para almacenar el estado de las puertas
 const puertasEstado = {
@@ -912,10 +910,10 @@ function generarAgujeroSaltos() {
 
 // Actualizar el suelo
 // Actualizar el suelo
-function actualizarSueloSaltos() {
+function actualizarSueloSaltos(factor) {
     // Mover los segmentos hacia la izquierda
     sueloSaltos.segmentos.forEach(segmento => {
-        segmento.x -= sueloSaltos.velocidad;
+        segmento.x -= sueloSaltos.velocidad * factor;
     });
 
     // Eliminar segmentos que han salido del canvas
@@ -975,11 +973,11 @@ function dibujarJugadorSaltos() {
 }
 
 // Función para manejar la física del jugador
-function actualizarJugadorSaltos() {
+function actualizarJugadorSaltos(factor) {
     // Aplicar gravedad
-    jugadorSaltos.velY += jugadorSaltos.gravedad;
-    jugadorSaltos.y += jugadorSaltos.velY;
-
+    jugadorSaltos.velY += jugadorSaltos.gravedad * factor;
+    jugadorSaltos.y += jugadorSaltos.velY * factor;
+    
     // Detectar colisión con el suelo
     let sobreSuelo = false;
     sueloSaltos.segmentos.forEach(segmento => {
@@ -1009,7 +1007,7 @@ function actualizarJugadorSaltos() {
 
     // Mover automáticamente a Sari hacia la derecha en modo automático
     if (modoAuto) {
-        jugadorSaltos.x += 3; // Velocidad de movimiento automático
+        jugadorSaltos.x += 3 * factor;
     }
 }
 
@@ -1023,18 +1021,19 @@ function actualizarJuegoSaltos(timestamp) {
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
 
+    const frameIdeal = 16.67; // Un frame ideal a 60 FPS ~16.67 ms
+    const factor = deltaTime / frameIdeal;
+
     // Limpiar el canvas
     ctxSaltos.clearRect(0, 0, canvasSaltos.width, canvasSaltos.height);
 
-    // Actualizar y dibujar elementos del juego
+
+    actualizarDesplazamientoFondo(factor);
+    actualizarSueloSaltos(factor);
+    actualizarJugadorSaltos(factor);
     dibujarFondoSaltos();
-    actualizarDesplazamientoFondo();
-
     dibujarSueloSaltos();
-    actualizarSueloSaltos();
-
     dibujarJugadorSaltos();
-    actualizarJugadorSaltos();
 
     // Si modoAuto, verificar si Sari ha salido del canvas
     if (modoAuto) {
@@ -1053,7 +1052,7 @@ function actualizarJuegoSaltos(timestamp) {
     }
 
     // Solicitar el siguiente frame
-    gameSaltosInterval = requestAnimationFrame(actualizarJuegoSaltos);
+    requestAnimationFrame(actualizarJuegoSaltos);
 }
 
 
@@ -1151,18 +1150,6 @@ function manejarTeclasSaltos(e) {
 // Añadir eventos de teclado para saltosCanvas
 document.addEventListener("keydown", manejarTeclasSaltos);
 
-// Función para finalizar el juego de saltos y avanzar
-function finalizarJuegoSaltos() {
-    detenerTemporizadorSaltos(); // Detener el temporizador al finalizar
-    if (gameSaltosInterval) {
-        cancelAnimationFrame(gameSaltosInterval);
-    }
-    if (rockInterval) {
-        clearInterval(rockInterval);
-    }
-    alert("¡Has llegado a la puerta! La puerta se abre ante ti, permitiéndote continuar tu aventura.");
-    avanzarPantalla();
-}
 
 function entrarPantallaJuegoSaltos() {
     console.log("Entrando a pantalla de juego de saltos de plataformas.");
@@ -1205,8 +1192,8 @@ fondoImgSaltos.onload = () => {
 };
 
 // Función para actualizar el desplazamiento del fondo
-function actualizarDesplazamientoFondo() {
-    fondoX -= fondoSpeed;
+function actualizarDesplazamientoFondo(factor) {
+    fondoX -= fondoSpeed * factor;
     if (fondoX <= -fondoImgSaltos.scaledWidth) {
         fondoX += fondoImgSaltos.scaledWidth;
     }
@@ -1276,6 +1263,7 @@ function cerrarPopupDerrotaSaltos() {
     if (popup) {
         popup.classList.remove('visible'); // Ocultar el popup
         popup.style.display = '';
+        popup.style.display = 'none';
     } else {
         console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
     }
@@ -1286,10 +1274,22 @@ function reiniciarJuegoSaltos() {
     const popup = document.getElementById("popup-derrota-saltos");
     if (popup) {
         popup.classList.remove('visible'); // Ocultar el popup
+        popup.style.display = 'none';
     }
     jugadorMuerto = false; // Resetear la bandera de muerte
     jugadorCayendo = false; // Resetear la bandera de caída
     gameSaltosActivo = true; // Activar el juego nuevamente
+    modoAuto = false; // Si estaba activado el modoAuto, desactívalo también
+    
+    jugadorSaltos.x = 100;
+    jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
+    jugadorSaltos.velY = 0;
+    jugadorSaltos.saltando = false;
+
+    // Reiniciar el tiempo y el suelo
+    lastTime = 0; 
+    sueloSaltos.segmentos = [];
+    iniciarSueloSaltos(); // Crear segmentos iniciales sin agujeros
     iniciarJuegoSaltos(); // Reinicia el juego
 }
 
@@ -1297,10 +1297,20 @@ function reiniciarJuegoSaltos() {
 function volverAPuertas() {
     console.log("Función volverAPuertas() llamada");
     cerrarPopupDerrotaSaltos(); // Cierra el popup de derrota en saltos
-    jugadorMuerto = false; // Restablece el estado del jugador a vivo
-    jugadorCayendo = false; // Resetear la bandera de caída
-    irAPantallaPorId("pantalla-tres-puertas"); // Navega de vuelta a la pantalla de las puertas
-    resetearJuegoSaltos();
+    detenerTemporizadorSaltos(); 
+    jugadorMuerto = false;
+    jugadorCayendo = false;
+    modoAuto = false;
+    gameSaltosActivo = false;
+    lastTime = 0;
+    sueloSaltos.segmentos = []; // Vaciar segmentos del suelo
+    iniciarSueloSaltos(); // Suelo inicial sin agujeros
+    jugadorSaltos.x = 100;
+    jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
+    jugadorSaltos.velY = 0;
+    jugadorSaltos.saltando = false;
+
+    irAPantallaPorId("pantalla-tres-puertas");
 }
 
 // Función para mostrar el popup de éxito al superar 30 segundos
