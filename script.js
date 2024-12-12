@@ -1051,8 +1051,6 @@ function actualizarJuegoSaltos(timestamp) {
     // Solicitar el siguiente frame
     requestAnimationFrame(actualizarJuegoSaltos);
 }
-
-
 // Función para cargar una imagen y devolver una promesa
 function cargarImagen(src) {
     return new Promise((resolve, reject) => {
@@ -1062,7 +1060,6 @@ function cargarImagen(src) {
         img.onerror = () => reject(new Error(`Error al cargar la imagen: ${src}`));
     });
 }
-
 // Función para iniciar el juego de saltos después de cargar las imágenes
 async function iniciarJuegoSaltos() {
     
@@ -1125,7 +1122,6 @@ async function iniciarJuegoSaltos() {
         alert("Hubo un problema al cargar las imágenes del juego. Por favor, recarga la página.");
     }
 }
-
 // Función para manejar las teclas presionadas (solo salto)
 function manejarTeclasSaltos(e) {
     if (modoAuto) return; // Ignorar inputs en modo automático
@@ -1138,14 +1134,11 @@ function manejarTeclasSaltos(e) {
 }
 // Añadir eventos de teclado para saltosCanvas
 document.addEventListener("keydown", manejarTeclasSaltos);
-
-
 function entrarPantallaJuegoSaltos() {
     pantallas.forEach(pantalla => pantalla.classList.remove('visible'));
     document.getElementById("pantalla-juego-saltos").classList.add("visible");
     iniciarJuegoSaltos();
 }
-
 // Evento para cargar las imágenes y ajustar dimensiones
 jugadorImgSaltos.onload = () => {
     jugadorOriginalWidth = jugadorImgSaltos.width;
@@ -1163,7 +1156,6 @@ jugadorImgSaltos.onload = () => {
     // Ajustar la posición Y para que Sari esté completamente sobre el suelo
     jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
 };
-
 // Asegúrate de que el fondo está cargado antes de iniciar el juego
 fondoImgSaltos.onload = () => {
     
@@ -1173,7 +1165,6 @@ fondoImgSaltos.onload = () => {
     fondoImgSaltos.scaledHeight = canvasSaltos.height;
     
 };
-
 // Función para actualizar el desplazamiento del fondo
 function actualizarDesplazamientoFondo(factor) {
     fondoX -= fondoSpeed * factor;
@@ -1181,19 +1172,16 @@ function actualizarDesplazamientoFondo(factor) {
         fondoX += fondoImgSaltos.scaledWidth;
     }
 }
-
 // Función para iniciar el temporizador de 20 segundos
 function iniciarTemporizadorSaltos() {
     // Asegúrate de que cualquier temporizador anterior se haya limpiado
     if (timerSaltos) {
         clearTimeout(timerSaltos);
-    }
-    
+    }  
     timerSaltos = setTimeout(() => {
         activarModoAuto();
     }, tiempoObjetivo);
 }
-
 // Función para detener el temporizador (llamada al finalizar el juego)
 function detenerTemporizadorSaltos() {
     if (timerSaltos) {
@@ -1201,23 +1189,18 @@ function detenerTemporizadorSaltos() {
         timerSaltos = null;
     }
 }
-
 function activarModoAuto() {
     modoAuto = true;
-
     // Remover todos los agujeros existentes en el suelo
     sueloSaltos.segmentos.forEach(segmento => {
         segmento.hole = false;
     });
-
 }
-
 // Función para mostrar el popup de derrota en saltos
 function mostrarPopupDerrotaSaltos() {
     if (jugadorMuerto) {
         return; // Evita mostrar el popup múltiples veces
     }
-
     jugadorMuerto = true; // Marca al jugador como muerto
     gameSaltosActivo = false; // Detener el ciclo del juego
     detenerTemporizadorSaltos(); // Detener el temporizador al morir
@@ -1233,8 +1216,6 @@ function mostrarPopupDerrotaSaltos() {
         console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
     }
 }
-
-
 // Función para cerrar el popup de derrota en saltos
 function cerrarPopupDerrotaSaltos() {
     const popup = document.getElementById("popup-derrota-saltos");
@@ -1246,7 +1227,6 @@ function cerrarPopupDerrotaSaltos() {
         console.error("Elemento con id 'popup-derrota-saltos' no encontrado");
     }
 }
-
 // Función para reiniciar el juego de saltos
 function reiniciarJuegoSaltos() {
     const popup = document.getElementById("popup-derrota-saltos");
@@ -1258,19 +1238,16 @@ function reiniciarJuegoSaltos() {
     jugadorCayendo = false; // Resetear la bandera de caída
     gameSaltosActivo = true; // Activar el juego nuevamente
     modoAuto = false; // Si estaba activado el modoAuto, desactívalo también
-    
     jugadorSaltos.x = 100;
     jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
     jugadorSaltos.velY = 0;
     jugadorSaltos.saltando = false;
-
     // Reiniciar el tiempo y el suelo
     lastTime = 0; 
     sueloSaltos.segmentos = [];
     iniciarSueloSaltos(); // Crear segmentos iniciales sin agujeros
     iniciarJuegoSaltos(); // Reinicia el juego
 }
-
 // Función para volver a las puertas
 function volverAPuertas() {
     cerrarPopupDerrotaSaltos(); // Cierra el popup de derrota en saltos
@@ -1289,20 +1266,16 @@ function volverAPuertas() {
 
     irAPantallaPorId("pantalla-tres-puertas");
 }
-
 // Función para mostrar el popup de éxito al superar 30 segundos
 function mostrarPopupExitoSaltos() {
     document.getElementById("popup-exito-saltos").style.display = "block";
 }
-
 // Función para cerrar el popup de éxito en saltos
 function cerrarPopupExitoSaltos() {
     document.getElementById("popup-exito-saltos").style.display = "none";
     // Navegar a la pantalla de la puerta de música cerrada
     irAPantallaPorId("pantalla-puerta-musica-cerrada");
 }
-
-
 function interactuarPuertaMusica() {
     const puertaMusica = document.getElementById('puerta-musica-cerrada');
     const mensajeNarrativo = document.getElementById('mensaje-narrativo-cofre');
@@ -1323,8 +1296,6 @@ function interactuarPuertaMusica() {
         }
     }
 }
-
-
 function desbloquearPuertaMusica() {
     // Cambiar la imagen de la puerta a la versión abierta
     document.getElementById("puerta-musica-cerrada").style.backgroundImage = "url('assets/images/puerta_musica_abierta.png')";
@@ -1332,18 +1303,15 @@ function desbloquearPuertaMusica() {
     // Mostrar el popup en lugar del alert
     document.getElementById("popup-puerta-musica-desbloqueada").style.display = "block";
 }
-
 function cruzarPuertaMusica() {
     document.getElementById("popup-puerta-musica-desbloqueada").style.display = "none";
     irAPantallaPorId("pantalla-final-puerta-abierta"); 
 }
-
 // Función para mostrar el popup que indica que se necesita una clave
 function mostrarPopupClaveMusica() {
     const popup = document.getElementById('popup-clave-musica');
     popup.style.display = 'block';
 }
-
 // Función para cerrar el popup de clave de música
 function cerrarPopupClaveMusica() {
     const popup = document.getElementById('popup-clave-musica');
@@ -1354,17 +1322,13 @@ function cerrarPopupClaveMusica() {
         cofre.style.display = 'block'; // Asegurarse de que el cofre sea visible
         cofre.setAttribute('data-visible', 'true'); // Actualizar atributo para la animación
         cofreMostrado = true; // Actualizar el estado para que no vuelva a aparecer
-
         mostrarMensajeNarrativo("No había visto ese cofre de lejos, ¿qué habrá dentro?");
-
     }
 }
-
 function interactuarCofreMusica() {
     const popupCofre = document.getElementById('popup-cofre-musica');
     popupCofre.style.display = 'block';
 }
-
 function cerrarPopupCofreMusica() {
     const popupCofre = document.getElementById('popup-cofre-musica');
     popupCofre.style.display = 'none';
@@ -1374,8 +1338,6 @@ function intentarAbrirCofre() {
     const inputContraseña = document.getElementById('input-contraseña-cofre').value.trim().toUpperCase(); // Normalizamos el texto
     const mensajeError = document.getElementById('mensaje-error-cofre');
     const cofreImagen = document.getElementById('cofre-musica'); // Referencia a la imagen del cofre
-
-
     if (inputContraseña === contraseñaCorrecta) {
         mensajeError.style.display = 'none';
         cofreImagen.src = "assets/images/cofre_abierto.png"; 
@@ -1389,7 +1351,6 @@ function intentarAbrirCofre() {
         mensajeError.style.display = 'block';
     }
 }
-
 function mostrarAnimacionLlave() {
     const llave = document.getElementById('llave-animada');
 
@@ -1403,8 +1364,6 @@ function mostrarAnimacionLlave() {
         llave.classList.add('llave-desaparece'); // Añade la clase para desvanecerse
     }, 1500); // 1.5 segundos: duración de la animación
 }
-
-
 function mostrarMensajeNarrativo(texto) {
     const mensajeNarrativo = document.getElementById('mensaje-narrativo-puerta');
     mensajeNarrativo.textContent = texto;
@@ -1415,7 +1374,6 @@ function mostrarMensajeNarrativo(texto) {
         mensajeNarrativo.style.display = 'none';
     }, 6000);
 }
-
 function resetearJuegoSaltos() {
     jugadorSaltos.x = 100;
     jugadorSaltos.y = sueloSaltos.y - jugadorSaltos.height;
