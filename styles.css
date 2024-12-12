@@ -8,7 +8,7 @@
 /* Tipografía y fondo */
 body {
     font-family: 'Roboto', sans-serif;
-    background-image: url('assets/images/background.jpg'); /* Asegúrate de tener esta imagen */
+    background-image: url('assets/images/background.jpg');
     background-size: cover;
     background-position: center;
     color: #ffffff;
@@ -999,11 +999,12 @@ input:disabled {
 
 /* Estilo cuando la llave aparece */
 .llave-visible {
-    transform: translate(-50%, -50%) scale(0.1); /* Tamaño final manejable */
-    opacity: 1; /* Aparece */
-    pointer-events: auto; /* Ahora permite interacción */
-    -webkit-transform: translate(-50%, -50%) scale(0.1);
+    transform: translate(-50%, -50%) scale(0.1);
+    /*Tamañofinalmanejable*/opacity: 1;
+    /*Aparece*/pointer-events: auto;
+    /*Ahorapermiteinteracción*/-webkit-transform: translate(-50%, -50%) scale(0.1);
     -moz-transform: translate(-50%, -50%) scale(0.1);
     -ms-transform: translate(-50%, -50%) scale(0.1);
     -o-transform: translate(-50%, -50%) scale(0.1);
+    -webkit-transform: translate(-50%, -50%) scale(0.1);
 }
