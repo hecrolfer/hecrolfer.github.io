@@ -226,7 +226,7 @@ let sari = new Image();
 sari.src = "assets/images/sari.PNG";
 
 let rockImage = new Image();
-rockImage.src = "assets/images/rocks.png";
+rockImage.src = "assets/images/rocks.webp";
 let sariX = canvas.width / 2 - 25; // Posición inicial de Sari
 let sariY = canvas.height - 60; // Altura fija de Sari
 let sariXInicial = sariX;
