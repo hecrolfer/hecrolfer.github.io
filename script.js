@@ -218,11 +218,6 @@ function cerrarPopupPerdida() {
 }
 
 
-// Función para mostrar la última frase después de abrir el regalo
-function mostrarUltimaFrase() {
-    document.getElementById('pantalla-final').classList.remove('visible');
-    document.getElementById('pantalla-final-revelacion').classList.add('visible');
-}
 
 let canvas = document.getElementById("juegoCanvas");
 let ctx = canvas.getContext("2d");
