@@ -1339,12 +1339,26 @@ function cerrarPopupExitoSaltos() {
 
 
 function interactuarPuertaMusica() {
-    if(!llaveObtenida){
+    const puertaMusica = document.getElementById('puerta-musica-cerrada');
+    const mensajeNarrativo = document.getElementById('mensaje-narrativo-cofre');
+
+    if (!llaveObtenida) {
         mostrarPopupClaveMusica();
-    }else{
-        desbloquearPuertaMusica();
+    } else {
+        if (!puertaMusicaDesbloqueada) {
+            // Cambiar la imagen de la puerta a abierta
+            puertaMusica.style.backgroundImage = "url('assets/images/puerta_musica_abierta.png')";
+            puertaMusicaDesbloqueada = true;
+
+            // Mostrar mensaje narrativo
+            mostrarMensajeNarrativo("Has desbloqueado la puerta...");
+        } else {
+            // Pasar a la siguiente pantalla
+            irAPantallaPorId("pantalla-final-puerta-abierta");
+        }
     }
 }
+
 
 function desbloquearPuertaMusica() {
     // Cambiar la imagen de la puerta a la versión abierta
