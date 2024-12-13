@@ -412,7 +412,7 @@ a:hover {
 }
 
 #puerta-musica {
-    background-image: url('assets/images/puerta_musica.png');
+    background-image: url('assets/images/puerta_musica.webp');
 }
 
 
@@ -741,7 +741,7 @@ input:disabled {
 
 /* Estilos para la Puerta de Música Cerrada */
 #puerta-musica-cerrada {
-    background-image: url('assets/images/puerta_musica.png'); /* Asegúrate de tener esta imagen */
+    background-image: url('assets/images/puerta_musica.webp'); /* Asegúrate de tener esta imagen */
 }
 
 /* Popup para indicar que se necesita una clave */
@@ -821,7 +821,7 @@ input:disabled {
 #puerta-musica-cerrada {
     width: 90px;
     height: 190px;
-    background-image: url('assets/images/puerta_musica.png'); /* Asegúrate de tener esta imagen */
+    background-image: url('assets/images/puerta_musica.webp'); /* Asegúrate de tener esta imagen */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
