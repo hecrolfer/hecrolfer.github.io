@@ -177,7 +177,6 @@
         </div>
     </div>
 
-
     <!-- Pantalla del Pasadizo Secreto -->
     <div id="pantalla-pasadizo" class="pantalla">
         <h2>El Pasadizo Secreto</h2>
@@ -195,7 +194,6 @@
             <button onclick="avanzarPantalla()">Entrar a la sala</button>
         </div>
     </div>
-
 
     <!-- Pantalla de las Tres Puertas -->
     <div id="pantalla-tres-puertas" class="pantalla">
@@ -224,38 +222,6 @@
         </div>
     </div>
 
-
-    <!-- Pantalla del Minijuego: El Camino Roto -->
-    <div id="pantalla-camino-roto" class="pantalla">
-        <h2>El Camino Incompleto</h2>
-        <p>"Este camino comenzó, pero quedó incompleto. Une las piezas para reconstruirlo y avanzar."</p>
-        <div id="area-camino">
-            <!-- Aquí irán los fragmentos del camino para arrastrar -->
-            <!-- Por simplicidad, usaremos divs representando los fragmentos -->
-            <div class="fragmento" id="fragmento-1" draggable="true" ondragstart="drag(event)">1</div>
-            <div class="fragmento" id="fragmento-2" draggable="true" ondragstart="drag(event)">2</div>
-            <div class="fragmento" id="fragmento-3" draggable="true" ondragstart="drag(event)">3</div>
-            <div class="fragmento" id="fragmento-4" draggable="true" ondragstart="drag(event)">4</div>
-            <div class="fragmento" id="fragmento-5" draggable="true" ondragstart="drag(event)">5</div>
-        </div>
-        <div id="camino-destino" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <!-- Área donde se ensamblará el camino -->
-        </div>
-        <div class="botones-centro">
-            <button id="boton-intentar-abrir-puerta" onclick="intentarAbrirPuerta()" disabled>Intentar abrir la
-                puerta</button>
-        </div>
-    </div>
-
-    <!-- Pantalla de la Puerta Bloqueada con el Baúl -->
-    <div id="pantalla-puerta-bloqueada" class="pantalla">
-        <h2>La Puerta Bloqueada</h2>
-        <p>"La puerta está bloqueada. Necesitarás una llave para abrirla."</p>
-        <div class="botones-centro">
-            <button onclick="mostrarBaul()">Busca la llave</button>
-        </div>
-    </div>
-
     <!-- Pantalla del juego de saltos de plataformas -->
     <div id="pantalla-juego-saltos" class="pantalla">
         <h2>Cruza el camino</h2>
@@ -280,16 +246,7 @@
         <p>No había visto ese cofre de lejos, ¿qué habrá dentro?</p>
     </div>
 
-
     <img id="llave-animada" src="assets/images/key.png" alt="Llave" class="llave-oculta">
-
-    <!-- Popup de Error de Contraseña -->
-    <div id="popup-error-contraseña" class="popup">
-        <div class="popup-contenido">
-            <span class="cerrar-popup" onclick="cerrarPopupErrorContraseña()">&times;</span>
-            <p>Parece que todavía no tienes la llave correcta. Busca de nuevo en el regalo.</p>
-        </div>
-    </div>
 
     <!-- Pantalla Final tras abrir la puerta de la música -->
     <div id="pantalla-final-puerta-abierta" class="pantalla">
@@ -389,11 +346,9 @@
         </div>
     </div>
 
-
     <div id="mensaje-narrativo-cofre" class="mensaje-narrativo" style="display: none;">
         <p>No había visto ese cofre de lejos, ¿qué habrá dentro?</p>
     </div>
-
 
     <script src="script.js"></script>
 </body>

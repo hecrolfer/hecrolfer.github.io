@@ -642,66 +642,12 @@ function cerrarPopupPuerta() {
         puertaSeleccionada = null;
     }
 }
-// --- Código para el Minijuego del Camino Roto ---
-
-// Funciones de drag and drop
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
-
-let piezasEncajadas = 0;
-function drop(ev) {
-    ev.preventDefault();
-    const data = ev.dataTransfer.getData("text");
-    const fragmento = document.getElementById(data);
-
-    // Agregar el fragmento al camino destino
-    ev.target.appendChild(fragmento);
-    fragmento.draggable = false; // Evitar que se vuelva a arrastrar
-    piezasEncajadas++;
-
-    // Mostrar mensaje breve
-    alert("Un paso más hacia adelante.");
-
-    if (piezasEncajadas === 5) {
-        // Habilitar botón para intentar abrir la puerta
-        document.getElementById("boton-intentar-abrir-puerta").disabled = false;
-    }
-}
-
-// Función para intentar abrir la puerta después de completar el camino
-function intentarAbrirPuerta() {
-    irAPantallaPorId("pantalla-puerta-bloqueada");
-}
-
-// --- Código para la Puerta Bloqueada y el Baúl ---
-
-function mostrarBaul() {
-    irAPantallaPorId("pantalla-baul");
-}
-
-function abrirRegalo() {
-    document.getElementById("area-contraseña").style.display = "block";
-}
-// Popup de error de contraseña
-function mostrarPopupErrorContraseña() {
-    document.getElementById("popup-error-contraseña").style.display = "block";
-}
-
-function cerrarPopupErrorContraseña() {
-    document.getElementById("popup-error-contraseña").style.display = "none";
-}
 
 // Variable para saber si la puerta de la música está desbloqueada
 let puertaMusicaDesbloqueada = false;
 let cofreMostrado = false;
 let llaveObtenida = false;
 const contraseñaCorrecta = "PIANO"; // Contraseña para abrir el cofre
-
 
 // Función para avanzar a una pantalla específica por su id
 function irAPantallaPorId(id) {
