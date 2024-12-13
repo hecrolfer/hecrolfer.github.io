@@ -223,7 +223,7 @@ let canvas = document.getElementById("juegoCanvas");
 let ctx = canvas.getContext("2d");
 
 let sari = new Image();
-sari.src = "assets/images/sari.PNG";
+sari.src = "assets/images/sari.webp";
 
 let rockImage = new Image();
 rockImage.src = "assets/images/rocks.webp";
