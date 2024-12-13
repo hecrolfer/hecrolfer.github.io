@@ -600,22 +600,18 @@ function interactuarPuerta(puerta) {
 function accionPuerta() {
     const puerta = puertaSeleccionada; // Guardar la puerta seleccionada en una variable local
     document.getElementById("popup-puerta").style.display = "none";
-
     if (puerta === "musica") {
         // Iniciar el minijuego de saltos de plataformas
         entrarPantallaJuegoSaltos();
     } else if (puerta === "enfermeria" || puerta === "natacion") {
         // Restablecer el estado de la puerta
         puertasEstado[puerta] = false;
-
         // Actualizar la imagen de fondo de la puerta para reflejar que está cerrada
         const puertaElemento = document.getElementById(`puerta-${puerta}`);
         puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.png')`;
-
         // Resetear la puerta seleccionada
         puertaSeleccionada = null;
     }
-    // Si hay más puertas en el futuro, puedes añadir más condiciones aquí
 }
 
 // Función para cerrar el popup de las puertas
