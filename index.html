@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Orbitron&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
     <!-- Pantalla de Introducción -->
     <div id="pantalla-inicio" class="pantalla visible">
         <h1>Aterrizaje forzoso</h1>
-        <p id="texto">Abres los ojos lentamente, todavía aturdida por el largo viaje. La luz roja del sistema de emergencias parpadea dentro de la cabina de tu nave. Algo ha salido mal.<br><br>
-        Al mirar por la escotilla, te encuentras con un panorama que te hiela la sangre: <br> Un planeta envuelto en una niebla violeta, con formaciones rocosas que desafían la lógica y una extraña sensación de que no estás sola.<br><br>
-        Algo te dice que debes salir fuera y descubrir algo que ahora mismo es totalmente desconocido para ti.</p>
+        <p id="texto">Abres los ojos lentamente, todavía aturdida por el largo viaje. La luz roja del sistema de
+            emergencias parpadea dentro de la cabina de tu nave. Algo ha salido mal.<br><br>
+            Al mirar por la escotilla, te encuentras con un panorama que te hiela la sangre: <br> Un planeta envuelto en
+            una niebla violeta, con formaciones rocosas que desafían la lógica y una extraña sensación de que no estás
+            sola.<br><br>
+            Algo te dice que debes salir fuera y descubrir algo que ahora mismo es totalmente desconocido para ti.</p>
         <div class="botones-centro">
             <button onclick="avanzarPantalla()">Bajar de la nave</button>
         </div>
@@ -23,13 +28,22 @@
     <!-- Primer Mensaje Holográfico en el Desierto Luminoso -->
     <div id="pantalla-frase1" class="pantalla">
         <h1>Primer contacto</h1>
-        <p id="texto">Al bajar de la nave, notas que la gravedad es sorprendentemente similar a la de la Tierra. A cada paso, tus botas se hunden ligeramente en un suelo blando y cristalino que cruje bajo tus pies. El aire, aunque extraño, no resulta sofocante, pero está impregnado de un olor metálico que no logras identificar.<br><br>
-        De repente, un movimiento fugaz entre la niebla te hace detenerte. Unos ojos brillantes, amarillos como dos lunas, te observan desde la penumbra.<br><br>
-        Con cautela, das un paso más y, para tu sorpresa, una criatura emerge de la niebla. Su aspecto es desconcertante: parece un gato, pero sus orejas son largas y puntiagudas, su cola se divide en dos, y su pelaje tiene un extraño brillo azulado que parece cambiar con la luz.<br><br>
-        El extraño ser te observa con curiosidad y, tras un momento de silencio, habla en un idioma que inexplicablemente entiendes: <br><br>
-        <i>“Forastera, no puedes avanzar sin jugar,  
-            si buscas respuestas, deberás ganar.”</i><br><br>
-            Antes de que puedas responder, el suelo frente a ti se ilumina, dibujando una cuadrícula que reconoces: ¡es un tablero de tres en raya!</p>
+        <p id="texto">Al bajar de la nave, notas que la gravedad es sorprendentemente similar a la de la Tierra. A cada
+            paso, tus botas se hunden ligeramente en un suelo blando y cristalino que cruje bajo tus pies. El aire,
+            aunque extraño, no resulta sofocante, pero está impregnado de un olor metálico que no logras
+            identificar.<br><br>
+            De repente, un movimiento fugaz entre la niebla te hace detenerte. Unos ojos brillantes, amarillos como dos
+            lunas, te observan desde la penumbra.<br><br>
+            Con cautela, das un paso más y, para tu sorpresa, una criatura emerge de la niebla. Su aspecto es
+            desconcertante: parece un gato, pero sus orejas son largas y puntiagudas, su cola se divide en dos, y su
+            pelaje tiene un extraño brillo azulado que parece cambiar con la luz.<br><br>
+            El extraño ser te observa con curiosidad y, tras un momento de silencio, habla en un idioma que
+            inexplicablemente entiendes: <br><br>
+            <i>“Forastera, no puedes avanzar sin jugar,
+                si buscas respuestas, deberás ganar.”</i><br><br>
+            Antes de que puedas responder, el suelo frente a ti se ilumina, dibujando una cuadrícula que reconoces: ¡es
+            un tablero de tres en raya!
+        </p>
         <div class="botones-reto">
             <button onclick="aceptarReto()">Acepto el reto</button>
             <button onclick="mostrarPopupCagueta()" class="gallina-boton">
@@ -55,7 +69,8 @@
             <div class="celda" onclick="jugadaHumana(8)"></div>
         </div>
         <div class="botones-centro">
-            <button id="explorar-btn" onclick="avanzarPantalla()" disabled title="El alien te impide continuar hasta que le ganes.">Explorar más allá</button>
+            <button id="explorar-btn" onclick="avanzarPantalla()" disabled
+                title="El alien te impide continuar hasta que le ganes.">Explorar más allá</button>
         </div>
     </div>
 
@@ -63,17 +78,20 @@
     <div id="pantalla-estructura" class="pantalla">
         <h2>Una Estructura Misteriosa</h2>
         <p id="texto">
-            Después de vencer al pequeño alien, dejas escapar un suspiro de alivio y sigues adelante, sin mirar atrás.  
-            Pronto, el paisaje comienza a cambiar, y ante ti se alza una estructura gigantesca, imponente y antigua.  
-            Parece esculpida directamente en la roca, con líneas suaves pero majestuosas que transmiten una sensación de grandeza olvidada.  
+            Después de vencer al pequeño alien, dejas escapar un suspiro de alivio y sigues adelante, sin mirar atrás.
+            Pronto, el paisaje comienza a cambiar, y ante ti se alza una estructura gigantesca, imponente y antigua.
+            Parece esculpida directamente en la roca, con líneas suaves pero majestuosas que transmiten una sensación de
+            grandeza olvidada.
             <br><br>
-            Sin embargo, hay algo inquietante en el aire: las columnas, aunque robustas, muestran grietas profundas, y pequeñas partículas de polvo caen intermitentemente desde las alturas.  
-            El lugar parece haber resistido siglos de desgaste, pero su estabilidad es cuestionable.  
+            Sin embargo, hay algo inquietante en el aire: las columnas, aunque robustas, muestran grietas profundas, y
+            pequeñas partículas de polvo caen intermitentemente desde las alturas.
+            El lugar parece haber resistido siglos de desgaste, pero su estabilidad es cuestionable.
             <br><br>
-            Las paredes están cubiertas de intrincados grabados y símbolos que no logras descifrar, mientras arcos y columnas se alzan hacia el cielo, dando la impresión de que han estado allí desde el inicio de los tiempos.  
-            La entrada, una puerta amplia y entreabierta, parece invitarte a cruzarla.  
+            Las paredes están cubiertas de intrincados grabados y símbolos que no logras descifrar, mientras arcos y
+            columnas se alzan hacia el cielo, dando la impresión de que han estado allí desde el inicio de los tiempos.
+            La entrada, una puerta amplia y entreabierta, parece invitarte a cruzarla.
             <br><br>
-            ¿Qué secretos (o peligros) podrían aguardarte en su interior?  
+            ¿Qué secretos (o peligros) podrían aguardarte en su interior?
         </p>
         <div class="botones-reto">
             <button onclick="entrarPantallaTrampas()">Entrar a la estructura</button>
@@ -106,29 +124,32 @@
         </div>
     </div>
 
-        <!-- Popup de felicitación al esquivar las rocas -->
-        <div id="popup-enhorabuena" class="popup">
-            <span class="cerrar-popup" onclick="cerrarPopupEnhorabuena()">&times;</span>
-            <div class="popup-contenido">
-                <p>¡Enhorabuena, has conseguido sortear las rocas!</p>
-                <img src="assets/images/girar.PNG" alt="Felicidades" class="imagen-giratoria">
-            </div>
+    <!-- Popup de felicitación al esquivar las rocas -->
+    <div id="popup-enhorabuena" class="popup">
+        <span class="cerrar-popup" onclick="cerrarPopupEnhorabuena()">&times;</span>
+        <div class="popup-contenido">
+            <p>¡Enhorabuena, has conseguido sortear las rocas!</p>
+            <img src="assets/images/girar.PNG" alt="Felicidades" class="imagen-giratoria">
         </div>
+    </div>
 
     <!-- Pantalla de la Pared con el Mensaje Cifrado -->
     <div id="pantalla-mensaje-cifrado" class="pantalla">
         <h2>Pared Antigua</h2>
-            <p id="texto">
-                Apenas te recuperas de esquivar las trampas cuando algo en la pared frente a ti te detiene en seco.  
-                Es enorme, cubierta de símbolos extraños y grabados antiguos que parecen querer contarte algo... algo importante.<br><br>
-            
-                Te acercas despacio, como si la pared misma pudiera sentir tu curiosidad. Entre las marcas, notas algo diferente:
-                un mensaje tallado, más grande que el resto, que brilla con una intensidad que no puedes ignorar.<br><br>
-            
-                Es un idioma desconocido, pero sientes que no es casualidad que esté aquí, esperándote.<br><br>
-                ¿Qué dice? ¿Es una advertencia? ¿Una pista? No tienes opción: si quieres respuestas, tendrás que descifrarlo.  
-            </p>
-        <p class="texto-cifrado">✶ ∇ ⌖ ☰ ⍟ ⌬   ⍣   ☽⌖⧫☿✧   ☍⍣   ⊛⍂☾☌</p>
+        <p id="texto">
+            Apenas te recuperas de esquivar las trampas cuando algo en la pared frente a ti te detiene en seco.
+            Es enorme, cubierta de símbolos extraños y grabados antiguos que parecen querer contarte algo... algo
+            importante.<br><br>
+
+            Te acercas despacio, como si la pared misma pudiera sentir tu curiosidad. Entre las marcas, notas algo
+            diferente:
+            un mensaje tallado, más grande que el resto, que brilla con una intensidad que no puedes ignorar.<br><br>
+
+            Es un idioma desconocido, pero sientes que no es casualidad que esté aquí, esperándote.<br><br>
+            ¿Qué dice? ¿Es una advertencia? ¿Una pista? No tienes opción: si quieres respuestas, tendrás que
+            descifrarlo.
+        </p>
+        <p class="texto-cifrado">✶ ∇ ⌖ ☰ ⍟ ⌬ ⍣ ☽⌖⧫☿✧ ☍⍣ ⊛⍂☾☌</p>
         <div class="botones-centro">
             <button onclick="intentarDescifrar()">Intentar descifrar</button>
         </div>
@@ -137,7 +158,7 @@
     <!-- Pantalla del Juego de Ahorcado -->
     <div id="pantalla-ahorcado" class="pantalla">
         <h2>Descifra la frase</h2>
-        <p id="frase-oculta">_ _ _ _ _   _ _   _ _ _ _ _   _ _ _ _   _ _ _ _ _ _ _</p>
+        <p id="frase-oculta">_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</p>
         <div id="letras-intentadas">Letras intentadas: <span id="letras-intentadas-lista"></span></div>
         <div id="ahorcado-intentos">Intentos restantes: <span id="intentos-restantes">6</span></div>
         <div class="botones-centro">
@@ -146,11 +167,12 @@
         </div>
         <!-- Botón que se desbloquea al adivinar la frase -->
         <div class="botones-centro">
-            <button id="boton-continuar-ahorcado" onclick="avanzarPantalla()" disabled>Continuar por el pasadizo secreto</button>
+            <button id="boton-continuar-ahorcado" onclick="avanzarPantalla()" disabled>Continuar por el pasadizo
+                secreto</button>
         </div>
         <!-- Nuevo contenedor para los símbolos y la frase final -->
         <div id="animacion-frase" class="animacion-frase">
-            <p id="frase-simbolos" class="frase-simbolos">✶ ∇ ⌖ ☰ ⍟ ⌬   ⍣   ☽⌖⧫☿✧   ☍⍣   ⊛⍂☾☌</p>
+            <p id="frase-simbolos" class="frase-simbolos">✶ ∇ ⌖ ☰ ⍟ ⌬ ⍣ ☽⌖⧫☿✧ ☍⍣ ⊛⍂☾☌</p>
             <p id="frase-final" class="mensaje-descifrado"></p>
         </div>
     </div>
@@ -160,9 +182,14 @@
     <div id="pantalla-pasadizo" class="pantalla">
         <h2>El Pasadizo Secreto</h2>
         <p id="texto">
-            Al descifrar la última palabra, un ruido mecánico rompe el silencio. Una sección de la pared frente a ti se desplaza lentamente, revelando un pasadizo angosto y oscuro que parece haberse mantenido oculto durante siglos.<br><br>
-            Caminas con cuidado. El pasadizo es estrecho y silencioso, y el eco de tus pasos te acompaña en la oscuridad. Las paredes, frías al tacto, parecen haber estado allí mucho antes de que nadie pisara este lugar. <br><br>
-            Tras avanzar un buen tramo, el pasadizo se abre a una sala más amplia. A lo lejos, apenas visibles bajo la luz tenue, ves tres puertas blancas perfectamente alineadas, esperando al final de la sala. <br><br>
+            Al descifrar la última palabra, un ruido mecánico rompe el silencio. Una sección de la pared frente a ti se
+            desplaza lentamente, revelando un pasadizo angosto y oscuro que parece haberse mantenido oculto durante
+            siglos.<br><br>
+            Caminas con cuidado. El pasadizo es estrecho y silencioso, y el eco de tus pasos te acompaña en la
+            oscuridad. Las paredes, frías al tacto, parecen haber estado allí mucho antes de que nadie pisara este
+            lugar. <br><br>
+            Tras avanzar un buen tramo, el pasadizo se abre a una sala más amplia. A lo lejos, apenas visibles bajo la
+            luz tenue, ves tres puertas blancas perfectamente alineadas, esperando al final de la sala. <br><br>
         </p>
         <div class="botones-centro">
             <button onclick="avanzarPantalla()">Entrar a la sala</button>
@@ -170,27 +197,24 @@
     </div>
 
 
-   <!-- Pantalla de las Tres Puertas -->
+    <!-- Pantalla de las Tres Puertas -->
     <div id="pantalla-tres-puertas" class="pantalla">
         <h2>El Enigma de las Tres Puertas</h2>
-        <p>Escuchas una voz que te dice:</p> 
-        <p id="texto">           
-            "Ah, tres puertas. Dos son ya viejas conocidas tuyas. La tercera… bueno, lleva tanto tiempo esperando que, probablemente, ya ni recuerda por qué está aquí"
+        <p>Escuchas una voz que te dice:</p>
+        <p id="texto">
+            "Ah, tres puertas. Dos son ya viejas conocidas tuyas. La tercera… bueno, lleva tanto tiempo esperando que,
+            probablemente, ya ni recuerda por qué está aquí"
         </p>
-        
+
         <div id="contenedor-puertas">
             <div class="puertas">
-                <!-- Puerta de enfermería -->
                 <div class="puerta" id="puerta-enfermeria" onclick="interactuarPuerta('enfermeria')"></div>
-                <!-- Puerta de natación -->
                 <div class="puerta" id="puerta-natacion" onclick="interactuarPuerta('natacion')"></div>
-                <!-- Puerta de música -->
                 <div class="puerta" id="puerta-musica" onclick="interactuarPuerta('musica')"></div>
             </div>
         </div>
     </div>
 
-    
     <!-- Popup de interacción con las puertas -->
     <div id="popup-puerta" class="popup">
         <span class="cerrar-popup" onclick="cerrarPopupPuerta()">&times;</span>
@@ -199,92 +223,97 @@
             <button id="boton-accion-puerta" onclick="accionPuerta()">Cerrar</button>
         </div>
     </div>
-    
-    
-        <!-- Pantalla del Minijuego: El Camino Roto -->
-        <div id="pantalla-camino-roto" class="pantalla">
-            <h2>El Camino Incompleto</h2>
-            <p>"Este camino comenzó, pero quedó incompleto. Une las piezas para reconstruirlo y avanzar."</p>
-            <div id="area-camino">
-                <!-- Aquí irán los fragmentos del camino para arrastrar -->
-                <!-- Por simplicidad, usaremos divs representando los fragmentos -->
-                <div class="fragmento" id="fragmento-1" draggable="true" ondragstart="drag(event)">1</div>
-                <div class="fragmento" id="fragmento-2" draggable="true" ondragstart="drag(event)">2</div>
-                <div class="fragmento" id="fragmento-3" draggable="true" ondragstart="drag(event)">3</div>
-                <div class="fragmento" id="fragmento-4" draggable="true" ondragstart="drag(event)">4</div>
-                <div class="fragmento" id="fragmento-5" draggable="true" ondragstart="drag(event)">5</div>
-            </div>
-            <div id="camino-destino" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <!-- Área donde se ensamblará el camino -->
-            </div>
-            <div class="botones-centro">
-                <button id="boton-intentar-abrir-puerta" onclick="intentarAbrirPuerta()" disabled>Intentar abrir la puerta</button>
-            </div>
-        </div>
-    
-        <!-- Pantalla de la Puerta Bloqueada con el Baúl -->
-        <div id="pantalla-puerta-bloqueada" class="pantalla">
-            <h2>La Puerta Bloqueada</h2>
-            <p>"La puerta está bloqueada. Necesitarás una llave para abrirla."</p>
-            <div class="botones-centro">
-                <button onclick="mostrarBaul()">Busca la llave</button>
-            </div>
-        </div>
 
-        <!-- Pantalla del juego de saltos de plataformas -->
-        <div id="pantalla-juego-saltos" class="pantalla">
-            <h2>Cruza el camino</h2>
-            <p>¡Intenta llegar a la puerta evitando caer en los agujeros! Usa la barra espaciadora para saltar.</p>
-            <canvas id="saltosCanvas" width="800" height="400"></canvas>
-        </div>
 
-        <div id="popup-cofre-musica" class="popup">
-            <span class="cerrar-popup" onclick="cerrarPopupCofreMusica()">&times;</span>
-            <div class="popup-contenido">
-                <p>¿Pensabas que sería tan fácil? La clave está en el regalo de tu mundo (como no...)</p>
-                <div class="input-container">
-                    <input type="text" id="input-contraseña-cofre" placeholder="Introduce la contraseña">
-                    <button class="boton-accion-puerta" onclick="intentarAbrirCofre()">Abrir</button>
-                </div>
-                <p id="mensaje-error-cofre" class="mensaje-error" style="display: none;">La contraseña es incorrecta. Inténtalo de nuevo.</p>
+    <!-- Pantalla del Minijuego: El Camino Roto -->
+    <div id="pantalla-camino-roto" class="pantalla">
+        <h2>El Camino Incompleto</h2>
+        <p>"Este camino comenzó, pero quedó incompleto. Une las piezas para reconstruirlo y avanzar."</p>
+        <div id="area-camino">
+            <!-- Aquí irán los fragmentos del camino para arrastrar -->
+            <!-- Por simplicidad, usaremos divs representando los fragmentos -->
+            <div class="fragmento" id="fragmento-1" draggable="true" ondragstart="drag(event)">1</div>
+            <div class="fragmento" id="fragmento-2" draggable="true" ondragstart="drag(event)">2</div>
+            <div class="fragmento" id="fragmento-3" draggable="true" ondragstart="drag(event)">3</div>
+            <div class="fragmento" id="fragmento-4" draggable="true" ondragstart="drag(event)">4</div>
+            <div class="fragmento" id="fragmento-5" draggable="true" ondragstart="drag(event)">5</div>
+        </div>
+        <div id="camino-destino" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <!-- Área donde se ensamblará el camino -->
+        </div>
+        <div class="botones-centro">
+            <button id="boton-intentar-abrir-puerta" onclick="intentarAbrirPuerta()" disabled>Intentar abrir la
+                puerta</button>
+        </div>
+    </div>
+
+    <!-- Pantalla de la Puerta Bloqueada con el Baúl -->
+    <div id="pantalla-puerta-bloqueada" class="pantalla">
+        <h2>La Puerta Bloqueada</h2>
+        <p>"La puerta está bloqueada. Necesitarás una llave para abrirla."</p>
+        <div class="botones-centro">
+            <button onclick="mostrarBaul()">Busca la llave</button>
+        </div>
+    </div>
+
+    <!-- Pantalla del juego de saltos de plataformas -->
+    <div id="pantalla-juego-saltos" class="pantalla">
+        <h2>Cruza el camino</h2>
+        <p>¡Intenta llegar a la puerta evitando caer en los agujeros! Usa la barra espaciadora para saltar.</p>
+        <canvas id="saltosCanvas" width="800" height="400"></canvas>
+    </div>
+
+    <div id="popup-cofre-musica" class="popup">
+        <span class="cerrar-popup" onclick="cerrarPopupCofreMusica()">&times;</span>
+        <div class="popup-contenido">
+            <p>¿Pensabas que sería tan fácil? La clave está en el regalo de tu mundo (como no...)</p>
+            <div class="input-container">
+                <input type="text" id="input-contraseña-cofre" placeholder="Introduce la contraseña">
+                <button class="boton-accion-puerta" onclick="intentarAbrirCofre()">Abrir</button>
             </div>
+            <p id="mensaje-error-cofre" class="mensaje-error" style="display: none;">La contraseña es incorrecta.
+                Inténtalo de nuevo.</p>
         </div>
+    </div>
 
-        <div id="mensaje-narrativo-puerta" class="mensaje-narrativo" style="display: none;">
-            <p>No había visto ese cofre de lejos, ¿qué habrá dentro?</p>
+    <div id="mensaje-narrativo-puerta" class="mensaje-narrativo" style="display: none;">
+        <p>No había visto ese cofre de lejos, ¿qué habrá dentro?</p>
+    </div>
+
+
+    <img id="llave-animada" src="assets/images/key.png" alt="Llave" class="llave-oculta">
+
+    <!-- Popup de Error de Contraseña -->
+    <div id="popup-error-contraseña" class="popup">
+        <div class="popup-contenido">
+            <span class="cerrar-popup" onclick="cerrarPopupErrorContraseña()">&times;</span>
+            <p>Parece que todavía no tienes la llave correcta. Busca de nuevo en el regalo.</p>
         </div>
-        
+    </div>
 
-        <img id="llave-animada" src="assets/images/key.png" alt="Llave" class="llave-oculta">
+    <!-- Pantalla Final tras abrir la puerta de la música -->
+    <div id="pantalla-final-puerta-abierta" class="pantalla">
+        <h2>El Gran Desbloqueo (No se aceptan devoluciones)</h2>
+        <p id="texto">¡Felicidades, virtuosa del sufrimiento inútil!</p>
+        <p id="texto">
+            Después de todos los pasos, acertijos y una llave que probablemente costó más que el piano, has llegado al
+            gran final.
+            <strong>¿El premio?</strong> Un piano.
+            (No, no puedes cambiarlo por dinero. No, tampoco puedes devolverlo.)
+        </p>
+        <p id="texto">
+            Ahora, tienes dos opciones: retomar ese camino musical que abandonaste en su día o usar el piano como
+            soporte de macetas.<br>
+            <strong>Aviso:</strong> si optas por lo segundo, los fantasmas de Chopin y Beethoven te perseguirán en tus
+            sueños… y ninguno toca suave.
+        </p>
+        <p id="texto">
+            El camino está claro, pero tranquila, si te pierdes siempre puedes volver al cofre a pedirle consejos.
+        <p id="texto">Oh, espera… es un objeto inanimado. Bueno, como tú con las teclas… por ahora.</p>
+        </p>
+    </div>
 
-        <!-- Popup de Error de Contraseña -->
-        <div id="popup-error-contraseña" class="popup">
-            <div class="popup-contenido">
-                <span class="cerrar-popup" onclick="cerrarPopupErrorContraseña()">&times;</span>
-                <p>Parece que todavía no tienes la llave correcta. Busca de nuevo en el regalo.</p>
-            </div>
-        </div>
-    
-        <!-- Pantalla Final tras abrir la puerta de la música -->
-        <div id="pantalla-final-puerta-abierta" class="pantalla">
-            <h2>El Gran Desbloqueo (No se aceptan devoluciones)</h2>
-            <p id="texto">¡Felicidades, virtuosa del sufrimiento inútil!</p>
-            <p id="texto">
-                Después de todos los pasos, acertijos y una llave que probablemente costó más que el piano, has llegado al gran final.  
-                <strong>¿El premio?</strong> Un piano.  
-                (No, no puedes cambiarlo por dinero. No, tampoco puedes devolverlo.)
-            </p>
-            <p id="texto">
-                Ahora, tienes dos opciones: retomar ese camino musical que abandonaste en su día o usar el piano como soporte de macetas.<br>
-                <strong>Aviso:</strong> si optas por lo segundo, los fantasmas de Chopin y Beethoven te perseguirán en tus sueños… y ninguno toca suave.
-            </p>
-            <p id="texto">
-                El camino está claro, pero tranquila, si te pierdes siempre puedes volver al cofre a pedirle consejos.  
-                <p id="texto">Oh, espera… es un objeto inanimado. Bueno, como tú con las teclas… por ahora.</p>
-            </p>
-                </div>    
-
-        <!-- Popup de "¿Volver a intentar?" -->
+    <!-- Popup de "¿Volver a intentar?" -->
     <div id="popup-volver-intentar" class="popup">
         <div class="popup-contenido">
             <p>¿Volver a intentar?</p>
@@ -292,45 +321,48 @@
         </div>
     </div>
 
-<!-- Popup de derrota en el juego de saltos -->
-<div id="popup-derrota-saltos" class="popup">
-    <div class="popup-contenido">
-        <p>No has podido llegar a la puerta.</p>
-        <div class="botones-centro">
-            <button onclick="reiniciarJuegoSaltos()">Reintentar</button>
-            <button onclick="volverAPuertas()">Volver atrás</button>
-        </div>
-    </div>
-</div>
-
-<!-- Pantalla de la Puerta de Música Cerrada -->
-<div id="pantalla-puerta-musica-cerrada" class="pantalla">
-    <h2>Puerta misteriosa</h2>
-    <div id="contenedor-puerta-musica">
-        <div class="puerta" id="puerta-musica-cerrada" onclick="interactuarPuertaMusica()"></div>
-        <img id="cofre-musica" src="assets/images/cofre_cerrado.png" alt="Cofre de música" onclick="interactuarCofreMusica()" data-visible="false" style="display: none;">
-    </div>
-    <!-- Popup para indicar que se necesita una clave -->
-    <div id="popup-clave-musica" class="popup">
-        <span class="cerrar-popup" onclick="cerrarPopupClaveMusica()">&times;</span>
+    <!-- Popup de derrota en el juego de saltos -->
+    <div id="popup-derrota-saltos" class="popup">
         <div class="popup-contenido">
-            <p>Mierda... Está cerrada con llave...</p>
+            <p>No has podido llegar a la puerta.</p>
+            <div class="botones-centro">
+                <button onclick="reiniciarJuegoSaltos()">Reintentar</button>
+                <button onclick="volverAPuertas()">Volver atrás</button>
+            </div>
         </div>
     </div>
-</div>
-<!-- Popup de éxito al llegar a la puerta en saltos -->
-<div id="popup-exito-saltos" class="popup">
-    <span class="cerrar-popup" onclick="cerrarPopupExitoSaltos()">&times;</span>
-    <div class="popup-contenido">
-        <p>¡Has conseguido llegar a la puerta!</p>
+
+    <!-- Pantalla de la Puerta de Música Cerrada -->
+    <div id="pantalla-puerta-musica-cerrada" class="pantalla">
+        <h2>Puerta misteriosa</h2>
+        <div id="contenedor-puerta-musica">
+            <div class="puerta" id="puerta-musica-cerrada" onclick="interactuarPuertaMusica()"></div>
+            <img id="cofre-musica" src="assets/images/cofre_cerrado.png" alt="Cofre de música"
+                onclick="interactuarCofreMusica()" data-visible="false" style="display: none;">
+        </div>
+        <!-- Popup para indicar que se necesita una clave -->
+        <div id="popup-clave-musica" class="popup">
+            <span class="cerrar-popup" onclick="cerrarPopupClaveMusica()">&times;</span>
+            <div class="popup-contenido">
+                <p>Mierda... Está cerrada con llave...</p>
+            </div>
+        </div>
     </div>
-</div>
+    <!-- Popup de éxito al llegar a la puerta en saltos -->
+    <div id="popup-exito-saltos" class="popup">
+        <span class="cerrar-popup" onclick="cerrarPopupExitoSaltos()">&times;</span>
+        <div class="popup-contenido">
+            <p>¡Has conseguido llegar a la puerta!</p>
+        </div>
+    </div>
 
     <!-- Pantalla de Revelación Final -->
     <div id="pantalla-final-revelacion" class="pantalla">
         <h2>Este es tu regalo</h2>
-        <p>Ahora que has descubierto el regalo, el último susurro del planeta te habla directamente: “¿Y qué instrumento cojo? ¿El piano? A mí me gusta.”</p>
-        <p>Sari, este piano es solo para ti… para que descubras las melodías que has llevado dentro todo este tiempo.</p>
+        <p>Ahora que has descubierto el regalo, el último susurro del planeta te habla directamente: “¿Y qué instrumento
+            cojo? ¿El piano? A mí me gusta.”</p>
+        <p>Sari, este piano es solo para ti… para que descubras las melodías que has llevado dentro todo este tiempo.
+        </p>
     </div>
 
     <!-- Popup para el botón de la gallina -->
@@ -357,7 +389,7 @@
         </div>
     </div>
 
-   
+
     <div id="mensaje-narrativo-cofre" class="mensaje-narrativo" style="display: none;">
         <p>No había visto ese cofre de lejos, ¿qué habrá dentro?</p>
     </div>
@@ -365,5 +397,5 @@
 
     <script src="script.js"></script>
 </body>
-</html>
 
+</html>
