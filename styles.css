@@ -424,19 +424,6 @@ a:hover {
     margin-bottom: 20px;
 }
 
-.fragmento {
-    width: 50px;
-    height: 50px;
-    background-color: #1a1a1a;
-    color: #00ffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #00ffff;
-    border-radius: 5px;
-    cursor: grab;
-}
-
 #camino-destino {
     width: 100%;
     height: 100px;
@@ -655,17 +642,10 @@ a:hover {
     animation: blinkCursor 0.7s steps(44) infinite normal;
 }
 
-.frase-simbolos.transformado {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
 @keyframes fadeInChar {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); -moz-transform: translateY(0); -ms-transform: translateY(0); -o-transform: translateY(0); }
 }
-
 
 .mensaje-descifrado .char {
     opacity: 0;
@@ -963,20 +943,6 @@ input:disabled {
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-}
-
-.boton-popup {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.boton-popup:hover {
-    background-color: #0056b3;
 }
 
 /* Estilo inicial para la llave oculta */
