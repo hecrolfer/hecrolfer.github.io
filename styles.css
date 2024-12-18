@@ -160,23 +160,6 @@ button:disabled {
     position: relative;
 }
 
-/* Tooltip para el botón deshabilitado */
-button[disabled]:hover::after {
-    content: attr(title);
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #000000;
-    color: #ffffff;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 0.9em;
-    white-space: nowrap;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-    z-index: 10;
-}
-
 /* Estilo del popup */
 /* Estilo general para todos los popups */
 .popup {
@@ -973,4 +956,21 @@ input:disabled {
     -ms-transform: translate(-50%, -50%) scale(0.1);
     -o-transform: translate(-50%, -50%) scale(0.1);
     -webkit-transform: translate(-50%, -50%) scale(0.1);
+}
+
+.tooltip:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    pointer-events: none;
 }

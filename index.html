@@ -69,7 +69,7 @@
             <div class="celda" onclick="jugadaHumana(8)"></div>
         </div>
         <div class="botones-centro">
-            <button id="explorar-btn" onclick="avanzarPantalla()" disabled
+            <button id="explorar-btn" onclick="avanzarPantalla()" class="tooltip" disabled
                 title="El alien te impide continuar hasta que le ganes.">Explorar más allá</button>
         </div>
     </div>
@@ -162,7 +162,7 @@
         <div id="letras-intentadas">Letras intentadas: <span id="letras-intentadas-lista"></span></div>
         <div id="ahorcado-intentos">Intentos restantes: <span id="intentos-restantes">6</span></div>
         <div class="botones-centro">
-            <input type="text" id="letra-input" maxlength="1" title="Introduce una letra para adivinar la frase">
+            <input type="text" id="letra-input" class="tooltip" maxlength="1" title="Introduce una letra para adivinar la frase">
             <button onclick="intentarLetra()">Intentar letra</button>
         </div>
         <!-- Botón que se desbloquea al adivinar la frase -->
@@ -251,7 +251,7 @@
     <!-- Pantalla Final tras abrir la puerta de la música -->
     <div id="pantalla-final-puerta-abierta" class="pantalla">
         <h2>El Gran Desbloqueo (No se aceptan devoluciones)</h2>
-        <p id="texto">Feliz Navidad, nueva Mozart!</p>
+        <p id="texto">¡Feliz Navidad, nueva Mozart!</p>
         <p id="texto">
             Después de todos los pasos, acertijos y una llave que probablemente costó más que el piano, has llegado al
             gran final.
