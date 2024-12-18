@@ -579,7 +579,7 @@ function interactuarPuerta(puerta) {
     // Toggle door state
     if (puertasEstado[puerta]) {
         // Si está abierta, cerrarla
-        puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.png')`;
+        puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.webp')`;
         puertasEstado[puerta] = false;
     } else {
         // Si está cerrada, abrirla y mostrar el popup
@@ -587,7 +587,7 @@ function interactuarPuerta(puerta) {
         if (puerta === "musica") {
             mostrarContenidoSala(puerta); // Esto mostrará el mensaje específico
         } else {
-            puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}_abierta.png')`;
+            puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}_abierta.webp')`;
             puertasEstado[puerta] = true;
 
             // Mostrar el popup solo al abrir la puerta
@@ -608,7 +608,7 @@ function accionPuerta() {
         puertasEstado[puerta] = false;
         // Actualizar la imagen de fondo de la puerta para reflejar que está cerrada
         const puertaElemento = document.getElementById(`puerta-${puerta}`);
-        puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.png')`;
+        puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.webp')`;
         // Resetear la puerta seleccionada
         puertaSeleccionada = null;
     }
@@ -629,7 +629,7 @@ function cerrarPopupPuerta() {
 
         // Actualizar la imagen de fondo de la puerta para reflejar que está cerrada
         const puertaElemento = document.getElementById(`puerta-${puerta}`);
-        puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.png')`;
+        puertaElemento.style.backgroundImage = `url('assets/images/puerta_${puerta}.webp')`;
 
         // Resetear la puerta seleccionada
         puertaSeleccionada = null;
@@ -1227,7 +1227,7 @@ function interactuarPuertaMusica() {
     } else {
         if (!puertaMusicaDesbloqueada) {
             // Cambiar la imagen de la puerta a abierta
-            puertaMusica.style.backgroundImage = "url('assets/images/puerta_musica_abierta.png')";
+            puertaMusica.style.backgroundImage = "url('assets/images/puerta_musica_abierta.webp')";
             puertaMusicaDesbloqueada = true;
 
             // Mostrar mensaje narrativo
@@ -1240,7 +1240,7 @@ function interactuarPuertaMusica() {
 }
 function desbloquearPuertaMusica() {
     // Cambiar la imagen de la puerta a la versión abierta
-    document.getElementById("puerta-musica-cerrada").style.backgroundImage = "url('assets/images/puerta_musica_abierta.png')";
+    document.getElementById("puerta-musica-cerrada").style.backgroundImage = "url('assets/images/puerta_musica_abierta.webp')";
 
     // Mostrar el popup en lugar del alert
     document.getElementById("popup-puerta-musica-desbloqueada").style.display = "block";
@@ -1282,7 +1282,7 @@ function intentarAbrirCofre() {
     const cofreImagen = document.getElementById('cofre-musica'); // Referencia a la imagen del cofre
     if (inputContraseña === contraseñaCorrecta) {
         mensajeError.style.display = 'none';
-        cofreImagen.src = "assets/images/cofre_abierto.png"; 
+        cofreImagen.src = "assets/images/cofre_abierto.webp"; 
         mostrarAnimacionLlave();
         setTimeout(() => {
             cerrarPopupCofreMusica();

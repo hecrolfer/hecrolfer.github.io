@@ -404,11 +404,11 @@ a:hover {
 
 /* Establece la imagen de fondo para cada puerta cerrada */
 #puerta-enfermeria {
-    background-image: url('assets/images/puerta_enfermeria.png');
+    background-image: url('assets/images/puerta_enfermeria.webp');
 }
 
 #puerta-natacion {
-    background-image: url('assets/images/puerta_natacion.png');
+    background-image: url('assets/images/puerta_natacion.webp');
 }
 
 #puerta-musica {
